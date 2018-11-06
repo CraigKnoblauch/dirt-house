@@ -83,6 +83,8 @@ end
 block_under = getBlockUnder()
 block_name = getBlockName( block_under["id"], block_under["meta"] )
 
+print(block_name)
+
 -- If Squirt is on the starting block, he moves off.
 -- NOTE: Assuming he's moving in the correct direction
 if block_name == "yellow_wool" then
