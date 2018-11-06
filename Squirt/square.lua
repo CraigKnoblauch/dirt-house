@@ -1,18 +1,18 @@
-local squirt
 squirt = require("robot")
-
-local debug
 debug = require("component").debug
-
-local net
 net = require("internet")
 
-local HOST, PORT
+-- The current world, TODO error checking
+world = debug.getWorld(0)
+
+-- Network parameters
 HOST = "127.0.0.1"
 PORT = 65432
 
 -- Blocks to look out for
-local yellow, red, blue, lime, white
+WOOL_ID = 35
+
+yellow, red, blue, lime, white
 yellow = {}
 yellow["id"] = 35
 yellow["meta"] = 4
@@ -46,4 +46,38 @@ Squirt must move forward, constantly checking the block beneath him.
 7. Repeat 1 through 6 until Crush commands to end
 --]]
 
+-- What is the block under Squirt?
+function getBlockUnder()
+   local block = {}
+   
+   local myX, myY, myZ
+   myX = debug.getX()
+   myY = debug.getY()
+   myZ = debug.getZ()
+   
+   block["id"] = world.getBlockId(myX, myY-1, myZ)
+   block["meta"] = world.getMetadata(myX, myY-1, myZ)
+   
+   return block
+end
+
+-- Print the block under Squirt
+blockUnder = getBlockUnder()
+
+if blockUnder["id"] == WOOL_ID then
+   if blockUnder["meta"] == yellow["meta"] then
+      print("Block is Yellow Wool")
+   elseif blockUnder["meta"] == red["meta"] then
+      print("Block is Red wool")
+   elseif blockUnder["meta"] == blue["meta"] then
+      print("Block is Blue Wool")
+   elseif blockUnder["meta"] == lime["meta"] then
+      print("Block is Lime Wool")
+   elseif blockUnder["meta"] == white["meta"] then
+      print("Block is White Wool")
+else
+   print("Block is NOT Wool")
+end
+   
+   
 
