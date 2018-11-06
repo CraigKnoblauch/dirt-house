@@ -18,7 +18,7 @@ yellow["meta"] = 4
 
 red = {}
 red["id"] = 35
-red["meta"] = 4
+red["meta"] = 14
 
 blue = {}
 blue["id"] = 35
