@@ -90,7 +90,7 @@ if block_name == "yellow_wool" then
 end
 
 -- While Squirt is off of the starting square
-while block_name != "yellow wool" do
+while block_name ~= "yellow wool" do
 
     -- While Squirt is on the track
     while block_name == "white wool" do
@@ -100,7 +100,7 @@ while block_name != "yellow wool" do
     end
 
     squirt.turnRight()
-    
+
     print(block_name)
 end
    
