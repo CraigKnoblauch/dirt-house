@@ -91,6 +91,8 @@ if block_name == "yellow_wool" then
     squirt.forward()
 end
 
+print(block_name)
+
 -- While Squirt is off of the starting square
 while block_name ~= "yellow wool" do
 
@@ -99,6 +101,7 @@ while block_name ~= "yellow wool" do
         squirt.forward()
         block_under = getBlockUnder()
         block_name = getBlockName( block_under["id"], block_under["meta"] )
+        print(block_name)
     end
 
     squirt.turnRight()
