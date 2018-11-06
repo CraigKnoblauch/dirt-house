@@ -74,6 +74,7 @@ if blockUnder["id"] == WOOL_ID then
       print("Block is Lime Wool")
    elseif blockUnder["meta"] == white["meta"] then
       print("Block is White Wool")
+   end
 else
    print("Block is NOT Wool")
 end
