@@ -50,7 +50,7 @@ function getBlockUnder()
    local block = {}
    
    local myX, myY, myZ
-   myX = debug.getX()
+   myX = debug.getX() - 1 -- X is consistently off by 1.
    myY = debug.getY()
    myZ = debug.getZ()
    
