@@ -87,7 +87,7 @@ print(block_name)
 
 -- If Squirt is on the starting block, he moves off.
 -- NOTE: Assuming he's moving in the correct direction
-if block_name == "yellow_wool" then
+if block_name == "yellow wool" then
     squirt.forward()
 end
 
