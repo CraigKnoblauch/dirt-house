@@ -80,11 +80,27 @@ function getBlockName(id, meta)
     return block_name
 end
 
--- Print the block under Squirt
-blockUnder = getBlockUnder()
-blockName = getBlockName( blockUnder["id"], blockUnder["meta"] )
+block_under = getBlockUnder()
+block_name = getBlockName( block_under["id"], block_under["meta"] )
 
-print(blockName)
+-- If Squirt is on the starting block, he moves off.
+-- NOTE: Assuming he's moving in the correct direction
+if block_name == "yellow_wool" then
+    squirt.forward()
+end
+
+-- While Squirt is off of the starting square
+while block_name != "yellow wool" do
+
+    -- While Squirt is on the track
+    while block_name == "white wool" do
+        squirt.forward()
+        block_under = getBlockUnder()
+        block_name = getBlockName( block_under["id"], block_under["meta"] )
+    end
+
+    print(block_name)
+end
    
    
 
