@@ -12,7 +12,6 @@ PORT = 65432
 -- Blocks to look out for
 WOOL_ID = 35
 
-yellow, red, blue, lime, white
 yellow = {}
 yellow["id"] = 35
 yellow["meta"] = 4
