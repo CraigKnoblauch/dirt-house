@@ -47,37 +47,44 @@ Squirt must move forward, constantly checking the block beneath him.
 
 -- What is the block under Squirt?
 function getBlockUnder()
-   local block = {}
+    local block = {}
    
-   local myX, myY, myZ
-   myX = debug.getX() - 1 -- X is consistently off by 1.
-   myY = debug.getY()
-   myZ = debug.getZ()
+    local myX, myY, myZ
+    myX = debug.getX() - 1 -- X is consistently off by 1.
+    myY = debug.getY()
+    myZ = debug.getZ()
    
-   block["id"] = world.getBlockId(myX, myY-1, myZ)
-   block["meta"] = world.getMetadata(myX, myY-1, myZ)
+    block["id"] = world.getBlockId(myX, myY-1, myZ)
+    block["meta"] = world.getMetadata(myX, myY-1, myZ)
    
-   return block
+    return block
+end
+
+-- What is the name of this block. 
+-- NOTE: Limited to the blocks I know
+function getBlockName(id, meta)
+    block_name = "UNKNOWN"
+
+    if id == yellow["id"] and meta == yellow["meta"] then 
+        block_name = "yellow wool"
+    elseif id == red["id"] and meta == red["meta"] then
+        block_name = "red wool"
+    elseif id == blue["id"] and meta == blue["meta"] then
+        block_name = "blue wool"
+    elseif id == lime["id"] and meta == lime["meta"] then
+        block_name = "lime wool"
+    elseif id == white["id"] and meta == white["meta"] then
+        block_name = "white wool"
+    end
+
+    return block_name
 end
 
 -- Print the block under Squirt
 blockUnder = getBlockUnder()
+blockName = getBlockName( blockUnder["id"], blockUnder["meta"] )
 
-if blockUnder["id"] == WOOL_ID then
-   if blockUnder["meta"] == yellow["meta"] then
-      print("Block is Yellow Wool")
-   elseif blockUnder["meta"] == red["meta"] then
-      print("Block is Red wool")
-   elseif blockUnder["meta"] == blue["meta"] then
-      print("Block is Blue Wool")
-   elseif blockUnder["meta"] == lime["meta"] then
-      print("Block is Lime Wool")
-   elseif blockUnder["meta"] == white["meta"] then
-      print("Block is White Wool")
-   end
-else
-   print("Block is NOT Wool")
-end
+print(blockName)
    
    
 
