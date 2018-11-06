@@ -99,6 +99,8 @@ while block_name != "yellow wool" do
         block_name = getBlockName( block_under["id"], block_under["meta"] )
     end
 
+    squirt.turnRight()
+    
     print(block_name)
 end
    
