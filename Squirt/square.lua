@@ -130,7 +130,7 @@ while block_name ~= "yellow wool" do
     end
 
     -- Behavior shows I should need this but I don't know why
-    if block_name ~= "white wool" then
+    if block_name ~= "white wool" and block_name ~= "yellow wool" then
         myX = debug.getX() - 1
         myY = debug.getY()
         myZ = debug.getZ()
@@ -138,20 +138,20 @@ while block_name ~= "yellow wool" do
         squirt.turnRight()
 
         blockOnTravel(myX, myY, myZ)
+
+        myX = debug.getX() - 1
+        myY = debug.getY()
+        myZ = debug.getZ()
+
+        squirt.forward()
+
+        blockOnTravel(myX, myY, myZ)
+        
+        block_under = getBlockUnder()
+        block_name = getBlockName( block_under["id"], block_under["meta"] ) 
+
+        print(block_name)
     end
-
-    myX = debug.getX() - 1
-    myY = debug.getY()
-    myZ = debug.getZ()
-
-    squirt.forward()
-
-    blockOnTravel(myX, myY, myZ)
-    
-    block_under = getBlockUnder()
-    block_name = getBlockName( block_under["id"], block_under["meta"] ) 
-
-    print(block_name)
 end
    
    
