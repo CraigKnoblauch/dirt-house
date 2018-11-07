@@ -85,13 +85,8 @@ end
     functionality right after a move. Therefore, we must block Squirt 
     so he cannot ask qualities about his surroundings until he has
     actually moved ]]
-function blockOnTravel() 
-    initX, initY, initZ
-    initX = debug.getX()
-    initY = debug.getY()
-    initZ = debug.getZ()
-
-    while initX == debug.getX() and initY == debug.getY() and initZ == debug.getZ() do
+function blockOnTravel(intiX, initY, initZ) 
+    while initX == (debug.getX() - 1) and initY == debug.getY() and initZ == debug.getZ() do
         -- BLOCK
     end
 end
@@ -104,8 +99,14 @@ print(block_name)
 -- If Squirt is on the starting block, he moves off.
 -- NOTE: Assuming he's moving in the correct direction
 if block_name == "yellow wool" then
+
+    myX = debug.getX() - 1
+    myY = debug.getY()
+    myZ = debug.getZ()
+
     squirt.forward()
-    blockOnTravel()
+
+    blockOnTravel(myX, myY, myZ)
 end
 
 print(block_name)
@@ -115,8 +116,14 @@ while block_name ~= "yellow wool" do
 
     -- While Squirt is on the track
     while block_name == "white wool" do
+        myX = debug.getX() - 1
+        myY = debug.getY()
+        myZ = debug.getZ()
+
         squirt.forward()
-        blockOnTravel()
+
+        blockOnTravel(myX, myY, myZ)
+        
         block_under = getBlockUnder()
         block_name = getBlockName( block_under["id"], block_under["meta"] )
         print(block_name)
