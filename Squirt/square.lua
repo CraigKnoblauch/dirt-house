@@ -129,7 +129,10 @@ while block_name ~= "yellow wool" do
         print(block_name)
     end
 
-    squirt.turnRight()
+    -- Behavior shows I should need this but I don't know why
+    if block_name ~= "white wool" do
+        squirt.turnRight()
+    end
 
     myX = debug.getX() - 1
     myY = debug.getY()
