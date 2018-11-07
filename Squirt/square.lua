@@ -123,13 +123,21 @@ while block_name ~= "yellow wool" do
         squirt.forward()
 
         blockOnTravel(myX, myY, myZ)
-        
+
         block_under = getBlockUnder()
         block_name = getBlockName( block_under["id"], block_under["meta"] )
         print(block_name)
     end
 
     squirt.turnRight()
+
+    myX = debug.getX() - 1
+    myY = debug.getY()
+    myZ = debug.getZ()
+
+    squirt.forward()
+
+    blockOnTravel(myX, myY, myZ)
 
     print(block_name)
 end
