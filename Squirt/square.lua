@@ -130,8 +130,14 @@ while block_name ~= "yellow wool" do
     end
 
     -- Behavior shows I should need this but I don't know why
-    if block_name ~= "white wool" do
+    if block_name ~= "white wool" then
+        myX = debug.getX() - 1
+        myY = debug.getY()
+        myZ = debug.getZ()
+
         squirt.turnRight()
+
+        blockOnTravel(myX, myY, myZ)
     end
 
     myX = debug.getX() - 1
