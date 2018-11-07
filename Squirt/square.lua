@@ -80,6 +80,22 @@ function getBlockName(id, meta)
     return block_name
 end
 
+--[[ Blocking function to call after a Squirt move call. Squirt will 
+    assume it's in the same position if I call a position dependent
+    functionality right after a move. Therefore, we must block Squirt 
+    so he cannot ask qualities about his surroundings until he has
+    actually moved ]]
+function blockOnTravel() {
+    initX, initY, initZ
+    initX = debug.getX()
+    initY = debug.getY()
+    initZ = debug.getZ()
+
+    while initX == debug.getX() and initY == debug.getY() and initZ == debug.getZ() do
+        -- BLOCK
+    end
+}
+
 block_under = getBlockUnder()
 block_name = getBlockName( block_under["id"], block_under["meta"] )
 
@@ -89,6 +105,7 @@ print(block_name)
 -- NOTE: Assuming he's moving in the correct direction
 if block_name == "yellow wool" then
     squirt.forward()
+    blockOnTravel()
 end
 
 print(block_name)
@@ -99,6 +116,7 @@ while block_name ~= "yellow wool" do
     -- While Squirt is on the track
     while block_name == "white wool" do
         squirt.forward()
+        blockOnTravel()
         block_under = getBlockUnder()
         block_name = getBlockName( block_under["id"], block_under["meta"] )
         print(block_name)
