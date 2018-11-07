@@ -85,7 +85,7 @@ end
     functionality right after a move. Therefore, we must block Squirt 
     so he cannot ask qualities about his surroundings until he has
     actually moved ]]
-function blockOnTravel() {
+function blockOnTravel() 
     initX, initY, initZ
     initX = debug.getX()
     initY = debug.getY()
@@ -94,7 +94,7 @@ function blockOnTravel() {
     while initX == debug.getX() and initY == debug.getY() and initZ == debug.getZ() do
         -- BLOCK
     end
-}
+end
 
 block_under = getBlockUnder()
 block_name = getBlockName( block_under["id"], block_under["meta"] )
