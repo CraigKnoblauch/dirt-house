@@ -91,12 +91,13 @@ Squirt must move forward, constantly checking the block beneath him.
 7. Repeat 1 through 6 until Crush commands to end
 --]]
 
-function goSquare()
+-- Provide this function a handle so actions can be written to a server
+function goSquare(handle)
 
     block_under = getBlockUnder()
     block_name = getBlockName( block_under["id"], block_under["meta"] )
 
-    print(block_name)
+    handle:write(block_name)
 
     -- If Squirt is on the starting block, he moves off.
     -- NOTE: Assuming he's moving in the correct direction
@@ -114,7 +115,7 @@ function goSquare()
     block_under = getBlockUnder()
     block_name = getBlockName( block_under["id"], block_under["meta"] )
 
-    print(block_name)
+    handle:write(block_name)
 
     -- While Squirt is off of the starting square
     while block_name ~= "yellow wool" do
@@ -131,7 +132,7 @@ function goSquare()
 
             block_under = getBlockUnder()
             block_name = getBlockName( block_under["id"], block_under["meta"] )
-            print(block_name)
+            handle:write(block_name)
         end
 
         -- Behavior shows I should need this but I don't know why
@@ -155,10 +156,61 @@ function goSquare()
             block_under = getBlockUnder()
             block_name = getBlockName( block_under["id"], block_under["meta"] ) 
 
-            print(block_name)
+            handle:write(block_name)
         end
     end
 end
 
-goSquare()
-squirt.turnRight()
+-- Confirmed above functions work as intended
+
+-- Operating mode
+operating = true
+
+while operating do
+    -- Begin networking
+
+    -- Open a connection with Crush
+    handle = net.connect(HOST, PORT)
+
+    -- Get a command from Crush
+    crush_cmd = handle:read(1024)
+
+    while crush_cmd ~= "begin" do
+        -- Read again
+        crush_cmd = handle:read(1024)
+    end
+
+    print(crush_cmd)
+
+    -- Move in a square while reporting to Crush
+    goSquare(handle)
+
+    -- Report to Crush that Squirt is done
+    handle:write("done")
+
+    -- Wait for a command from Crush
+    crush_cmd = ""
+
+    while crush_cmd == "" do
+        -- Read again
+        crush_cmd = handle:read(1024)
+    end
+
+    print(crush_cmd)
+
+    -- Perform Crush's request
+    if crush_cmd == "stop" do
+        operating = false
+    elseif crush_cmd == "begin" do
+        -- Nothing
+    end
+
+    print(crush_cmd)
+    
+end
+
+
+
+
+
+

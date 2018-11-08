@@ -19,17 +19,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # Tell Squirt to begin
             conn.sendall(b'begin')
 
+            print("[CRUSH] - I've commanded Squirt to begin loop " + str(loopCounter) )
+
             # Print Squirt's observations. 
             # When squirt has finished, tell him to turn right and begin
+            loopCounter = 0
             while True: 
                 data = conn.recv(1024)
                 print( "[CRUSH] - Squirt reports: " + str(data) )
 
                 if( data == b'done' ):
                     print("[CRUSH] - Squirt is done")
-                    
-                    # Tell Squirt to turn right
-                    conn.sendall(b'right')
 
                     # Wait for a confirmation from Squirt
                     data = ''
@@ -37,3 +37,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     while data != b'done':
                         # Block
                         pass
+
+                if( loopCounter < 3 ):
+                    loopCounter += 1
+                else:
+                    break
+
+                
