@@ -1,6 +1,6 @@
 squirt = require("robot")
 debug = require("component").debug
-net = require("component").internet
+net = require("internet")
 
 -- The current world, TODO error checking
 world = debug.getWorld(0)
@@ -167,7 +167,7 @@ end
 operating = true
 
  -- Open a connection with Crush
- handle = net.connect(HOST, PORT)
+ handle = net.open(HOST, PORT)
 
  print("connected")
 
