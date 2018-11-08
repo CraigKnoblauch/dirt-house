@@ -109,6 +109,9 @@ if block_name == "yellow wool" then
     blockOnTravel(myX, myY, myZ)
 end
 
+block_under = getBlockUnder()
+block_name = getBlockName( block_under["id"], block_under["meta"] )
+
 print(block_name)
 
 -- While Squirt is off of the starting square
