@@ -166,10 +166,10 @@ end
 -- Operating mode
 operating = true
 
- -- Open a connection with Crush
- handle = net.open(HOST, PORT)
+-- Open a connection with Crush
+handle = net.open(HOST, PORT)
 
- print("connected")
+print("connected")
 
 while operating do
 
