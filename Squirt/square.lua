@@ -213,8 +213,10 @@ while operating do
 
 end
 
-handle:write(b'unsubscribe')
+handle:write("unsubscribe")
 handle:close()
+
+squirt.turnRight()
 
 
 

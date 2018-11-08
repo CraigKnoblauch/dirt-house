@@ -30,7 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             while data != b'done':
                 data = conn.recv(1024)
 
-            if( loopCounter < 3 ):
+            if( loopCounter < 2 ):
                 loopCounter += 1
 
                 # Command Squirt to go again
