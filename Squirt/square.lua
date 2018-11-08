@@ -92,12 +92,12 @@ Squirt must move forward, constantly checking the block beneath him.
 --]]
 
 -- Provide this function a handle so actions can be written to a server
-function goSquare(handle)
+function goSquare()--handle)
 
     block_under = getBlockUnder()
     block_name = getBlockName( block_under["id"], block_under["meta"] )
 
-    handle:write(block_name)
+    -- handle:write(block_name)
 
     -- If Squirt is on the starting block, he moves off.
     -- NOTE: Assuming he's moving in the correct direction
@@ -115,7 +115,7 @@ function goSquare(handle)
     block_under = getBlockUnder()
     block_name = getBlockName( block_under["id"], block_under["meta"] )
 
-    handle:write(block_name)
+    -- handle:write(block_name)
 
     -- While Squirt is off of the starting square
     while block_name ~= "yellow wool" do
@@ -156,7 +156,7 @@ function goSquare(handle)
             block_under = getBlockUnder()
             block_name = getBlockName( block_under["id"], block_under["meta"] ) 
 
-            handle:write(block_name)
+            -- handle:write(block_name)
         end
     end
 end
