@@ -183,7 +183,7 @@ while operating do
     print(crush_cmd)
 
     -- Move in a square while reporting to Crush
-    goSquare(handle)
+    goSquare()
 
     -- Report to Crush that Squirt is done
     handle:write("done")
@@ -202,7 +202,7 @@ while operating do
     if crush_cmd == "stop" then
         operating = false
     elseif crush_cmd == "begin" then
-        -- Nothing
+        squirt.turnRight()
     end
 
     print(crush_cmd)

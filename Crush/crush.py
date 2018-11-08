@@ -15,6 +15,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     # Squirt has connected, tell him to begin
     with conn:
 
+        loopCounter = 0
         while True:
             # Tell Squirt to begin
             conn.sendall(b'begin')
@@ -23,7 +24,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
             # Print Squirt's observations. 
             # When squirt has finished, tell him to turn right and begin
-            loopCounter = 0
             while True: 
                 data = conn.recv(1024)
                 print( "[CRUSH] - Squirt reports: " + str(data) )
