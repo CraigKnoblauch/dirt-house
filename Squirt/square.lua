@@ -166,11 +166,12 @@ end
 -- Operating mode
 operating = true
 
-while operating do
-    -- Begin networking
+ -- Open a connection with Crush
+ handle = net.connect(HOST, PORT)
 
-    -- Open a connection with Crush
-    handle = net.connect(HOST, PORT)
+ print("connected")
+
+while operating do
 
     -- Get a command from Crush
     crush_cmd = handle:read(1024)
@@ -188,6 +189,8 @@ while operating do
     -- Report to Crush that Squirt is done
     handle:write("done")
 
+    print("wrote done")
+
     -- Wait for a command from Crush
     crush_cmd = ""
 
@@ -196,6 +199,7 @@ while operating do
         crush_cmd = handle:read(1024)
     end
 
+    print("read")
     print(crush_cmd)
 
     -- Perform Crush's request
