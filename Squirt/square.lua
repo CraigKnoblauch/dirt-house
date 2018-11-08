@@ -174,11 +174,11 @@ operating = true
 while operating do
 
     -- Get a command from Crush
-    crush_cmd = handle:read(1024)
+    crush_cmd = handle:read(120)
 
     while crush_cmd ~= "begin" do
         -- Read again
-        crush_cmd = handle:read(1024)
+        crush_cmd = handle:read(120)
     end
 
     print(crush_cmd)
@@ -196,7 +196,7 @@ while operating do
 
     while crush_cmd == "" do
         -- Read again
-        crush_cmd = handle:read(1024)
+        crush_cmd = handle:read(120)
     end
 
     print("read")
