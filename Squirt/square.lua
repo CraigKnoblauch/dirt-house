@@ -1,6 +1,6 @@
 squirt = require("robot")
 debug = require("component").debug
-net = require("internet")
+net = require("component").internet
 
 -- The current world, TODO error checking
 world = debug.getWorld(0)
