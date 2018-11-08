@@ -33,18 +33,6 @@ white["id"] = 35
 white["meta"] = 0
 
 
---[[ Flow of this program:
-Squirt must move forward, constantly checking the block beneath him.
-1. He should start on a yellow wool block (35:4). 
-2. He must move forward until the block beneath him is not
-   white wool (35). 
-3. Report to Crush the block id and meta data
-4. Turn left
-5. Repeat 2 through 4 until the block beneath him is yellow wool
-6. What for an order from Crush to move to a new coordinate or end.
-7. Repeat 1 through 6 until Crush commands to end
---]]
-
 -- What is the block under Squirt?
 function getBlockUnder()
     local block = {}
@@ -91,56 +79,28 @@ function blockOnTravel(intiX, initY, initZ)
     end
 end
 
-block_under = getBlockUnder()
-block_name = getBlockName( block_under["id"], block_under["meta"] )
+--[[ Flow of this program:
+Squirt must move forward, constantly checking the block beneath him.
+1. He should start on a yellow wool block (35:4). 
+2. He must move forward until the block beneath him is not
+   white wool (35). 
+3. Report to Crush the block id and meta data
+4. Turn left
+5. Repeat 2 through 4 until the block beneath him is yellow wool
+6. What for an order from Crush to move to a new coordinate or end.
+7. Repeat 1 through 6 until Crush commands to end
+--]]
 
-print(block_name)
+function goSquare()
 
--- If Squirt is on the starting block, he moves off.
--- NOTE: Assuming he's moving in the correct direction
-if block_name == "yellow wool" then
+    block_under = getBlockUnder()
+    block_name = getBlockName( block_under["id"], block_under["meta"] )
 
-    myX = debug.getX() - 1
-    myY = debug.getY()
-    myZ = debug.getZ()
+    print(block_name)
 
-    squirt.forward()
-
-    blockOnTravel(myX, myY, myZ)
-end
-
-block_under = getBlockUnder()
-block_name = getBlockName( block_under["id"], block_under["meta"] )
-
-print(block_name)
-
--- While Squirt is off of the starting square
-while block_name ~= "yellow wool" do
-
-    -- While Squirt is on the track
-    while block_name == "white wool" do
-        myX = debug.getX() - 1
-        myY = debug.getY()
-        myZ = debug.getZ()
-
-        squirt.forward()
-
-        blockOnTravel(myX, myY, myZ)
-
-        block_under = getBlockUnder()
-        block_name = getBlockName( block_under["id"], block_under["meta"] )
-        print(block_name)
-    end
-
-    -- Behavior shows I should need this but I don't know why
-    if block_name ~= "white wool" and block_name ~= "yellow wool" then
-        myX = debug.getX() - 1
-        myY = debug.getY()
-        myZ = debug.getZ()
-
-        squirt.turnRight()
-
-        blockOnTravel(myX, myY, myZ)
+    -- If Squirt is on the starting block, he moves off.
+    -- NOTE: Assuming he's moving in the correct direction
+    if block_name == "yellow wool" then
 
         myX = debug.getX() - 1
         myY = debug.getY()
@@ -149,13 +109,56 @@ while block_name ~= "yellow wool" do
         squirt.forward()
 
         blockOnTravel(myX, myY, myZ)
-        
-        block_under = getBlockUnder()
-        block_name = getBlockName( block_under["id"], block_under["meta"] ) 
+    end
 
-        print(block_name)
+    block_under = getBlockUnder()
+    block_name = getBlockName( block_under["id"], block_under["meta"] )
+
+    print(block_name)
+
+    -- While Squirt is off of the starting square
+    while block_name ~= "yellow wool" do
+
+        -- While Squirt is on the track
+        while block_name == "white wool" do
+            myX = debug.getX() - 1
+            myY = debug.getY()
+            myZ = debug.getZ()
+
+            squirt.forward()
+
+            blockOnTravel(myX, myY, myZ)
+
+            block_under = getBlockUnder()
+            block_name = getBlockName( block_under["id"], block_under["meta"] )
+            print(block_name)
+        end
+
+        -- Behavior shows I should need this but I don't know why
+        if block_name ~= "white wool" and block_name ~= "yellow wool" then
+            myX = debug.getX() - 1
+            myY = debug.getY()
+            myZ = debug.getZ()
+
+            squirt.turnRight()
+
+            blockOnTravel(myX, myY, myZ)
+
+            myX = debug.getX() - 1
+            myY = debug.getY()
+            myZ = debug.getZ()
+
+            squirt.forward()
+
+            blockOnTravel(myX, myY, myZ)
+            
+            block_under = getBlockUnder()
+            block_name = getBlockName( block_under["id"], block_under["meta"] ) 
+
+            print(block_name)
+        end
     end
 end
-   
-   
 
+goSquare()
+squirt.turnRight()
