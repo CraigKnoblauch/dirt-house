@@ -199,14 +199,14 @@ while operating do
     print(crush_cmd)
 
     -- Perform Crush's request
-    if crush_cmd == "stop" do
+    if crush_cmd == "stop" then
         operating = false
-    elseif crush_cmd == "begin" do
+    elseif crush_cmd == "begin" then
         -- Nothing
     end
 
     print(crush_cmd)
-    
+
 end
 
 
