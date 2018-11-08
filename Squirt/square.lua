@@ -132,7 +132,7 @@ function goSquare()--handle)
 
             block_under = getBlockUnder()
             block_name = getBlockName( block_under["id"], block_under["meta"] )
-            handle:write(block_name)
+            -- handle:write(block_name)
         end
 
         -- Behavior shows I should need this but I don't know why
