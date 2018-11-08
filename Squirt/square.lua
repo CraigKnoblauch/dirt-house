@@ -174,11 +174,11 @@ print("connected")
 while operating do
 
     -- Get a command from Crush
-    crush_cmd = handle:read(120)
+    crush_cmd = handle:read(5)
 
     while crush_cmd ~= "begin" do
         -- Read again
-        crush_cmd = handle:read(120)
+        crush_cmd = handle:read(5)
     end
 
     print(crush_cmd)
@@ -196,14 +196,14 @@ while operating do
 
     while crush_cmd == "" do
         -- Read again
-        crush_cmd = handle:read(120)
+        crush_cmd = handle:read(5)
     end
 
     print("read")
     print(crush_cmd)
 
     -- Perform Crush's request
-    if crush_cmd == "stop" then
+    if crush_cmd == "stop!" then
         operating = false
     elseif crush_cmd == "begin" then
         squirt.turnRight()
@@ -212,6 +212,9 @@ while operating do
     print(crush_cmd)
 
 end
+
+handle:write(b'unsubscribe')
+handle:close()
 
 
 

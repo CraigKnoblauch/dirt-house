@@ -22,25 +22,34 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
             print("[CRUSH] - I've commanded Squirt to begin loop " + str(loopCounter) )
 
-            # Print Squirt's observations. 
-            # When squirt has finished, tell him to turn right and begin
-            while True: 
+            # Wait for Squirt to report he is done
+            data = conn.recv(1024)
+
+            print("[CRUSH] - I've received " + str(data) + " from Squirt")
+
+            while data != b'done':
                 data = conn.recv(1024)
-                print( "[CRUSH] - Squirt reports: " + str(data) )
 
-                if( data == b'done' ):
-                    print("[CRUSH] - Squirt is done")
+            if( loopCounter < 3 ):
+                loopCounter += 1
 
-                    # Wait for a confirmation from Squirt
-                    data = ''
-                    data = conn.recv(1024)
-                    while data != b'done':
-                        # Block
-                        pass
+                # Command Squirt to go again
+                conn.sendall(b'begin')
 
-                if( loopCounter < 3 ):
-                    loopCounter += 1
-                else:
-                    break
+            else:
+                # Command Squirt to stop
+                conn.sendall(b'stop!')
+                break
+        
+        # Wait for unsubscribe from Squirt
+        data = conn.recv(1024)
+
+        while data != b'unsubscribe':
+            data = conn.recv(1024)
+
+        print("[CRUSH] - I have recieved from Squirt: " + str(data))
+
+    s.close()
+
 
                 
