@@ -1,9 +1,12 @@
 squirt = require("robot")
 debug = require("component").debug
 
+-- Table of functions to return
+local nav = {}
+
 --[[ Serves as a wrapper for a robot's forward function. Without this function, squirt would 
     report his position as the block he came from, rather than the block he's going to. ]]
-function sqForward(debug)
+function nav.sqForward(debug)
     -- Get the coordinates before the move
     local initX, initY, initZ
     initX = debug.getX()
@@ -18,3 +21,5 @@ function sqForward(debug)
     -- Return the current position. 
     return debug.getX(), debug.getY(), debug.getZ()
 end
+
+return nav

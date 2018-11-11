@@ -14,3 +14,6 @@ wget https://raw.githubusercontent.com/CraigKnoblauch/dirt-house/master/oppm.cfg
 in /etc.
 
 Now I can call `oppm install <package-name>` and the files will be installed in `/usr`. My last question is how do I access this functionality in my own scripts? Specifically, there's a file in my package called `nav.lua` that contains a function `sqForward`. __How do I call this function insdie another lua script__?
+
+### Globally
+The top key of `programs.cfg`
