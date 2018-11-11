@@ -12,3 +12,5 @@ According to the [wiki](https://ocdoc.cil.li/tutorial:program:oppm) I edit the o
 wget https://raw.githubusercontent.com/CraigKnoblauch/dirt-house/master/oppm.cfg
 ```
 in /etc.
+
+Now I can call `oppm install <package-name>` and the files will be installed in `/usr`. My last question is how do I access this functionality in my own scripts? Specifically, there's a file in my package called `nav.lua` that contains a function `sqForward`. __How do I call this function insdie another lua script__?
