@@ -1,28 +1,25 @@
 local squirt = require("robot")
 local debug = require("component").debug
+local nav = require("navigation")
 
 -- Table of functions to return
-local nav = {}
+local mv = {}
 
 --[[ Serves as a wrapper for a robot's forward function. Without this function, squirt would 
     report his position as the block he came from, rather than the block he's going to. ]]
-function nav.sqForward()
+function mv.sqForward()
     -- Get the coordinates before the move
     local initX, initY, initZ
-    initX = debug.getX() - 1
-    initY = debug.getY()
-    initZ = debug.getZ()
+    initX, initY, initZ = nav.sqGetPos()
     
     -- Move squirt forward
     squirt.forward()
 
     -- While squirt has not moved relative to his starting location
-    while initX == debug.getX() - 1 and initY == debug.getY() and initZ == debug.getZ() do
+    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
         -- Block
     end
 
     -- Return the current position. 
-    return debug.getX() - 1, debug.getY(), debug.getZ()
+    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
 end
-
-return nav

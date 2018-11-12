@@ -5,12 +5,12 @@ This page details Squirt's operating responsibilities including movement, naviga
 Squirt must: 
 - move forward, backward, up, and down.
 - turn left, right, and around
+- know how to navigate to a position
 
 ## Navigation
 Squirt must:
 - know his orientation
 - know his position
-- know how to navigate to a position
 
 ## Interaction with the environment
 Squirt must:
