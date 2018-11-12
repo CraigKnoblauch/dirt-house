@@ -14,7 +14,7 @@ local nav = {}
     just remove the -1]]
 function nav.sqGetX()
     local thisX = world.getX()
-    thisX = thisX - 1
+    thisX = thisX
     return thisX
 end
 
