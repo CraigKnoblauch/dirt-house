@@ -12,6 +12,9 @@ function nav.sqForward()
     initX = debug.getX() - 1
     initY = debug.getY()
     initZ = debug.getZ()
+    
+    -- Move squirt forward
+    squirt.forward()
 
     -- While squirt has not moved relative to his starting location
     while initX == debug.getX() - 1 and initY == debug.getY() and initZ == debug.getZ() do
