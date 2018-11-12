@@ -34,16 +34,19 @@ function mv.sqBack()
     local initX, initY, initZ
     initX, initY, initZ = nav.sqGetPos()
     
-    -- Move squirt forward
-    squirt.back()
+    -- Move squirt back
+    ret = squirt.back()
+    if ret == true then
 
-    -- While squirt has not moved relative to his starting location
-    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
-        -- Block
+        -- While squirt has not moved relative to his starting location
+        while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+            -- Block
+        end
+
     end
 
-    -- Return the current position. 
-    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+    -- Return the back's usual return
+    return ret
 end
 
 --[[ Serves as a wrapper for a robot's up function. Without this function, squirt would 
@@ -53,16 +56,19 @@ function mv.sqUp()
     local initX, initY, initZ
     initX, initY, initZ = nav.sqGetPos()
     
-    -- Move squirt forward
-    squirt.up()
+    -- Move squirt up
+    ret = squirt.up()
+    if ret == true then
 
-    -- While squirt has not moved relative to his starting location
-    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
-        -- Block
+        -- While squirt has not moved relative to his starting location
+        while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+            -- Block
+        end
+
     end
 
-    -- Return the current position. 
-    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+    -- Return the up's usual return
+    return ret
 end
 
 --[[ Serves as a wrapper for a robot's down function. Without this function, squirt would 
@@ -72,16 +78,19 @@ function mv.sqDown()
     local initX, initY, initZ
     initX, initY, initZ = nav.sqGetPos()
     
-    -- Move squirt forward
-    squirt.down()
+    -- Move squirt down
+    ret = squirt.down()
+    if ret == true then
 
-    -- While squirt has not moved relative to his starting location
-    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
-        -- Block
+        -- While squirt has not moved relative to his starting location
+        while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+            -- Block
+        end
+
     end
 
-    -- Return the current position. 
-    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+    -- Return the down's usual return
+    return ret
 end
 
 return mv
