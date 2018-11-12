@@ -2,9 +2,6 @@ local debug = require("component").debug
 
 -- TODO Need a class structure so we can have a persistant orientation
 
--- TODO QUESTION Is my world always 0?
-local world = debug.getWorld(0)
-
 -- Table of functions to return
 local nav = {}
 
@@ -13,7 +10,7 @@ local nav = {}
     only occurs here. So if the OpenComputers mod is ever updated so this problem is solved,
     just remove the -1]]
 function nav.sqGetX()
-    local thisX = world.getX()
+    local thisX = debug.getX()
     thisX = thisX
     return thisX
 end
