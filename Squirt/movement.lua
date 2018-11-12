@@ -13,15 +13,18 @@ function mv.sqForward()
     initX, initY, initZ = nav.sqGetPos()
     
     -- Move squirt forward
-    squirt.forward()
+    ret = squirt.forward()
+    if ret == true then
 
-    -- While squirt has not moved relative to his starting location
-    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
-        -- Block
+        -- While squirt has not moved relative to his starting location
+        while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+            -- Block
+        end
+
     end
 
-    -- Return the current position. 
-    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+    -- Return the forward's usual return
+    return ret
 end
 
 --[[ Serves as a wrapper for a robot's back function. Without this function, squirt would 
