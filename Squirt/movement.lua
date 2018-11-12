@@ -23,3 +23,5 @@ function mv.sqForward()
     -- Return the current position. 
     return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
 end
+
+return mv
