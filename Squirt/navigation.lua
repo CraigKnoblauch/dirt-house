@@ -15,29 +15,29 @@ function nav.sqGetX()
     return thisX
 end
 
--- --[[ Wrapper for debug's getY function. Not strictly needed in the same way the getX function
---     is, but is included for consistency]]
--- function nav.sqGetY()
---     local thisY = world.getY()
---     return thisY
--- end
+--[[ Wrapper for debug's getY function. Not strictly needed in the same way the getX function
+    is, but is included for consistency]]
+function nav.sqGetY()
+    local thisY = debug.getY()
+    return thisY
+end
 
--- --[[ Wrapper for debug's getY function. Not strictly needed in the same way the getX function
---     is, but is included for consistency]]
--- function nav.sqGetZ()
---     local thisZ = world.getZ()
---     return thisZ
--- end
+--[[ Wrapper for debug's getY function. Not strictly needed in the same way the getX function
+    is, but is included for consistency]]
+function nav.sqGetZ()
+    local thisZ = debug.getZ()
+    return thisZ
+end
 
--- --[[ Return the position of Squirt ]]
--- function nav.sqGetPos()
---     local thisX, thisY, thisZ
+--[[ Return the position of Squirt ]]
+function nav.sqGetPos()
+    local thisX, thisY, thisZ
 
---     thisX = nav.sqGetX()
---     thisY = nav.sqGetY()
---     thisZ = nav.sqGetZ()
+    thisX = nav.sqGetX()
+    thisY = nav.sqGetY()
+    thisZ = nav.sqGetZ()
 
---     return thisX, thisY, thisZ
--- end
+    return thisX, thisY, thisZ
+end
 
 return nav
