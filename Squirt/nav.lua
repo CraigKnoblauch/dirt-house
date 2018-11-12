@@ -6,12 +6,15 @@ local nav = {}
 
 --[[ Serves as a wrapper for a robot's forward function. Without this function, squirt would 
     report his position as the block he came from, rather than the block he's going to. ]]
-local function nav.sqForward()
+function nav.sqForward()
     -- Get the coordinates before the move
     local initX, initY, initZ
     initX = debug.getX() - 1
     initY = debug.getY()
     initZ = debug.getZ()
+    
+    -- Move squirt forward
+    squirt.forward()
 
     -- While squirt has not moved relative to his starting location
     while initX == debug.getX() - 1 and initY == debug.getY() and initZ == debug.getZ() do
