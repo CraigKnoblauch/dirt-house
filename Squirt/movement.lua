@@ -24,4 +24,61 @@ function mv.sqForward()
     return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
 end
 
+--[[ Serves as a wrapper for a robot's back function. Without this function, squirt would 
+    report his position as the block he came from, rather than the block he's going to. ]]
+function mv.sqBack()
+    -- Get the coordinates before the move
+    local initX, initY, initZ
+    initX, initY, initZ = nav.sqGetPos()
+    
+    -- Move squirt forward
+    squirt.back()
+
+    -- While squirt has not moved relative to his starting location
+    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+        -- Block
+    end
+
+    -- Return the current position. 
+    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+end
+
+--[[ Serves as a wrapper for a robot's up function. Without this function, squirt would 
+    report his position as the block he came from, rather than the block he's going to. ]]
+function mv.sqUp()
+    -- Get the coordinates before the move
+    local initX, initY, initZ
+    initX, initY, initZ = nav.sqGetPos()
+    
+    -- Move squirt forward
+    squirt.up()
+
+    -- While squirt has not moved relative to his starting location
+    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+        -- Block
+    end
+
+    -- Return the current position. 
+    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+end
+
+--[[ Serves as a wrapper for a robot's down function. Without this function, squirt would 
+    report his position as the block he came from, rather than the block he's going to. ]]
+function mv.sqDown()
+    -- Get the coordinates before the move
+    local initX, initY, initZ
+    initX, initY, initZ = nav.sqGetPos()
+    
+    -- Move squirt forward
+    squirt.down()
+
+    -- While squirt has not moved relative to his starting location
+    while initX == nav.sqGetX() and initY == nav.sqGetY() and initZ == nav.sqGetZ() do
+        -- Block
+    end
+
+    -- Return the current position. 
+    return nav.sqGetX(), nav.sqGetY(), nav.sqGetZ()
+end
+
 return mv
