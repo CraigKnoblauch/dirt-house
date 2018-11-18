@@ -186,28 +186,28 @@ function swim.sqGoToPos(destX, destY, destZ)
     for i = 1, math.abs(diffX), 1 do swim.sqForward() end
     ---------------------------------------------------------------
 
-    -- --[[ Travel to the correct Z. Remember Z is not up and down]]
-    -- ---------------------------------------------------------------
-    -- -- If diffZ < 0, face south
-    -- if diffZ < 0 then
-    --     while facing ~= "south" do
-    --         swim.sqTurnRight()
-    --         facing = swim.sqGetFacing()
-    --     end
+    --[[ Travel to the correct Z. Remember Z is not up and down]]
+    ---------------------------------------------------------------
+    -- If diffZ < 0, face south
+    if diffZ < 0 then
+        while facing ~= "south" do
+            swim.sqTurnRight()
+            facing = swim.sqGetFacing()
+        end
 
-    -- -- If diffZ > 0, face north
-    -- elseif diffZ > 0 then
-    --     while facing ~= "north" do
-    --         swim.sqTurnRight()
-    --         facing = swim.sqGetFacing()
-    --     end
+    -- If diffZ > 0, face north
+    elseif diffZ > 0 then
+        while facing ~= "north" do
+            swim.sqTurnRight()
+            facing = swim.sqGetFacing()
+        end
 
-    -- -- In the event diffZ == 0, do nothing
-    -- end
+    -- In the event diffZ == 0, do nothing
+    end
 
-    -- -- Travel the absolute value of diffZ forward
-    -- for i = 1, math.abs(diffZ), 1 do swim.sqForward() end 
-    -- ---------------------------------------------------------------
+    -- Travel the absolute value of diffZ forward
+    for i = 1, math.abs(diffZ), 1 do swim.sqForward() end 
+    ---------------------------------------------------------------
 
     -- --[[ Travel to destination Y (elevation) ]]
     -- -- Assume destination Y is beneath Squirt after the 20 block upward move 
