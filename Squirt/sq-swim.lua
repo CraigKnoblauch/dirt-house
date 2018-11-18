@@ -143,25 +143,25 @@ function swim.sqGetFacing()
 end
 
 --[[ Takes Squirt to the postion specified in arguments 
-    Assumes that there will be no blocks to run into 20 blocks above it's current pos 
+    Assumes that there will be no blocks to run into 7 blocks above it's current pos 
     Also assumes that the destination Y will be beneath it after it's upward move ]]
 function swim.goToPos(destX, destY, destZ)
-    -- Move squirt 20 blocks up so he's clear of obstructions in the environment
+    -- Move squirt 7 blocks up so he's clear of obstructions in the environment
     -- NOTE: This can only be assumed to work in a specific environment and setting
-    for i = 1, 20, 1 do swim.sqUp() end
+    for i = 1, 7, 1 do swim.sqUp() end
 
-    -- -- Get Squirt's current postion
-    -- local initX, initY, initZ
-    -- initX, initY, initZ = sq_nav.sqGetPos()
+    -- Get Squirt's current postion
+    local initX, initY, initZ
+    initX, initY, initZ = sq_nav.sqGetPos()
 
-    -- -- Get Squirt's orientation
-    -- local facing = swim.sqGetFacing()
+    -- Get Squirt's orientation
+    local facing = swim.sqGetFacing()
 
-    -- -- Calculate the difference between Squirt's current location and the destination
-    -- local diffX, diffY, diffZ
-    -- diffX = initX - destX
-    -- diffY = initY - destY
-    -- diffZ = initZ - destZ
+    -- Calculate the difference between Squirt's current location and the destination
+    local diffX, diffY, diffZ
+    diffX = initX - destX
+    diffY = initY - destY
+    diffZ = initZ - destZ
 
     -- --[[ Travel to the correct X ]]
     -- ---------------------------------------------------------------

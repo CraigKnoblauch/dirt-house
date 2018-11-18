@@ -6,6 +6,7 @@ The functions in this module are very straightforward. I'll use this section to 
 1. `robot` has no orientation. In the API I design, we'll need to design some way to track that.
 2. The move functions are non-blocking relative to `debug`. In the API, I'll have to make wrapper functions for the move functions that allow Squirt to move, but do not allow a calling program to progress until Squirt has finished moving.
 3. The turn functions **are** blocking.
+4. Calling up in an infinite loop causes Squirt to stop going up after 8 blocks. At that point, Squirt starts spitting out particle effects.
 
 ## debug
 Like the previous section, I'll be using this to detail weird behavior and plans to work around it.
