@@ -1,18 +1,15 @@
 # Squirt's requirements and responsibilities
 This page details Squirt's operating responsibilities including movement, navigation, interaction with the environment, and communicating with Crush
 
-## Movement
+## Movement and Navigation (sqSwim)
 Squirt must: 
 - [ ] move forward, backward, up, and down. 
 - [ ] turn left, right, and around
 - [ ] know how to navigate to a position
-
-## Navigation
-Squirt must:
 - [ ] know his orientation
 - [ ] know his position
 
-## Interaction with the environment
+## Interaction with the environment (sqAct)
 Squirt must:
 - [ ] Pick up a block
 - [ ] Know the block he's going to pick up
@@ -22,7 +19,7 @@ Squirt must:
 - [ ] Know the block he placed
 - [ ] Know the type of block in front, behind, to the right, and to the left of him.
 
-## Communicating with Crush
+## Communicating with Crush (sqComms)
 Squirt must:
 - [ ] Follow instructions from Crush
 - [ ] Send rewards to Crush per action
