@@ -169,14 +169,14 @@ function swim.sqGoToPos(destX, destY, destZ)
     if diffX < 0 then
         while facing ~= "east" do
             swim.sqTurnRight()
-            facing = sqGetFacing()
+            facing = swim.sqGetFacing()
         end
 
     -- If diffX > 0, face west
     elseif diffX > 0 then
         while facing ~= "west" do
             swim.sqTurnRight()
-            facing = sqGetFacing()
+            facing = swim.sqGetFacing()
         end
 
     -- In the event diffX == 0, do nothing
