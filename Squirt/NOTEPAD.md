@@ -5,6 +5,7 @@ One place for all my notes on using OpenComputers for this project
 The functions in this module are very straightforward. I'll use this section to detail weird behavior and make plans to work around it. 
 1. `robot` has no orientation. In the API I design, we'll need to design some way to track that.
 2. The move functions are non-blocking relative to `debug`. In the API, I'll have to make wrapper functions for the move functions that allow Squirt to move, but do not allow a calling program to progress until Squirt has finished moving.
+3. The turn functions **are** blocking.
 
 ## debug
 Like the previous section, I'll be using this to detail weird behavior and plans to work around it.
@@ -27,4 +28,7 @@ lua
 5. Now that the package is installed, if I update the github, all I have to do to update the code is `oppm update <package-name>`. An important note: required files are cached. To reset the file before calling `require` you can do either of the following:
 - reboot
 - In a lua console: `package.loaded.nav = nil`
+
+## navigation
+The navigation upgrade is needed to access these functions. After that is included, we can call `require("component").navigation`.
 
