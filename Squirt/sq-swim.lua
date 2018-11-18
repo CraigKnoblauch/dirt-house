@@ -145,7 +145,7 @@ end
 --[[ Takes Squirt to the postion specified in arguments 
     Assumes that there will be no blocks to run into 7 blocks above it's current pos 
     Also assumes that the destination Y will be beneath it after it's upward move ]]
-function swim.goToPos(destX, destY, destZ)
+function swim.sqGoToPos(destX, destY, destZ)
     -- Move squirt 7 blocks up so he's clear of obstructions in the environment
     -- NOTE: This can only be assumed to work in a specific environment and setting
     for i = 1, 7, 1 do swim.sqUp() end
