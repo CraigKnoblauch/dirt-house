@@ -211,7 +211,7 @@ function swim.sqGoToPos(destX, destY, destZ)
 
     --[[ Travel to destination Y (elevation) ]]
     -- Assume destination Y is beneath Squirt after the 7 block upward move 
-    while math.abs( sq_nav.sqGetY() - destY ) >= 0.5 do
+    while math.abs( sq_nav.sqGetY() - destY ) > 0.5 do
         swim.sqDown()
     end
 end
