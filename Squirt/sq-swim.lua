@@ -96,5 +96,23 @@ function swim.sqDown()
     return ret
 end
 
+--[[ Turn left. Unaware if additional functionality will be needed at this time ]]
+function swim.sqLeftFace()
+    -- Turn left
+    squirt.turnLeft()
+end
+
+--[[ Turn right. Unaware if additional functionality will be needed at this time ]]
+function swim.sqRightFace()
+    -- Turn right
+    squirt.turnRight()
+end
+
+--[[ Turn around. Unaware if additional functionality will be needed ]]
+function swim.sqAboutFace()
+    -- Turn around
+    squirt.turnAround()
+end
+
 return swim
     
