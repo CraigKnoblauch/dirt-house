@@ -7,7 +7,7 @@ Squirt must:
 - [x] turn left, right, and around
 - [ ] know how to navigate to a position
 - [ ] know how to navigate to a waypoint
-- [ ] know his orientation
+- [x] know his orientation
 - [x] know his position
 
 ## Interaction with the environment (sqAct)
