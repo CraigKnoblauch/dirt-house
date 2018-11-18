@@ -150,41 +150,41 @@ function swim.goToPos(destX, destY, destZ)
     -- NOTE: This can only be assumed to work in a specific environment and setting
     for i = 1, 20, 1 do swim.sqUp() end
 
-    -- Get Squirt's current postion
-    local initX, initY, initZ
-    initX, initY, initZ = sq_nav.sqGetPos()
+    -- -- Get Squirt's current postion
+    -- local initX, initY, initZ
+    -- initX, initY, initZ = sq_nav.sqGetPos()
 
-    -- Get Squirt's orientation
-    local facing = swim.sqGetFacing()
+    -- -- Get Squirt's orientation
+    -- local facing = swim.sqGetFacing()
 
-    -- Calculate the difference between Squirt's current location and the destination
-    local diffX, diffY, diffZ
-    diffX = initX - destX
-    diffY = initY - destY
-    diffZ = initZ - destZ
+    -- -- Calculate the difference between Squirt's current location and the destination
+    -- local diffX, diffY, diffZ
+    -- diffX = initX - destX
+    -- diffY = initY - destY
+    -- diffZ = initZ - destZ
 
-    --[[ Travel to the correct X ]]
-    ---------------------------------------------------------------
-    -- If diffX < 0, face east
-    if diffX < 0 then
-        while facing ~= "east" do
-            swim.sqTurnRight()
-            facing = sqGetFacing()
-        end
+    -- --[[ Travel to the correct X ]]
+    -- ---------------------------------------------------------------
+    -- -- If diffX < 0, face east
+    -- if diffX < 0 then
+    --     while facing ~= "east" do
+    --         swim.sqTurnRight()
+    --         facing = sqGetFacing()
+    --     end
 
-    -- If diffX > 0, face west
-    elseif diffX > 0 then
-        while facing ~= "west" do
-            swim.sqTurnRight()
-            facing = sqGetFacing()
-        end
+    -- -- If diffX > 0, face west
+    -- elseif diffX > 0 then
+    --     while facing ~= "west" do
+    --         swim.sqTurnRight()
+    --         facing = sqGetFacing()
+    --     end
 
-    -- In the event diffX == 0, do nothing
-    end
+    -- -- In the event diffX == 0, do nothing
+    -- end
 
-    -- Travel the absolute value of diffX forward
-    for i = 1, math.abs(diffX), 1 do swim.sqForward()
-    ---------------------------------------------------------------
+    -- -- Travel the absolute value of diffX forward
+    -- for i = 1, math.abs(diffX), 1 do swim.sqForward()
+    -- ---------------------------------------------------------------
 
     -- --[[ Travel to the correct Z. Remember Z is not up and down]]
     -- ---------------------------------------------------------------
