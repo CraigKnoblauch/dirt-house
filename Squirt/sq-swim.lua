@@ -216,13 +216,5 @@ function swim.sqGoToPos(destX, destY, destZ)
     end
 end
 
-
-
-
-    
-
-
-
-
 return swim
     
