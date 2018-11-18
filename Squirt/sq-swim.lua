@@ -114,5 +114,34 @@ function swim.sqAboutFace()
     squirt.turnAround()
 end
 
+--[[ Values of component.navigation.getFacing given here: https://github.com/MightyPirates/OpenComputers/issues/2984
+    Also confirmed in game
+    - North == 2
+    - East == 5
+    - South == 3
+    - West == 4 
+
+    This functions returns a string direction rather than the number. Returns nil if the number is unknown
+  ]]
+function swim.sqGetFace()
+    -- Get the number of the direction Squirt is facing
+    facing_num = nav.getFacing()
+    facing_str = "nil"
+
+    -- Determine the direction Squirt is facing
+    if facing_num == 2 then
+        facing_str = "north"
+    elseif facing_num == 5 then
+        facing_str = "east"
+    elseif facing_num == 3 then
+        facing_str = "south"
+    elseif facing_num == 4 then
+        facing_str = "west"
+    end
+
+    return facing_str
+end
+
+
 return swim
     
