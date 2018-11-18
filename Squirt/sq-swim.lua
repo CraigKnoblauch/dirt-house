@@ -183,7 +183,7 @@ function swim.sqGoToPos(destX, destY, destZ)
     end
 
     -- Travel the absolute value of diffX forward
-    for i = 1, math.abs(diffX), 1 do swim.sqForward()
+    for i = 1, math.abs(diffX), 1 do swim.sqForward() end
     ---------------------------------------------------------------
 
     -- --[[ Travel to the correct Z. Remember Z is not up and down]]
@@ -206,7 +206,7 @@ function swim.sqGoToPos(destX, destY, destZ)
     -- end
 
     -- -- Travel the absolute value of diffZ forward
-    -- for i = 1, math.abs(diffZ), 1 do swim.sqForward()
+    -- for i = 1, math.abs(diffZ), 1 do swim.sqForward() end 
     -- ---------------------------------------------------------------
 
     -- --[[ Travel to destination Y (elevation) ]]
