@@ -3,7 +3,7 @@ This page details Squirt's operating responsibilities including movement, naviga
 
 ## Movement and Navigation (sqSwim)
 Squirt must: 
-- [ ] move forward, backward, up, and down. 
+- [x] move forward, backward, up, and down. 
 - [ ] turn left, right, and around
 - [ ] know how to navigate to a position
 - [ ] know his orientation
