@@ -97,19 +97,19 @@ function swim.sqDown()
 end
 
 --[[ Turn left. Unaware if additional functionality will be needed at this time ]]
-function swim.sqLeftFace()
+function swim.sqTurnLeft()
     -- Turn left
     squirt.turnLeft()
 end
 
 --[[ Turn right. Unaware if additional functionality will be needed at this time ]]
-function swim.sqRightFace()
+function swim.sqTurnRight()
     -- Turn right
     squirt.turnRight()
 end
 
 --[[ Turn around. Unaware if additional functionality will be needed ]]
-function swim.sqAboutFace()
+function swim.sqTurnAround()
     -- Turn around
     squirt.turnAround()
 end
@@ -123,7 +123,7 @@ end
 
     This functions returns a string direction rather than the number. Returns nil if the number is unknown
   ]]
-function swim.sqGetFace()
+function swim.sqGetFacing()
     -- Get the number of the direction Squirt is facing
     facing_num = nav.getFacing()
     facing_str = "nil"
@@ -141,6 +141,87 @@ function swim.sqGetFace()
 
     return facing_str
 end
+
+--[[ Takes Squirt to the postion specified in arguments 
+    Assumes that there will be no blocks to run into 20 blocks above it's current pos 
+    Also assumes that the destination Y will be beneath it after it's upward move ]]
+function swim.goToPos(destX, destY, destZ)
+    -- Move squirt 20 blocks up so he's clear of obstructions in the environment
+    -- NOTE: This can only be assumed to work in a specific environment and setting
+    for i = 1, 20, 1 do swim.sqUp() end
+
+    -- Get Squirt's current postion
+    local initX, initY, initZ
+    initX, initY, initZ = sq_nav.sqGetPos()
+
+    -- Get Squirt's orientation
+    local facing = swim.sqGetFacing()
+
+    -- Calculate the difference between Squirt's current location and the destination
+    local diffX, diffY, diffZ
+    diffX = initX - destX
+    diffY = initY - destY
+    diffZ = initZ - destZ
+
+    --[[ Travel to the correct X ]]
+    ---------------------------------------------------------------
+    -- If diffX < 0, face east
+    if diffX < 0 then
+        while facing ~= "east" do
+            swim.sqTurnRight()
+            facing = sqGetFacing()
+        end
+
+    -- If diffX > 0, face west
+    elseif diffX > 0 then
+        while facing ~= "west" do
+            swim.sqTurnRight()
+            facing = sqGetFacing()
+        end
+
+    -- In the event diffX == 0, do nothing
+    end
+
+    -- Travel the absolute value of diffX forward
+    for i = 1, math.abs(diffX), 1 do swim.sqForward()
+    ---------------------------------------------------------------
+
+    --[[ Travel to the correct Z. Remember Z is not up and down]]
+    ---------------------------------------------------------------
+    -- If diffZ < 0, face south
+    if diffZ < 0 then
+        while facing ~= "south" do
+            swim.sqTurnRight()
+            facing = swim.sqGetFacing()
+        end
+
+    -- If diffZ > 0, face north
+    elseif diffZ > 0 then
+        while facing ~= "north" do
+            swim.sqTurnRight()
+            facing = swim.sqGetFacing()
+        end
+
+    -- In the event diffZ == 0, do nothing
+    end
+
+    -- Travel the absolute value of diffZ forward
+    for i = 1, math.abs(diffZ), 1 do swim.sqForward()
+    ---------------------------------------------------------------
+
+    --[[ Travel to destination Y (elevation) ]]
+    -- Assume destination Y is beneath Squirt after the 20 block upward move 
+    while math.abs( sq_nav.sqGetY() - destY ) > 0 do
+        swim.sqDown()
+    end
+end
+
+
+
+
+    
+
+
 
 
 return swim

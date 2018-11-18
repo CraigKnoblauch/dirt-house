@@ -31,4 +31,8 @@ lua
 
 ## navigation
 The navigation upgrade is needed to access these functions. After that is included, we can call `require("component").navigation`.
+1. Waypoints are a useful tool. Especially since their position is read by Squirt relative to Squirt's location.
+2. To find lead Squirt to a position, whether it's a world coordinate or a waypoint, directions matter. 
+ - East/West is +x/-x
+ - North/South is -z/+z 
 
