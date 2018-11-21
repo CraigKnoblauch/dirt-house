@@ -229,9 +229,13 @@ function swim.sqGoToWaypoint(label)
     waypoints_set = {}
     
     -- TODO QUESTION Is this code too slow for OpenComputers?
+    -- TODO Change this to break when the label is found
     -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
-    for waypoint_label, waypoint_pos in pairs(waypoints_tbl) do
-        waypoints_set[ waypoint_label ] = waypoint_pos
+    for i = 1, waypoints_tbl.n, 1 do
+        waypoint_label = waypoints_table[i].label
+        waypoint_position = waypoints_tbl[i].position
+
+        waypoints_set[ waypoint_label ] = waypoint_position
     end
 
     -- Get the destination position relative to Squirt
@@ -250,13 +254,13 @@ function swim.sqGoToWaypoint(label)
     local relative_destY = relative_dest[2]
     local relative_destZ = relative_dest[3]
 
-    -- -- Calculate the world destination coordinates
-    -- local world_destX = squirtX + relative_destX
-    -- local world_destY = squirtY + relative_destY
-    -- local world_destZ = squirtZ + relative_destZ
+    -- Calculate the world destination coordinates
+    local world_destX = squirtX + relative_destX
+    local world_destY = squirtY + relative_destY
+    local world_destZ = squirtZ + relative_destZ
 
-    -- -- Send Squirt to the waypoint position
-    -- swim.sqGoToPos(world_destX, world_destY, world_destZ)
+    -- Send Squirt to the waypoint position
+    swim.sqGoToPos(world_destX, world_destY, world_destZ)
 end
 
 return swim
