@@ -231,8 +231,8 @@ function swim.sqGoToWaypoint(label)
     -- TODO QUESTION Is this code too slow for OpenComputers?
     -- TODO Change this to break when the label is found
     -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
-    for i = 1, waypoints_tbl.n, 1 do
-        waypoint_label = waypoints_table[i].label
+    for i = 1, waypoints_tbl.n - 1, 1 do
+        waypoint_label = waypoints_tbl[i].label
         waypoint_position = waypoints_tbl[i].position
 
         waypoints_set[ waypoint_label ] = waypoint_position
