@@ -218,7 +218,7 @@ end
 
 --[[ Command squirt to navigate to the waypoint whose label is specified 
     as argument ]]
-function sqGoToWaypoint(label)
+function swim.sqGoToWaypoint(label)
     -- Get all waypoints in a 1000 block area
     -- NOTE TODO The 1000 blocks is completely arbitrary. What's a good distance.
     local range = 1000
