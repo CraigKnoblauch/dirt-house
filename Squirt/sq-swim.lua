@@ -228,11 +228,11 @@ function swim.sqGoToWaypoint(label)
         code organizes the labels and their position tables into a set]]
     waypoints_set = {}
     
-    -- -- TODO QUESTION Is this code too slow for OpenComputers?
-    -- -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
-    -- for waypoint_label, waypoint_pos in pairs(waypoints_tbl) do
-    --     waypoints_set[ waypoint_label ] = waypoint_pos
-    -- end
+    -- TODO QUESTION Is this code too slow for OpenComputers?
+    -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
+    for waypoint_label, waypoint_pos in pairs(waypoints_tbl) do
+        waypoints_set[ waypoint_label ] = waypoint_pos
+    end
 
     -- -- Get the destination position relative to Squirt
     -- local relative_dest = waypoints_set[label]
