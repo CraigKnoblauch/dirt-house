@@ -216,5 +216,48 @@ function swim.sqGoToPos(destX, destY, destZ)
     end
 end
 
+--[[ Command squirt to navigate to the waypoint whose label is specified 
+    as argument ]]
+function sqGoToWaypoint(label)
+    -- Get all waypoints in a 1000 block area
+    -- NOTE TODO The 1000 blocks is completely arbitrary. What's a good distance.
+    local range = 1000
+    local waypoints_tbl = nav.findWaypoints(range)
+
+    --[[ All we care about are the labels and their positions. So, the following
+        code organizes the labels and their position tables into a set]]
+    waypoints_set = {}
+    
+    -- TODO QUESTION Is this code too slow for OpenComputers?
+    -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
+    for waypoint_label, waypoint_pos in pairs(waypoints_tbl) do
+        waypoints_set[ waypoint_label ] = waypoint_pos
+    end
+
+    -- Get the destination position relative to Squirt
+    local relative_dest = waypoints_set[label]
+
+    --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
+        this is to convert these coordinates into world coordinates. Then we can use the 
+        previously defined sqGoToPos function ]]
+
+    -- Get the current coordinates
+    local squirtX, squirtY, squirtZ
+    squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
+
+    -- Get the relative destination coordinates
+    local relative_destX = relative_dest.position[1]
+    local relative_destY = relative_dest.position[2]
+    local relative_destZ = relative_dest.position[3]
+
+    -- Calculate the world destination coordinates
+    local world_destX = squirtX + relative_destX
+    local world_destY = squirtY + relative_destY
+    local world_destZ = squirtZ + relative_destZ
+
+    -- Send Squirt to the waypoint position
+    swim.sqGoToPos(world_destX, world_destY, world_destZ)
+end
+
 return swim
     
