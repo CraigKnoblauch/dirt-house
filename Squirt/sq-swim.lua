@@ -234,8 +234,8 @@ function swim.sqGoToWaypoint(label)
         waypoints_set[ waypoint_label ] = waypoint_pos
     end
 
-    -- -- Get the destination position relative to Squirt
-    -- local relative_dest = waypoints_set[label]
+    -- Get the destination position relative to Squirt
+    local relative_dest = waypoints_set[label]
 
     -- --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
     --     this is to convert these coordinates into world coordinates. Then we can use the 
