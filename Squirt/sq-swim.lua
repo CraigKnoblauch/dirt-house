@@ -237,13 +237,13 @@ function swim.sqGoToWaypoint(label)
     -- Get the destination position relative to Squirt
     local relative_dest = waypoints_set[label]
 
-    -- --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
-    --     this is to convert these coordinates into world coordinates. Then we can use the 
-    --     previously defined sqGoToPos function ]]
+    --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
+        this is to convert these coordinates into world coordinates. Then we can use the 
+        previously defined sqGoToPos function ]]
 
-    -- -- Get the current coordinates
-    -- local squirtX, squirtY, squirtZ
-    -- squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
+    -- Get the current coordinates
+    local squirtX, squirtY, squirtZ
+    squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
 
     -- -- Get the relative destination coordinates
     -- local relative_destX = relative_dest.position[1]
