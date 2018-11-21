@@ -238,6 +238,7 @@ function swim.sqGoToWaypoint(label)
         waypoints_set[ waypoint_label ] = waypoint_position
     end
 
+    -- TODO handle the case where the label is unknown
     -- Get the destination position relative to Squirt
     local relative_dest = waypoints_set[label]
 
