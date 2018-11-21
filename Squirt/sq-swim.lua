@@ -246,9 +246,9 @@ function swim.sqGoToWaypoint(label)
     squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
 
     -- Get the relative destination coordinates
-    local relative_destX = relative_dest.position[1]
-    local relative_destY = relative_dest.position[2]
-    local relative_destZ = relative_dest.position[3]
+    local relative_destX = relative_dest[1]
+    local relative_destY = relative_dest[2]
+    local relative_destZ = relative_dest[3]
 
     -- -- Calculate the world destination coordinates
     -- local world_destX = squirtX + relative_destX
