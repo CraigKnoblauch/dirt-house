@@ -13,7 +13,7 @@ Squirt must:
 ## Interaction with the environment (sq-act)
 Squirt must:
 - [x] Know the type of block in front of him
-- [ ] Know the type of block behind him
+- [x] Know the type of block behind him
 - [ ] Know the type of block to the right of him
 - [ ] Know the type of block to the left of him
 - [ ] Know the type of block above him
