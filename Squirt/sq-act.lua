@@ -392,6 +392,7 @@ local function getPickupInventoryIndex(block)
     return index
 end
 
+-- TODO change return to exit codes
 --[[ Given a side, pick up the block on that side. Return the name of the block
     in that direction, and whether it was picked up or not.
     Returns "invalid side", false if the side provided is invalid. ]]
@@ -530,6 +531,39 @@ local function getPlaceInventoryIndex(block)
 
     return index
 end
+
+
+--[[ Given a side and a block name, Place the block on that side. Returns a positive
+    number if the block was placed successfully. Return a negative number otherwise.
+    
+    Returns -1 if the block is unsupported
+    Returns -2 if Squirt doesn't have the block requested
+    Returns -3 if there's already a block on the requested side
+    Returns -4 if the side is invalid
+]]
+function act.sqPlaceBlock(side, block)
+    local BLOCK_UNSUPPORTED = -1
+    local BLOCK_NOT_IN_INVENTORY = -2
+    local BLOCK_DETECTED_ON_SIDE = -3
+    local INVALID_SIDE = -4
+
+    local exitcode = 1
+
+    -- TODO Left off here. Functionalize this so the block detection, index finding, and picking up the block are seperate local functions
+    -- Figure out what side is being requested
+    if side == "front" then
+
+        -- Is there a block in front of Squirt
+        local block_exists, _ = squirt.detect()
+        if block_exists then
+            exitcode = BLOCK_DETECTED_ON_SIDE
+        end
+
+        -- If there is not a block in front of Squirt, continue
+        if not block_exists then
+            -- Get the index of the requested 
+
+
 
 
             
