@@ -351,8 +351,9 @@ function act.sqGetBottomBlockName()
 end
 
 --[[ Function to be used by this module only. Returns the inventory index
-    to used based on the block name. Returns 9 if the block is unsupported ]]
-local function getInventoryIndex(block)
+    to used for picking up a block, based on the block name. Returns 9 if the 
+    block is unsupported ]]
+local function getPickupInventoryIndex(block)
     local DEFAULT_INDEX = 9
 
     -- Default index for all blocks that are not supported in the below ifelse
@@ -406,7 +407,7 @@ function act.sqPickUpBlock(side)
         blockname = act.sqGetFrontBlockName()
 
         -- Select the proper inventory slot
-        inventory_index = getInventoryIndex(blockname)
+        inventory_index = getPickupInventoryIndex(blockname)
         squirt.select(inventory_index)
 
         -- Pick up the block in front of Squirt
@@ -417,7 +418,7 @@ function act.sqPickUpBlock(side)
         blockname = act.sqGetRightBlockName()
 
         -- Select the proper inventory slot
-        inventory_index = getInventoryIndex(blockname)
+        inventory_index = getPickupInventoryIndex(blockname)
         squirt.select(inventory_index)
 
         -- Turn Squirt to the right, get that block, then turn Squirt back
@@ -430,7 +431,7 @@ function act.sqPickUpBlock(side)
         blockname = act.sqGetLeftBlockName()
 
         -- Select the proper inventory slot
-        inventory_index = getInventoryIndex(blockname)
+        inventory_index = getPickupInventoryIndex(blockname)
         squirt.select(inventory_index)
 
         -- Turn Squirt to the left, get that block, then turn Squirt back
@@ -443,7 +444,7 @@ function act.sqPickUpBlock(side)
         blockname = act.sqGetBackBlockName()
 
         -- Select the proper inventory slot
-        inventory_index = getInventoryIndex(blockname)
+        inventory_index = getPickupInventoryIndex(blockname)
         squirt.select(inventory_index)
 
         -- Turn Squirt around, get that block, then turn Squirt back
@@ -456,7 +457,7 @@ function act.sqPickUpBlock(side)
         blockname = act.sqGetTopBlockName()
 
         -- Select the proper inventory slot
-        inventory_index = getInventoryIndex(blockname)
+        inventory_index = getPickupInventoryIndex(blockname)
         squirt.select(inventory_index)
 
         -- Get the block above of Squirt
@@ -467,7 +468,7 @@ function act.sqPickUpBlock(side)
         blockname = act.sqGetBottomBlockName()
 
         -- Select the proper inventory slot
-        inventory_index = getInventoryIndex(blockname)
+        inventory_index = getPickupInventoryIndex(blockname)
         squirt.select(inventory_index)
 
         -- Get the block beneath Squirt
@@ -478,6 +479,57 @@ function act.sqPickUpBlock(side)
     return blockname, picked_up
 
 end
+
+--[[ Function to be used by this module only. Returns the inventory index
+    to be used for placing a block, based on the block name. 
+    
+    Returns -1 if the block is unsupported
+    Returns -2 if there Squirt doesn't have the block to place
+
+    Assumes supported blocks are ordered by quantity
+
+    TODO What does the receiver do with this kind of error? ]]
+function act.getPlaceInventoryIndex(block)
+    local BLOCK_UNSUPPORTED = -1
+    local BLOCK_NOT_IN_INVENTORY = -2
+
+    local index = BLOCK_UNSUPPORTED
+
+    if block == "dirt" then
+        --[[ Start the index at four, move backwards in dirt space until the
+            space is not empty. If this never occurs, set the index to -2 
+        ]]
+        index = 4
+        while squirt.space() == 0 and index >= 1 do
+            index = index - 1
+        end
+
+        -- If index rolled under 1, set it to -2
+        if index < 1 then
+            index = BLOCK_NOT_IN_INVENTORY
+        end
+
+    elseif block == "cobblestone" then
+        --[[ Start the index at 8, move backwards in the cobblestone space
+            until the space is not empty. If this never occurs, set the index 
+            to -2 
+        ]]
+        index = 8
+        while squirt.space() == 0 and index >= 5 do
+            index = index - 1
+        end
+
+        -- If index rolled under 5, set it to -2
+        if index < 5 then
+            index = BLOCK_NOT_IN_INVENTORY
+        end
+
+    end
+
+    return index
+end
+
+
             
 return act
     
