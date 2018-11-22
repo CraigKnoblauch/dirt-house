@@ -85,23 +85,23 @@ local function getFrontPos()
     return blockX, blockY, blockZ
 end
     
--- --[[ Return the name of the block in front of squirt. Only blocks in the
---     local getBlockName function are supported. ]]
--- function act.sqGetFrontBlockName()
+--[[ Return the name of the block in front of squirt. Only blocks in the
+    local getBlockName function are supported. ]]
+function act.sqGetFrontBlockName()
 
---     -- Get the coordinate of the block in front of Squirt
---     local frontX, frontY, frontZ
---     frontX, frontY, frontZ = getFrontPos()
+    -- Get the coordinate of the block in front of Squirt
+    local frontX, frontY, frontZ
+    frontX, frontY, frontZ = getFrontPos()
 
---     -- Get the block id and meta data with world object
---     local id = world.getBlockId(frontX, frontY, frontZ)
---     local meta = world.getMetadata(frontX, frontY, frontZ)
+    -- Get the block id and meta data with world object
+    local id = world.getBlockId(frontX, frontY, frontZ)
+    local meta = world.getMetadata(frontX, frontY, frontZ)
 
---     -- Get the block name in front of squirt
---     local block = getBlockName(id, meta)
+    -- Get the block name in front of squirt
+    local block = getBlockName(id, meta)
 
---     return block
--- end
+    return block
+end
 
 return act
     
