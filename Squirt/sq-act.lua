@@ -371,7 +371,7 @@ function act.sqPickUpBlock(side)
         -- Turn Squirt to the right, get that block, then turn Squirt back
         sq_swim.sqTurnRight()
         picked_up, _ = squirt.swing()
-        sq_sim.sqTurnLeft()
+        sq_swim.sqTurnLeft()
 
     elseif side == "left" then
         -- Get the name of the block to the left of Squirt

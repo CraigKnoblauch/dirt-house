@@ -20,8 +20,9 @@ Squirt must:
 - [x] Know the type of block below him
 - [ ] ~~Know the block he's going to pick up~~
 - [ ] ~~Choose a block to pick up~~ (<-- Crush is responsible for this)
-- [ ] Pick up a block in front, to the right, to the left, behind, above, or below him
-- [ ] Know what block he picked up
+- [x] Pick up a block in front, to the right, to the left, behind, above, or below him
+- [x] Know what block he picked up
+- [ ] Put picked up blocks in the proper indices (**This only works for this specialized project**)
 - [ ] ~~Know what block he's going to place~~
 - [ ] ~~Choose a block to place~~ (<-- Crush is responsible for this)
 - [ ] Place up a block in front, to the right, to the left, behind, above, or below him
