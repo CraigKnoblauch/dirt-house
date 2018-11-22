@@ -165,7 +165,7 @@ function act.sqGetBackBlockName()
 end
 
 --[[ Local function to only be used with functions in sq-act module.
-    Returns the coordinates of one block to the right of of squirt ]]
+    Returns the coordinates of one block to the right of squirt ]]
 local function getRightPos()
 
     -- Get Squirt's current position
@@ -179,7 +179,7 @@ local function getRightPos()
     local facing = sq_swim.sqGetFacing()
 
     --[[ Based on the direction Squirt is facing, we can determine which
-        axis must be incremented our decremented to give the block to the right of
+        axis must be incremented our decremented to give the block to the right
         of Squirt
         
         North --> -Z
@@ -204,7 +204,7 @@ local function getRightPos()
     return blockX, blockY, blockZ
 end
         
---[[ Return the name of the block to the right of of squirt. Only blocks in the
+--[[ Return the name of the block to the right of squirt. Only blocks in the
     local getBlockName function are supported. ]]
 function act.sqGetRightBlockName()
 
@@ -223,7 +223,7 @@ function act.sqGetRightBlockName()
 end
 
 --[[ Local function to only be used with functions in sq-act module.
-    Returns the coordinates of one block to the left of of squirt ]]
+    Returns the coordinates of one block to the left of squirt ]]
 local function getLeftPos()
 
     -- Get Squirt's current position
@@ -237,7 +237,7 @@ local function getLeftPos()
     local facing = sq_swim.sqGetFacing()
 
     --[[ Based on the direction Squirt is facing, we can determine which
-        axis must be incremented our decremented to give the block to the left of
+        axis must be incremented our decremented to give the block to the left
         of Squirt
         
         North --> -Z
@@ -262,7 +262,7 @@ local function getLeftPos()
     return blockX, blockY, blockZ
 end
         
---[[ Return the name of the block to the left of of squirt. Only blocks in the
+--[[ Return the name of the block to the left of squirt. Only blocks in the
     local getBlockName function are supported. ]]
 function act.sqGetLeftBlockName()
 
@@ -274,7 +274,7 @@ function act.sqGetLeftBlockName()
     local id = world.getBlockId(leftX, leftY, leftZ)
     local meta = world.getMetadata(leftX, leftY, leftZ)
 
-    -- Get the block name in front of squirt
+    -- Get the block name to the left of squirt
     local block = getBlockName(id, meta)
 
     return block
@@ -290,9 +290,6 @@ local function getTopPos()
 
     -- Make copies of squirt's postion to be edited
     local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
-
-    -- Determine which direction Squirt is facing
-    local facing = sq_swim.sqGetFacing()
 
     -- Increment Y by 1
     blockY = blockY + 1
@@ -328,9 +325,6 @@ local function getBottomPos()
 
     -- Make copies of squirt's postion to be edited
     local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
-
-    -- Determine which direction Squirt is facing
-    local facing = sq_swim.sqGetFacing()
 
     -- Decrement Y by 1
     blockY = blockY - 1

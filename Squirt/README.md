@@ -17,7 +17,7 @@ Squirt must:
 - [x] Know the type of block to the right of him
 - [x] Know the type of block to the left of him
 - [x] Know the type of block above him
-- [ ] Know the type of block below him
+- [x] Know the type of block below him
 - [ ] ~~Know the block he's going to pick up~~
 - [ ] Choose a block to pick up
 - [ ] Know what block he picked up
