@@ -489,7 +489,7 @@ end
     Assumes supported blocks are ordered by quantity
 
     TODO What does the receiver do with this kind of error? ]]
-function act.getPlaceInventoryIndex(block)
+local function getPlaceInventoryIndex(block)
     local BLOCK_UNSUPPORTED = -1
     local BLOCK_NOT_IN_INVENTORY = -2
 
