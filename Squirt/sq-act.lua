@@ -413,20 +413,19 @@ end
 
 --[[ Function to be used by this module only. Returns the inventory index
     to used based on the block name. Returns 9 if the block is unsupported ]]
-function act.getInventoryIndex(block)
+local function getInventoryIndex(block)
     DEFAULT_INDEX = 9
 
     -- Default index for all blocks that are not supported in the below ifelse
     index = DEFAULT_INDEX
 
-    -- TODO handle the case where the inventory indices are full
     if block == "dirt" then
         --[[ Start on index 1, is there space for the block? If not, move to the
             next index. If there isn't a spot to put the block, mark index as the
             default ]]
         index = 1
         -- Is there space for a dirt block at this index?
-        while squirt.space(index) ~= 0 and index <= 4 do
+        while squirt.space(index) == 0 and index <= 4 do
             index = index + 1
         end
 
@@ -440,7 +439,7 @@ function act.getInventoryIndex(block)
             next index. If there isn't a spot to put the block, mark index as 9 ]]
         index = 5
         -- Is there space for a cobblestone block at this index
-        while squirt.space(index) ~= 0 and index <= 8 do
+        while squirt.space(index) == 0 and index <= 8 do
             index = index + 1
         end
 
