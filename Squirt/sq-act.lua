@@ -150,7 +150,7 @@ end
     local getBlockName function are supported. ]]
 function act.sqGetBackBlockName()
 
-    -- Get the coordinate of the block in front of Squirt
+    -- Get the coordinate of the block behind of Squirt
     local backX, backY, backZ
     backX, backY, backZ = getBackPos()
 
@@ -158,7 +158,7 @@ function act.sqGetBackBlockName()
     local id = world.getBlockId(backX, backY, backZ)
     local meta = world.getMetadata(backX, backY, backZ)
 
-    -- Get the block name in front of squirt
+    -- Get the block name behind of squirt
     local block = getBlockName(id, meta)
 
     return block
@@ -208,13 +208,71 @@ end
     local getBlockName function are supported. ]]
 function act.sqGetRightBlockName()
 
-    -- Get the coordinate of the block in front of Squirt
+    -- Get the coordinate of the block to the right of Squirt
     local rightX, rightY, rightZ
     rightX, rightY, rightZ = getRightPos()
 
     -- Get the block id and meta data with world object
     local id = world.getBlockId(rightX, rightY, rightZ)
     local meta = world.getMetadata(rightX, rightY, rightZ)
+
+    -- Get the block name to the right of squirt
+    local block = getBlockName(id, meta)
+
+    return block
+end
+
+--[[ Local function to only be used with functions in sq-act module.
+    Returns the coordinates of one block to the left of of squirt ]]
+local function getLeftPos()
+
+    -- Get Squirt's current position
+    local squirtX, squirtY, squirtZ
+    squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
+
+    -- Make copies of squirt's postion to be edited
+    local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
+
+    -- Determine which direction Squirt is facing
+    local facing = sq_swim.sqGetFacing()
+
+    --[[ Based on the direction Squirt is facing, we can determine which
+        axis must be incremented our decremented to give the block to the left of
+        of Squirt
+        
+        North --> -Z
+        East  --> +X
+        South --> +Z
+        West  --> -X
+    ]]
+    if facing == "north" then
+        -- Decrement X by 1
+        blockX = blockX - 1
+    elseif facing == "east" then
+        -- Decrement Z by 1
+        blockZ = blockZ - 1
+    elseif facing == "south" then
+        -- Increment X by 1
+        blockX = blockX + 1
+    elseif facing == "west" then
+        -- Increment Z by 1
+        blockZ = blockZ + 1
+    end
+
+    return blockX, blockY, blockZ
+end
+        
+--[[ Return the name of the block to the left of of squirt. Only blocks in the
+    local getBlockName function are supported. ]]
+function act.sqGetLeftBlockName()
+
+    -- Get the coordinate of the block to the left of Squirt
+    local leftX, leftY, leftZ
+    leftX, leftY, leftZ = getLeftPos()
+
+    -- Get the block id and meta data with world object
+    local id = world.getBlockId(leftX, leftY, leftZ)
+    local meta = world.getMetadata(leftX, leftY, leftZ)
 
     -- Get the block name in front of squirt
     local block = getBlockName(id, meta)
