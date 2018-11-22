@@ -210,7 +210,7 @@ function act.sqGetRightBlockName()
 
     -- Get the coordinate of the block in front of Squirt
     local rightX, rightY, rightZ
-    rightX, rightY, rightZ = getBackPos()
+    rightX, rightY, rightZ = getRightPos()
 
     -- Get the block id and meta data with world object
     local id = world.getBlockId(rightX, rightY, rightZ)
