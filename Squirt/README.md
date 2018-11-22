@@ -19,13 +19,13 @@ Squirt must:
 - [x] Know the type of block above him
 - [x] Know the type of block below him
 - [ ] ~~Know the block he's going to pick up~~
-- [ ] Choose a block to pick up
+- [ ] ~~Choose a block to pick up~~ (<-- Crush is responsible for this)
+- [ ] Pick up a block in front, to the right, to the left, behind, above, or below him
 - [ ] Know what block he picked up
-- [ ] Pick up a block
 - [ ] ~~Know what block he's going to place~~
-- [ ] Choose a block to place
+- [ ] ~~Choose a block to place~~ (<-- Crush is responsible for this)
+- [ ] Place up a block in front, to the right, to the left, behind, above, or below him
 - [ ] Know the block he placed
-- [ ] Place a block
 
 ## Communicating with Crush (sq-comms)
 Squirt must:
