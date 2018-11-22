@@ -25,6 +25,7 @@ local world = debug.getWorld(0)
     | Dirt         |    3     |     0      |
     | Stone        |    1     |     0      |
     | Cobblestone  |    4     |     0      |
+    | Air          |    0     |     0      |
     |--------------------------------------|
 
 ]]
@@ -40,6 +41,8 @@ local function getBlockName(id, meta)
         block = "stone"
     elseif id == 4 and meta == 0 then
         block = "cobblestone"
+    elseif id == 0 and meta == 0 then
+        block = "air"
     end
 
     return block
