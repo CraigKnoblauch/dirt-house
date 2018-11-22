@@ -500,12 +500,14 @@ function act.getPlaceInventoryIndex(block)
             space is not empty. If this never occurs, set the index to -2 
         ]]
         index = 4
-        while squirt.space() == 0 and index >= 1 do
+        while squirt.count(index) == 0 and index >= 1 do
             index = index - 1
         end
 
-        -- If index rolled under 1, set it to -2
-        if index < 1 then
+        --[[ Previous while ends when index == 1 but count has not occurred. 
+            This is because count(0) throws an error. If this occurs, set
+            index to -2 ]]
+        if index == 1 and squirt.count(index) == 0 then
             index = BLOCK_NOT_IN_INVENTORY
         end
 
@@ -515,7 +517,7 @@ function act.getPlaceInventoryIndex(block)
             to -2 
         ]]
         index = 8
-        while squirt.space() == 0 and index >= 5 do
+        while squirt.count(index) == 0 and index >= 5 do
             index = index - 1
         end
 
