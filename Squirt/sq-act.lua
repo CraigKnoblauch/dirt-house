@@ -500,7 +500,7 @@ function act.getPlaceInventoryIndex(block)
             space is not empty. If this never occurs, set the index to -2 
         ]]
         index = 4
-        while squirt.count(index) == 0 and index >= 1 do
+        while squirt.count(index) == 0 and index > 1 do
             index = index - 1
         end
 
