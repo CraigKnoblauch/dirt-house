@@ -18,8 +18,10 @@ Squirt must:
 - [x] Know the type of block to the left of him
 - [x] Know the type of block above him
 - [x] Know the type of block below him
-- [ ] ~~Know the block he's going to pick up~~
-- [ ] ~~Choose a block to pick up~~ (<-- Crush is responsible for this)
+
+~~Know the block he's going to pick up~~
+
+~~Choose a block to pick up~~ (<-- Crush is responsible for this)
 - [ ] Pick up a block in front, to the right, to the left, behind, above, or below him
 - [ ] Know what block he picked up
 - [ ] ~~Know what block he's going to place~~
