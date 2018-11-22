@@ -358,7 +358,7 @@ local function getInventoryIndex(block)
     -- Default index for all blocks that are not supported in the below ifelse
     local index = DEFAULT_INDEX
 
-    if block == "dirt" then
+    if block == "dirt" or block == "grass" then
         --[[ Start on index 1, is there space for the block? If not, move to the
             next index. If there isn't a spot to put the block, mark index as the
             default ]]
@@ -373,7 +373,7 @@ local function getInventoryIndex(block)
             index = DEFAULT_INDEX
         end
 
-    elseif block == "cobblestone" then
+    elseif block == "cobblestone" or block == "stone" then
         --[[ Start on index 5, is there space for the block? If not, move to the
             next index. If there isn't a spot to put the block, mark index as 9 ]]
         index = 5
