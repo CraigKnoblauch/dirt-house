@@ -13,37 +13,37 @@ local act = {}
 -- TODO QUESTION Is the world object always 0
 local world = debug.getWorld(0)
 
---[[ local function to be used by sq-act's functions only. This function takes a block's id,
-    and it's metadata, and returns the string name of the block. 
+-- --[[ local function to be used by sq-act's functions only. This function takes a block's id,
+--     and it's metadata, and returns the string name of the block. 
     
-    Squirt will be working in a very limited environment. Therefore, only 4 blocks are supported:
+--     Squirt will be working in a very limited environment. Therefore, only 4 blocks are supported:
     
-    |--------------------------------------|
-    | Block String | Block ID | Block Meta |
-    |--------------------------------------|
-    | Grass        |    2     |     0      |
-    | Dirt         |    3     |     0      |
-    | Stone        |    1     |     0      |
-    | Cobblestone  |    4     |     0      |
-    |--------------------------------------|
+--     |--------------------------------------|
+--     | Block String | Block ID | Block Meta |
+--     |--------------------------------------|
+--     | Grass        |    2     |     0      |
+--     | Dirt         |    3     |     0      |
+--     | Stone        |    1     |     0      |
+--     | Cobblestone  |    4     |     0      |
+--     |--------------------------------------|
 
-]]
-local function getBlockName(id, meta)
-    block = "unknown"
+-- ]]
+-- local function getBlockName(id, meta)
+--     block = "unknown"
 
-    -- Based on the table shown above, classify the block
-    if id == 2 and meta == 0 then
-        block = "grass"
-    elseif id == 3 and meta == 0 then
-        block = "dirt"
-    elseif id == 1 and meta == 0 then
-        block = "stone"
-    elseif id == 4 and meta == 0 then
-        block = "cobblestone"
-    end
+--     -- Based on the table shown above, classify the block
+--     if id == 2 and meta == 0 then
+--         block = "grass"
+--     elseif id == 3 and meta == 0 then
+--         block = "dirt"
+--     elseif id == 1 and meta == 0 then
+--         block = "stone"
+--     elseif id == 4 and meta == 0 then
+--         block = "cobblestone"
+--     end
 
-    return block
-end
+--     return block
+-- end
 
 -- --[[ Local function to only be used with functions in sq-act module.
 --     Returns the coordinates of one block in front of squirt ]]
