@@ -318,6 +318,44 @@ function act.sqGetTopBlockName()
     return block
 end
 
+--[[ Local function to only be used with functions in sq-act module.
+    Returns the coordinates of one block beneath squirt ]]
+local function getBottomPos()
+
+    -- Get Squirt's current position
+    local squirtX, squirtY, squirtZ
+    squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
+
+    -- Make copies of squirt's postion to be edited
+    local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
+
+    -- Determine which direction Squirt is facing
+    local facing = sq_swim.sqGetFacing()
+
+    -- Decrement Y by 1
+    blockY = blockY - 1
+
+    return blockX, blockY, blockZ
+end
+        
+--[[ Return the name of the block beneath squirt. Only blocks in the
+    local getBlockName function are supported. ]]
+function act.sqGetBottomBlockName()
+
+    -- Get the coordinate of the block beneath Squirt
+    local bottomX, bottomY, bottomZ
+    bottomX, bottomY, bottomZ = getBottomPos()
+
+    -- Get the block id and meta data with world object
+    local id = world.getBlockId(bottomX, bottomY, bottomZ)
+    local meta = world.getMetadata(bottomX, bottomY, bottomZ)
+
+    -- Get the block name beneath squirt
+    local block = getBlockName(id, meta)
+
+    return block
+end
+
 return act
     
 
