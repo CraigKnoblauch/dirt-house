@@ -22,7 +22,7 @@ Squirt must:
 - [ ] ~~Choose a block to pick up~~ (<-- Crush is responsible for this)
 - [x] Pick up a block in front, to the right, to the left, behind, above, or below him
 - [x] Know what block he picked up
-- [ ] Put picked up blocks in the proper indices (1, 2, 3, 4 for dirt. 5, 6, 7, 8 for cobble) (**This only works for this specialized project**)
+- [x] Put picked up blocks in the proper indices (1, 2, 3, 4 for dirt. 5, 6, 7, 8 for cobble) (**This only works for this specialized project**)
 - [ ] ~~Know what block he's going to place~~
 - [ ] ~~Choose a block to place~~ (<-- Crush is responsible for this)
 - [ ] Place up a block in front, to the right, to the left, behind, above, or below him
