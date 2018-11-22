@@ -350,74 +350,13 @@ function act.sqGetBottomBlockName()
     return block
 end
 
---[[ Given a side, pick up the block on that side. Return the name of the block
-    in that direction, and whether it was picked up or not.
-    Returns "invalid side", false if the side provided is invalid. ]]
-function act.sqPickUpBlock(side)
-    blockname = "invalid side"
-    picked_up = false
-
-    if side == "front" then
-        -- Get the name of the block in front of Squirt
-        blockname = act.sqGetFrontBlockName()
-
-        -- Pick up the block in front of Squirt
-        picked_up, _ = squirt.swing()
-
-    elseif side == "right" then
-        -- Get the name of the block to the right of Squirt
-        blockname = act.sqGetRightBlockName()
-
-        -- Turn Squirt to the right, get that block, then turn Squirt back
-        sq_swim.sqTurnRight()
-        picked_up, _ = squirt.swing()
-        sq_swim.sqTurnLeft()
-
-    elseif side == "left" then
-        -- Get the name of the block to the left of Squirt
-        blockname = act.sqGetLeftBlockName()
-
-        -- Turn Squirt to the left, get that block, then turn Squirt back
-        sq_swim.sqTurnLeft()
-        picked_up, _ = squirt.swing()
-        sq_swim.sqTurnRight()
-
-    elseif side == "back" then
-        -- Get the name of the block behind Squirt
-        blockname = act.sqGetBackBlockName()
-
-        -- Turn Squirt around, get that block, then turn Squirt back
-        sq_swim.sqTurnAround()
-        picked_up, _ = squirt.swing()
-        sq_swim.sqTurnAround()
-
-    elseif side == "up" or side == "top" then
-        -- Get the name of the block above Squirt
-        blockname = act.sqGetTopBlockName()
-
-        -- Get the block above of Squirt
-        picked_up, _ = squirt.swingUp()
-
-    elseif side == "down" or side == "bottom" then
-        -- Get the name of the block below Squirt
-        blockname = act.sqGetBottomBlockName()
-
-        -- Get the block beneath Squirt
-        picked_up, _ = squirt.swingDown()
-
-    end
-
-    return blockname, picked_up
-
-end
-
 --[[ Function to be used by this module only. Returns the inventory index
     to used based on the block name. Returns 9 if the block is unsupported ]]
 local function getInventoryIndex(block)
-    DEFAULT_INDEX = 9
+    local DEFAULT_INDEX = 9
 
     -- Default index for all blocks that are not supported in the below ifelse
-    index = DEFAULT_INDEX
+    local index = DEFAULT_INDEX
 
     if block == "dirt" then
         --[[ Start on index 1, is there space for the block? If not, move to the
@@ -450,6 +389,94 @@ local function getInventoryIndex(block)
     end
 
     return index
+end
+
+--[[ Given a side, pick up the block on that side. Return the name of the block
+    in that direction, and whether it was picked up or not.
+    Returns "invalid side", false if the side provided is invalid. ]]
+function act.sqPickUpBlock(side)
+    local blockname = "invalid side"
+    local picked_up = false
+
+    -- Get the current inventory seleection slot
+    local inventory_index = squirt.select() 
+
+    if side == "front" then
+        -- Get the name of the block in front of Squirt
+        blockname = act.sqGetFrontBlockName()
+
+        -- Select the proper inventory slot
+        inventory_index = getInventoryIndex(blockname)
+        squirt.select(inventory_index)
+
+        -- Pick up the block in front of Squirt
+        picked_up, _ = squirt.swing()
+
+    elseif side == "right" then
+        -- Get the name of the block to the right of Squirt
+        blockname = act.sqGetRightBlockName()
+
+        -- Select the proper inventory slot
+        inventory_index = getInventoryIndex(blockname)
+        squirt.select(inventory_index)
+
+        -- Turn Squirt to the right, get that block, then turn Squirt back
+        sq_swim.sqTurnRight()
+        picked_up, _ = squirt.swing()
+        sq_swim.sqTurnLeft()
+
+    elseif side == "left" then
+        -- Get the name of the block to the left of Squirt
+        blockname = act.sqGetLeftBlockName()
+
+        -- Select the proper inventory slot
+        inventory_index = getInventoryIndex(blockname)
+        squirt.select(inventory_index)
+
+        -- Turn Squirt to the left, get that block, then turn Squirt back
+        sq_swim.sqTurnLeft()
+        picked_up, _ = squirt.swing()
+        sq_swim.sqTurnRight()
+
+    elseif side == "back" then
+        -- Get the name of the block behind Squirt
+        blockname = act.sqGetBackBlockName()
+
+        -- Select the proper inventory slot
+        inventory_index = getInventoryIndex(blockname)
+        squirt.select(inventory_index)
+
+        -- Turn Squirt around, get that block, then turn Squirt back
+        sq_swim.sqTurnAround()
+        picked_up, _ = squirt.swing()
+        sq_swim.sqTurnAround()
+
+    elseif side == "up" or side == "top" then
+        -- Get the name of the block above Squirt
+        blockname = act.sqGetTopBlockName()
+
+        -- Select the proper inventory slot
+        inventory_index = getInventoryIndex(blockname)
+        squirt.select(inventory_index)
+
+        -- Get the block above of Squirt
+        picked_up, _ = squirt.swingUp()
+
+    elseif side == "down" or side == "bottom" then
+        -- Get the name of the block below Squirt
+        blockname = act.sqGetBottomBlockName()
+
+        -- Select the proper inventory slot
+        inventory_index = getInventoryIndex(blockname)
+        squirt.select(inventory_index)
+
+        -- Get the block beneath Squirt
+        picked_up, _ = squirt.swingDown()
+
+    end
+
+    return blockname, picked_up
+
 end
             
 return act
