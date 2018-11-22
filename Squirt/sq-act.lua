@@ -350,6 +350,67 @@ function act.sqGetBottomBlockName()
     return block
 end
 
+--[[ Given a side, pick up the block on that side. Return the name of the block
+    in that direction, and whether it was picked up or not.
+    Returns "invalid side", false if the side provided is invalid. ]]
+function act.sqPickUpBlock(side)
+    blockname = "invalid side"
+    picked_up = false
+
+    if side == "front" then
+        -- Get the name of the block in front of Squirt
+        blockname = act.sqGetFrontBlockName()
+
+        -- Pick up the block in front of Squirt
+        picked_up, _ = squirt.swing()
+
+    elseif side == "right" then
+        -- Get the name of the block to the right of Squirt
+        blockname = act.sqGetRightBlockName()
+
+        -- Turn Squirt to the right, get that block, then turn Squirt back
+        sq_swim.sqTurnRight()
+        picked_up, _ = squirt.swing()
+        sq_sim.sqTurnLeft()
+
+    elseif side == "left" then
+        -- Get the name of the block to the left of Squirt
+        blockname = act.sqGetLeftBlockName()
+
+        -- Turn Squirt to the left, get that block, then turn Squirt back
+        sq_swim.sqTurnLeft()
+        picked_up, _ = squirt.swing()
+        sq_swim.sqTurnRight()
+
+    elseif side == "back" then
+        -- Get the name of the block behind Squirt
+        blockname = act.sqGetBackBlockName()
+
+        -- Turn Squirt around, get that block, then turn Squirt back
+        sq_swim.sqTurnAround()
+        picked_up, _ = squirt.swing()
+        sq_swim.sqTurnAround()
+
+    elseif side == "up" or side == "top" then
+        -- Get the name of the block above Squirt
+        blockname = act.sqGetTopBlockName()
+
+        -- Get the block above of Squirt
+        picked_up, _ = squirt.swingUp()
+
+    elseif side == "down" or side == "bottom" then
+        -- Get the name of the block below Squirt
+        blockname = act.sqGetBottomBlockName()
+
+        -- Get the block beneath Squirt
+        picked_up, _ = squirt.swingDown()
+
+    end
+
+    return blockname, picked_up
+
+end
+            
 return act
     
 

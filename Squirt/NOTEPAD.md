@@ -37,3 +37,6 @@ The navigation upgrade is needed to access these functions. After that is includ
  - East/West is +x/-x
  - North/South is -z/+z 
 
+## action
+1. Squirt must be equipped with a tool to pick up blocks that require a tool.
+2. Tool decay can be turned off by setting `itemDamageRate` in the settings config to 0.
