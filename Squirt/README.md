@@ -32,4 +32,4 @@ Squirt must:
 Squirt must:
 - [x] Open a connection at 127.0.0.1:65432
 - [x] Read a standard amount of bytes (5 bytes)
-- [ ] Write a standard message (x, y, z, action, outcome)
+- [x] Write a standard message (x, y, z, action, outcome)
