@@ -535,7 +535,7 @@ end
 --[[ Given a side, returns if a block exists on that side.
     NOTE Since this function is only used internally, it's assuming
     the side is valide ]]
-function act.blockExists(side)
+local function blockExists(side)
     local block_exists = nil
 
     if side == "front" then
