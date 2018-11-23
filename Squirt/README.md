@@ -25,8 +25,8 @@ Squirt must:
 - [x] Put picked up blocks in the proper indices (1, 2, 3, 4 for dirt. 5, 6, 7, 8 for cobble) (**This only works for this specialized project**)
 - [ ] ~~Know what block he's going to place~~
 - [ ] ~~Choose a block to place~~ (<-- Crush is responsible for this)
-- [ ] Place up a block in front, to the right, to the left, behind, above, or below him
-- [ ] Know the block he placed
+- [x] Place up a block in front, to the right, to the left, behind, above, or below him
+- [x] Know the block he placed
 
 ## Communicating with Crush (sq-comms)
 Squirt must:
