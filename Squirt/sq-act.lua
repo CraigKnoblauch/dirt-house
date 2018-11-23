@@ -532,6 +532,49 @@ local function getPlaceInventoryIndex(block)
     return index
 end
 
+--[[ Given a side, returns if a block exists on that side.
+    NOTE Since this function is only used internally, it's assuming
+    the side is valide ]]
+function act.blockExists(side)
+    local block_exists = nil
+
+    if side == "front" then
+        -- Detect block in front of squirt
+        block_exists, _ = squirt.detect()
+
+    elseif side == "right" then
+        -- Turn Squirt to the right, detect, then turn Squirt back
+        sq_swim.sqTurnRight()
+        block_exists, _ = squirt.detect()
+        sq_swim.sqTurnLeft()
+
+    elseif side == "left" then
+        -- Turn Squirt to the left, detect, then turn Squirt back
+        sq_swim.sqTurnLeft()
+        block_exists, _ = squirt.detect()
+        sq_swim.sqTurnRight()
+
+    elseif side == "back" or side == "behind" then
+        -- Turn Squirt around, detect, then turn Squirt around
+        sq_swim.sqTurnAround()
+        block_exists, _ = squirt.detect()
+        sq_swim.sqTurnAround()
+
+    elseif side == "up" or side == "top" then
+        -- Detect up
+        block_exists, _ = squirt.detectUp()
+
+    elseif side == "down" or side == "under" or side == "bottom" then
+        -- Detect down
+        block_exists, _ = squirt.detectDown()
+
+    end
+
+    return block_exists
+
+end
+
+
 
 --[[ Given a side and a block name, Place the block on that side. Returns a positive
     number if the block was placed successfully. Return a negative number otherwise.
@@ -551,18 +594,7 @@ function act.sqPlaceBlock(side, block)
 
     -- TODO Left off here. Functionalize this so the block detection, index finding, and picking up the block are seperate local functions
     -- Figure out what side is being requested
-    if side == "front" then
-
-        -- Is there a block in front of Squirt
-        local block_exists, _ = squirt.detect()
-        if block_exists then
-            exitcode = BLOCK_DETECTED_ON_SIDE
-        end
-
-        -- If there is not a block in front of Squirt, continue
-        if not block_exists then
-            -- Get the index of the requested 
-
+end
 
 
 
