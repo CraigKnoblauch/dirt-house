@@ -584,14 +584,17 @@ end
     Returns -2 if Squirt doesn't have the block requested
     Returns -3 if there's already a block on the requested side
     Returns -4 if the side is invalid
+    Returns -5 if a reference block does not exist. i.e. Cannot place a floating block
 ]]
 function act.sqPlaceBlock(side, block)
     local BLOCK_UNSUPPORTED = -1
     local BLOCK_NOT_IN_INVENTORY = -2
     local BLOCK_DETECTED_ON_SIDE = -3
     local INVALID_SIDE = -4
+    local NO_REFERENCE_BLOCK = -5
 
-    local exitcode = 1
+    local SUCCESS = 1
+    local exitcode = SUCCESS
 
     -- Check that the side is supported. Return INVALID_SIDE if it is not
     if not ( side == "front" or 
@@ -623,41 +626,48 @@ function act.sqPlaceBlock(side, block)
         return BLOCK_DETECTED_ON_SIDE
     end
 
+    -- Boolean used to track if the block was successfully placed
+    local placed = true
+
     -- Turn to the side, place the block and turn back
     -- TODO QUESTION Should Squirt turn back?
     if side == "front" then
         -- Place a block in front of Squirt
-        squirt.place()
+        placed = squirt.place()
 
     elseif side == "right" then
         -- Turn Squirt to the right, place a block, turn back
         sq_swim.sqTurnRight()
-        squirt.place()
+        placed = squirt.place()
         sq_swim.sqTurnLeft()
 
     elseif side == "left" then
         -- Turn Squirt to the left, place a block, then back
         sq_swim.sqTurnLeft()
-        squirt.place()
+        placed = squirt.place()
         sq_swim.sqTurnRight()
 
     elseif side == "back" or side == "behind" then
         -- Turn Squirt around, place a block, then back
         sq_swim.sqTurnAround()
-        squirt.place()
+        placed = squirt.place()
         sq_swim.sqTurnAround()
 
     elseif side == "top" or side == "up" then
         -- Place a block up
-        squirt.placeUp()
+        placed = squirt.placeUp()
     
     elseif side == "bottom" or side == "down" or side == "under" or side == "beneath" then
         -- Place block down
-        squirt.placeDown()
+        placed = squirt.placeDown()
     
     end
 
-    return exitcode
+    if not placed then
+        return NO_REFERENCE_BLOCK
+    else
+        return SUCCESS
+        
 end
 
 
