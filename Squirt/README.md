@@ -28,10 +28,8 @@ Squirt must:
 - [x] Place up a block in front, to the right, to the left, behind, above, or below him
 - [x] Know the block he placed
 
-## Communicating with Crush (sq-comms)
+## Communicating with the EAC (sq-comms)
 Squirt must:
 - [x] Open a connection at 127.0.0.1:65432
-- [ ] Read a standard amount of bytes (5 bytes)
+- [x] Read a standard amount of bytes (5 bytes)
 - [ ] Write a standard message (x, y, z, action, outcome)
-- [ ] Follow instructions from Crush
-- [ ] Send rewards to Crush per action

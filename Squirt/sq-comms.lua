@@ -47,14 +47,24 @@ function comms.sqRead()
     return read
 end
 
---[[ Writes a message to the connection. Returns whether or not the message was written
+--[[ Construct and write a message to the connection. Message is a combination of
+    parameters, seperated by commas. Returns whether or not the message was written
     and an error message if it was not ]]
-function comms.sqWrite(msg)
+function comms.sqWrite(x, y, z, action, outcome)
     local written = false
     local err = "ERROR: NO CONNECTION"
 
+    -- Construct the message
+    local msg = ""
+    msg = msg .. tostring(x) .. ","
+    msg = msg .. tostring(y) .. ","
+    msg = msg .. tostring(z) .. ","
+    msg = msg .. tostring(action) .. ","
+    msg = msg .. tostring(outcome)
+
     -- Check if the connection is open
     if handle ~= nil then
+        -- Send the message
         handle.write(msg)
         written = true
         err = "SUCCESS"
