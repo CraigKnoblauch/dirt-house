@@ -18,7 +18,8 @@ local ADDRESS = "127.0.0.1"
 local PORT = 65432
 
 -- Handle to manage connection
-local handle = nil
+-- Hacked to be a consistent variable
+handle = nil
 
 -- Number of bytes to read has been standardized to this number
 local NUM_READ_BYTES = 5
@@ -26,6 +27,11 @@ local NUM_READ_BYTES = 5
 --[[ Opens and assignes connection opened at ADDRESS:PORT, to the local handle ]]
 function comms.sqConnect()
     handle = it.connect(ADDRESS, PORT)
+end
+
+--[[ Close the connection ]]
+function comms.sqClose()
+    handle.close()
 end
 
 --[[ Uses the local handle to read from the connection. If the handle has not
