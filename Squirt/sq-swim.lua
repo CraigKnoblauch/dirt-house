@@ -146,9 +146,14 @@ end
     Assumes that there will be no blocks to run into 7 blocks above it's current pos 
     Also assumes that the destination Y will be beneath it after it's upward move ]]
 function swim.sqGoToPos(destX, destY, destZ)
-    -- Move squirt 7 blocks up so he's clear of obstructions in the environment
+    -- Defines the Y flight height that Squirt should be at before moving forward.
+    -- TODO Change this is if the environment changes
+    local FLIGHT_Y = 67
+
+    -- Move squirt up to the flight height so he's clear of obstructions in the environment
     -- NOTE: This can only be assumed to work in a specific environment and setting
-    for i = 1, 7, 1 do swim.sqUp() end
+    -- TODO: What if Squirt is above the flight height
+    for i = math.floor(sq_nav.sqGetY()), 67, 1 do swim.sqUp() end
 
     -- Get Squirt's current postion
     local initX, initY, initZ
