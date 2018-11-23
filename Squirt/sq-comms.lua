@@ -47,4 +47,20 @@ function comms.sqRead()
     return read
 end
 
+--[[ Writes a message to the connection. Returns whether or not the message was written
+    and an error message if it was not ]]
+function comms.sqWrite(msg)
+    local written = false
+    local err = "ERROR: NO CONNECTION"
+
+    -- Check if the connection is open
+    if handle ~= nil then
+        handle.write(msg)
+        written = true
+        err = "SUCCESS"
+    end
+
+    return written, err
+end
+
 return comms
