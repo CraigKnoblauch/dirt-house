@@ -393,6 +393,7 @@ local function getPickupInventoryIndex(block)
 end
 
 -- TODO change return to exit codes
+-- TODO what if there is no block to pick up?
 --[[ Given a side, pick up the block on that side. Return the name of the block
     in that direction, and whether it was picked up or not.
     Returns "invalid side", false if the side provided is invalid. ]]
@@ -564,7 +565,7 @@ local function blockExists(side)
         -- Detect up
         block_exists, _ = squirt.detectUp()
 
-    elseif side == "down" or side == "under" or side == "bottom" then
+    elseif side == "down" or side == "under" or side == "bottom" or side == "beneath" then
         -- Detect down
         block_exists, _ = squirt.detectDown()
 
@@ -575,7 +576,7 @@ local function blockExists(side)
 end
 
 
-
+-- TODO I think this is a badly designed function
 --[[ Given a side and a block name, Place the block on that side. Returns a positive
     number if the block was placed successfully. Return a negative number otherwise.
     
@@ -592,8 +593,71 @@ function act.sqPlaceBlock(side, block)
 
     local exitcode = 1
 
+    -- Check that the side is supported. Return INVALID_SIDE if it is not
+    if not ( side == "front" or 
+             side == "right" or
+             side == "left" or
+             side == "back" or side == "behind" or
+             side == "up" or side == "top" or
+             side == "down" or side == "bottom" or side == "under" or side == "beneath"
+            ) then
+        
+        return INVALID_SIDE
+
+    end
+
     -- TODO Left off here. Functionalize this so the block detection, index finding, and picking up the block are seperate local functions
-    -- Figure out what side is being requested
+    
+    -- Make sure there's not a block on that side
+    if not blockExists(side) then
+
+        -- Squirt selects the proper inventory index for the requested block
+        if getPlaceInventoryIndex(block) < 0 then
+            return getPlaceInventoryIndex(block)
+        else
+            squirt.select( getPlaceInventoryIndex(block) )
+        end
+
+    else 
+        -- Return that a block was detected
+        return BLOCK_DETECTED_ON_SIDE
+    end
+
+    -- Turn to the side, place the block and turn back
+    -- TODO QUESTION Should Squirt turn back?
+    if side == "front" then
+        -- Place a block in front of Squirt
+        squirt.place()
+
+    elseif side == "right" then
+        -- Turn Squirt to the right, place a block, turn back
+        sq_swim.sqTurnRight()
+        squirt.place()
+        sq_swim.sqTurnLeft()
+
+    elseif side == "left" then
+        -- Turn Squirt to the left, place a block, then back
+        sq_swim.sqTurnLeft()
+        squirt.place()
+        sq_swim.sqTurnRight()
+
+    elseif side == "back" or side == "behind" then
+        -- Turn Squirt around, place a block, then back
+        sq_swim.sqTurnAround()
+        squirt.place()
+        sq_swim.sqTurnAround()
+
+    elseif side == "top" or side == "up" then
+        -- Place a block up
+        squirt.placeUp()
+    
+    elseif side == "bottom" or side == "down" or side == "under" or side == "beneath" then
+        -- Place block down
+        squirt.placeDown()
+    
+    end
+
+    return exitcode
 end
 
 
