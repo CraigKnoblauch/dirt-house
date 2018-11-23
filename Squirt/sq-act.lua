@@ -667,7 +667,8 @@ function act.sqPlaceBlock(side, block)
         return NO_REFERENCE_BLOCK
     else
         return SUCCESS
-        
+    end
+
 end
 
 
