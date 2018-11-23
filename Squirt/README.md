@@ -30,5 +30,8 @@ Squirt must:
 
 ## Communicating with Crush (sq-comms)
 Squirt must:
+- [x] Open a connection at 127.0.0.1:65432
+- [ ] Read a standard amount of bytes (5 bytes)
+- [ ] Write a standard message (x, y, z, action, outcome)
 - [ ] Follow instructions from Crush
 - [ ] Send rewards to Crush per action

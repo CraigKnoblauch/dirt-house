@@ -17,9 +17,28 @@ local ADDRESS = "127.0.0.1"
 -- The port that Squirt must connect to
 local PORT = 65432
 
---[[ Returns a handle to the connection opened at ADDRESS:PORT ]]
+-- Handle to manage connection
+local handle = nil
+
+-- Number of bytes to read has been standardized to this number
+local NUM_READ_BYTES = 5
+
+--[[ Opens and assignes connection opened at ADDRESS:PORT, to the local handle ]]
 function comms.sqConnect()
-    return it.connect(ADDRESS, PORT)
+    handle = it.connect(ADDRESS, PORT)
+end
+
+--[[ Uses the local handle to read from the connection. If the handle has not
+    yet been assigned, returns "ERROR: NO CONNECTION" ]]
+function comms.sqRead()
+    local read = "ERROR: NO CONNECTION"
+
+    -- Check if the connection is open
+    if handle ~= nil then
+        read = handle.read(NUM_READ_BYTES)
+    end
+
+    return read
 end
 
 return comms
