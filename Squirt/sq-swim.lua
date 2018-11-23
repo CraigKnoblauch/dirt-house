@@ -153,7 +153,11 @@ function swim.sqGoToPos(destX, destY, destZ)
     -- Move squirt up to the flight height so he's clear of obstructions in the environment
     -- NOTE: This can only be assumed to work in a specific environment and setting
     -- TODO: What if Squirt is above the flight height
-    for i = math.floor(sq_nav.sqGetY()), FLIGHT_Y, 1 do swim.sqUp() end
+    for i = math.floor(sq_nav.sqGetY()), FLIGHT_Y, 1 do 
+        squirt.select(9)
+        squirt.swingUp()
+        swim.sqUp() 
+    end
 
     -- Get Squirt's current postion
     local initX, initY, initZ
