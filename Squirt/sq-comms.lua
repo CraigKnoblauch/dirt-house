@@ -41,6 +41,8 @@ function comms.sqRead()
 
     -- Check if the connection is open
     if handle ~= nil then
+        -- Read once to clear the buffer, then again to get the command
+        handle.read(NUM_READ_BYTES)
         read = handle.read(NUM_READ_BYTES)
     end
 

@@ -8,7 +8,7 @@ class EAC:
 
     def __init__(self):
         self.actions = {'noop': 0,
-                        'forward': 1,
+                        'forward': b'001',
                         'back': 2,
                         'up': 3,
                         'down': 4,

@@ -3,21 +3,18 @@
     Relays state information back to the EAC
 ]]
 local sq_act = require("sq-act")
-local sq_nav = require("sq-nav")
+local sq_nav = require("sq-navigation")
 local sq_comms = require("sq-comms")
 local sq_swim = require("sq-swim")
 
 -- Open a connection with the EAC
 sq_comms.sqConnect()
+print("I have connected to Crush")
 
--- Inform the EAC Squirt is ready for a command
-sq_comms.sqWrite("ready")
+-- Get the command from Crush
+read = sq_comms.sqRead()
 
--- Wait for something to be read
-read = ""
-while read == "" do
-    read = sq_comms.sqRead()
-end
+print("Received " .. read)
 
 -- 1 go forward
 if read == "001" then
