@@ -403,7 +403,7 @@ end
     | Return Code |               Info                  |
     |---------------------------------------------------|
     |  -3         | Invalid side used as input          |
-    |  -2         | Attempting to bick up bedrock       |
+    |  -2         | Attempting to pick up bedrock       |
     |  -1         | There is not block to pick up       |
     |   1         | The block picked up was dirt        |
     |   2         | The block picked up was cobblestone |
@@ -422,7 +422,7 @@ function act.sqPickUpBlock(side)
 
     local blockname = "invalid side"
     local picked_up = false
-    local stat = ""
+    local state = ""
 
     -- Get the current inventory seleection slot
     local inventory_index = squirt.select() 
@@ -502,14 +502,14 @@ function act.sqPickUpBlock(side)
     end
 
     -- Identify the exitcode to use based on the block that was picked up or not
-    if (not picked_up and state == "block") or blockname == "bedrock" then
+    if blockname == "invalid side" then
+        exitcode = INVALID_SIDE
+
+    elseif (not picked_up and state == "block") or blockname == "bedrock" then
         exitcode = BLOCK_IS_BEDROCK
 
     elseif not picked_up or state == "air" then
         exitcode = BLOCK_DOES_NOT_EXIST
-
-    elseif blockname == "invalid side" then
-        exitcode = INVALID_SIDE
 
     -- NOTE blockname is given before the block is picked up. That's why we're checking
     -- both "dirt" and "grass"
