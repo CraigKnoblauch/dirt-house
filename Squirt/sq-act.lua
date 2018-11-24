@@ -402,6 +402,7 @@ end
     |---------------------------------------------------|
     | Return Code |               Info                  |
     |---------------------------------------------------|
+    |  -3         | Invalid side used as input          |
     |  -2         | Attempting to bick up bedrock       |
     |  -1         | There is not block to pick up       |
     |   1         | The block picked up was dirt        |
@@ -501,8 +502,14 @@ function act.sqPickUpBlock(side)
     end
 
     -- Identify the exitcode to use based on the block that was picked up or not
-    if not picked_up or state == "air" then
+    if (not picked_up and state == "block") or blockname == "bedrock" then
+        exitcode = BLOCK_IS_BEDROCK
+
+    elseif not picked_up or state == "air" then
         exitcode = BLOCK_DOES_NOT_EXIST
+
+    elseif blockname == "invalid side" then
+        exitcode = INVALID_SIDE
 
     -- NOTE blockname is given before the block is picked up. That's why we're checking
     -- both "dirt" and "grass"
@@ -511,9 +518,6 @@ function act.sqPickUpBlock(side)
 
     elseif blockname == "cobblestone" or blockname == "stone" then
         exitcode = BLOCK_IS_COBBLESTONE
-
-    elseif blockname == "bedrock" then
-        exitcode = BLOCK_IS_BEDROCK
     
     -- There was a block picked up, but it wasn't cobble or dirt
     else
