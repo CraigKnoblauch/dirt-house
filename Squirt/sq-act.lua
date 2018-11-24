@@ -416,6 +416,7 @@ function act.sqPickUpBlock(side)
     -- Exit codes
     local BLOCK_DOES_NOT_EXIST = -1
     local BLOCK_IS_BEDROCK = -2
+    local INVALID_SIDE = -3
     local BLOCK_IS_DIRT = 1
     local BLOCK_IS_COBBLESTONE = 2
     local BLOCK_IS_UNKNOWN = 3
