@@ -9,8 +9,15 @@ local sq_nav = require("sq-navigation")
 local swim = {}
 
 --[[ Serves as a wrapper for a robot's forward function. Without this function, squirt would 
-    report his position as the block he came from, rather than the block he's going to. ]]
+    report his position as the block he came from, rather than the block he's going to. 
+
+    Returns 1 if success
+    Returns -1 if fail
+    Returns 0 if the time_t's roll around
+]]
 function swim.sqForward()
+    local outcome = 0
+
     -- Get the coordinates before the move
     local initX, initY, initZ
     initX, initY, initZ = sq_nav.sqGetPos()
@@ -26,13 +33,26 @@ function swim.sqForward()
 
     end
 
-    -- Return the forward's usual return
-    return ret
+    -- Convert forward's result into a number. 1 if true, -1 if false
+    if ret then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
 end
 
 --[[ Serves as a wrapper for a robot's back function. Without this function, squirt would 
-    report his position as the block he came from, rather than the block he's going to. ]]
+    report his position as the block he came from, rather than the block he's going to. 
+
+    Returns 1 if success
+    Returns -1 if fail
+    Returns 0 if the time_t's roll around
+]]
 function swim.sqBack()
+    local outcome = 0
+    
     -- Get the coordinates before the move
     local initX, initY, initZ
     initX, initY, initZ = sq_nav.sqGetPos()
@@ -48,13 +68,26 @@ function swim.sqBack()
 
     end
 
-    -- Return the back's usual return
-    return ret
+    -- Convert back's result into a number. 1 if true, -1 if false
+    if ret then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
 end
 
 --[[ Serves as a wrapper for a robot's up function. Without this function, squirt would 
-    report his position as the block he came from, rather than the block he's going to. ]]
+    report his position as the block he came from, rather than the block he's going to. 
+
+    Returns 1 if success
+    Returns -1 if fail
+    Returns 0 if the time_t's roll around
+]]
 function swim.sqUp()
+    local outcome = 0
+
     -- Get the coordinates before the move
     local initX, initY, initZ
     initX, initY, initZ = sq_nav.sqGetPos()
@@ -70,12 +103,23 @@ function swim.sqUp()
 
     end
 
-    -- Return the up's usual return
-    return ret
+    -- Convert up's result into a number. 1 if true, -1 if false
+    if ret then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
 end
 
 --[[ Serves as a wrapper for a robot's down function. Without this function, squirt would 
-    report his position as the block he came from, rather than the block he's going to. ]]
+    report his position as the block he came from, rather than the block he's going to. 
+    
+    Returns 1 if success
+    Returns -1 if fail
+    Returns 0 if the time_t's roll around
+]]
 function swim.sqDown()
     local outcome = 0
 
@@ -102,7 +146,7 @@ function swim.sqDown()
     end
 
     return outcome
-    
+
 end
 
 --[[ Turn left. Unaware if additional functionality will be needed at this time 
