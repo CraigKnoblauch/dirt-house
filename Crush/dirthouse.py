@@ -22,4 +22,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         data = conn.recv(1024)
         print(data)
 
+        # Command Squirt up
+        action_code = eac.getUpAC()
+        conn.sendall(action_code)
+
+        data = conn.recv(1024)
+        print(data)
+
     conn.close()

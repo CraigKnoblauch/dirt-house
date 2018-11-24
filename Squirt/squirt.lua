@@ -12,6 +12,7 @@ sq_comms.sqConnect()
 print("I have connected to Crush")
 
 -- Get the command from Crush
+sq_comms.sqRead()
 read = sq_comms.sqRead()
 
 print("Received " .. read)

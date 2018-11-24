@@ -31,5 +31,9 @@ Squirt must:
 ## Communicating with the EAC (sq-comms)
 Squirt must:
 - [x] Open a connection at 127.0.0.1:65432
-- [x] Read a standard amount of bytes (5 bytes)
+- [x] Read a standard amount of bytes (3 bytes)
 - [x] Write a standard message (x, y, z, action, outcome)
+
+## Executing commands (sq-exe)
+Squirt must:
+- [ ] Understand action codes
