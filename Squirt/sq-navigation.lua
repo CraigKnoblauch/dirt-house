@@ -49,12 +49,17 @@ function nav.sqSetAbsInitPos()
 end
 
 -- TODO on all, handle weird cases with return codes
---[[ Return Squirt's X position based on the episode count ]]
+-- NOTE Back of envs must be facing West
+
+--[[ Return Squirt's X position based on the episode count.
+    NOTE: While currently Squirt's x pos is not dependent on episode
+    count, it's good practice to have this function used as if it does.
+    Just in case the setup changes in the future 
+]]
 function nav.sqGetEpisodicX(episode)
     local epX = nil
 
-    -- 18 because each starting point is 18 blocks away
-    epX = nav.sqGetX() - SQ_INIT_X - (18 * episode)
+    epX = nav.sqGetX() - SQ_INIT_X
 
     return epX
 end
@@ -72,15 +77,12 @@ function nav.sqGetEpisodicY(episode)
     return epY
 end
 
---[[ Return Squirt's Z position based on the episode count.
-    NOTE: While currently Squirt's z pos is not dependent on episode
-    count, it's good practice to have this function used as if it does.
-    Just in case the setup changes in the future 
-]]
-function nav.sqGetEpisodicZ(episode)
+--[[ Return Squirt's Z position based on the episode count ]]
+function nav.sqGetEpisodicX(episode)
     local epZ = nil
 
-    epZ = nav.sqGetZ() - SQ_INIT_Z
+    -- 18 because each starting point is 18 blocks away
+    epZ = nav.sqGetX() - SQ_INIT_Z - (18 * episode)
 
     return epZ
 end
