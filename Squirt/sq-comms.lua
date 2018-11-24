@@ -22,7 +22,7 @@ local PORT = 65432
 handle = nil
 
 -- Number of bytes to read has been standardized to this number
-local NUM_READ_BYTES = 5
+local NUM_READ_BYTES = 3
 
 --[[ Opens and assignes connection opened at ADDRESS:PORT, to the local handle ]]
 function comms.sqConnect()
