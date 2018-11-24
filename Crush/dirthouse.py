@@ -16,3 +16,10 @@ with open socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print("Squirt has connected")
 
         # Demo, command Squirt to move forward, 
+        action_code = eac.getForwardAC()
+        conn.sendall(action_code)
+
+        data = conn.recv(1024)
+        print(data)
+
+    conn.close()
