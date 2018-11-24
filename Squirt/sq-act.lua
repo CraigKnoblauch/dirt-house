@@ -392,14 +392,31 @@ local function getPickupInventoryIndex(block)
     return index
 end
 
--- TODO change return to exit codes
--- TODO what if there is no block to pick up?
 --[[ Given a side, pick up the block on that side. Return the name of the block
     in that direction, and whether it was picked up or not.
-    Returns "invalid side", false if the side provided is invalid. ]]
+    Possible returns:
+    
+    |---------------------------------------------------|
+    | Return Code |               Info                  |
+    |---------------------------------------------------|
+    |  -1         | There is not block to pick up       |
+    |   1         | The block picked up was dirt        |
+    |   2         | The block picked up was cobblestone |
+    |   3         | The block picked up was unknown     |
+    |   0         | The time_t's rolled around          |
+    |---------------------------------------------------|
+]]
 function act.sqPickUpBlock(side)
+    local exitcode = 0
+    -- Exit codes
+    local BLOCK_DOES_NOT_EXIST = -1
+    local BLOCK_IS_DIRT = 1
+    local BLOCK_IS_COBBLESTONE = 2
+    local BLOCK_IS_UNKNOWN = 3
+
     local blockname = "invalid side"
     local picked_up = false
+    local stat = ""
 
     -- Get the current inventory seleection slot
     local inventory_index = squirt.select() 
@@ -413,7 +430,7 @@ function act.sqPickUpBlock(side)
         squirt.select(inventory_index)
 
         -- Pick up the block in front of Squirt
-        picked_up, _ = squirt.swing()
+        picked_up, state = squirt.swing()
 
     elseif side == "right" then
         -- Get the name of the block to the right of Squirt
@@ -425,7 +442,7 @@ function act.sqPickUpBlock(side)
 
         -- Turn Squirt to the right, get that block, then turn Squirt back
         sq_swim.sqTurnRight()
-        picked_up, _ = squirt.swing()
+        picked_up, state = squirt.swing()
         sq_swim.sqTurnLeft()
 
     elseif side == "left" then
@@ -438,7 +455,7 @@ function act.sqPickUpBlock(side)
 
         -- Turn Squirt to the left, get that block, then turn Squirt back
         sq_swim.sqTurnLeft()
-        picked_up, _ = squirt.swing()
+        picked_up, state = squirt.swing()
         sq_swim.sqTurnRight()
 
     elseif side == "back" then
@@ -451,7 +468,7 @@ function act.sqPickUpBlock(side)
 
         -- Turn Squirt around, get that block, then turn Squirt back
         sq_swim.sqTurnAround()
-        picked_up, _ = squirt.swing()
+        picked_up, state = squirt.swing()
         sq_swim.sqTurnAround()
 
     elseif side == "up" or side == "top" then
@@ -463,7 +480,7 @@ function act.sqPickUpBlock(side)
         squirt.select(inventory_index)
 
         -- Get the block above of Squirt
-        picked_up, _ = squirt.swingUp()
+        picked_up, state = squirt.swingUp()
 
     elseif side == "down" or side == "bottom" then
         -- Get the name of the block below Squirt
@@ -474,11 +491,28 @@ function act.sqPickUpBlock(side)
         squirt.select(inventory_index)
 
         -- Get the block beneath Squirt
-        picked_up, _ = squirt.swingDown()
+        picked_up, state = squirt.swingDown()
 
     end
 
-    return blockname, picked_up
+    -- Identify the exitcode to use based on the block that was picked up or not
+    if not picked_up or state == "air" then
+        exitcode = BLOCK_DOES_NOT_EXIST
+
+    -- NOTE blockname is given before the block is picked up. That's why we're checking
+    -- both "dirt" and "grass"
+    elseif blockname == "dirt" or blockname == "grass" then
+        exitcode = BLOCK_IS_DIRT
+
+    elseif blockname == "cobblestone" or blockname == "stone" then
+        exitcode = BLOCK_IS_COBBLESTONE
+
+    -- There was a block picked up, but it wasn't cobble or dirt
+    else
+        exitcode = BLOCK_IS_UNKNOWN
+    end
+
+    return exitcode
 
 end
 
@@ -489,8 +523,7 @@ end
     Returns -2 if there Squirt doesn't have the block to place
 
     Assumes supported blocks are ordered by quantity
-
-    TODO What does the receiver do with this kind of error? ]]
+]]
 local function getPlaceInventoryIndex(block)
     local BLOCK_UNSUPPORTED = -1
     local BLOCK_NOT_IN_INVENTORY = -2
