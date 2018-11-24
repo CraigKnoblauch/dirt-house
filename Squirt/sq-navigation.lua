@@ -3,6 +3,11 @@ local debug = require("component").debug
 -- Table of functions to return
 local nav = {}
 
+-- Persistant variables that Squirt will have access to. Squirt set's these on Episode 1
+SQ_INIT_X = 0
+SQ_INIT_Y = 0
+SQ_INIT_Z = 0
+
 --[[ Wrapper for debug's getX function. This function is off by 1 in the mod. Here,
     that is compensated for by subtracting 1 from the the return of getX. The subtraction
     only occurs here. So if the OpenComputers mod is ever updated so this problem is solved,
@@ -37,5 +42,7 @@ function nav.sqGetPos()
 
     return thisX, thisY, thisZ
 end
+
+
 
 return nav
