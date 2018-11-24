@@ -26,6 +26,7 @@ local world = debug.getWorld(0)
     | Stone        |    1     |     0      |
     | Cobblestone  |    4     |     0      |
     | Air          |    0     |     0      |
+    | Bedrock      |    7     |     0      |
     |--------------------------------------|
 
 ]]
@@ -43,6 +44,8 @@ local function getBlockName(id, meta)
         block = "cobblestone"
     elseif id == 0 and meta == 0 then
         block = "air"
+    elseif id == 7 and meta == 0 then
+        block = "bedrock"
     end
 
     return block
@@ -399,6 +402,7 @@ end
     |---------------------------------------------------|
     | Return Code |               Info                  |
     |---------------------------------------------------|
+    |  -2         | Attempting to bick up bedrock       |
     |  -1         | There is not block to pick up       |
     |   1         | The block picked up was dirt        |
     |   2         | The block picked up was cobblestone |
@@ -410,6 +414,7 @@ function act.sqPickUpBlock(side)
     local exitcode = 0
     -- Exit codes
     local BLOCK_DOES_NOT_EXIST = -1
+    local BLOCK_IS_BEDROCK = -2
     local BLOCK_IS_DIRT = 1
     local BLOCK_IS_COBBLESTONE = 2
     local BLOCK_IS_UNKNOWN = 3
@@ -507,6 +512,9 @@ function act.sqPickUpBlock(side)
     elseif blockname == "cobblestone" or blockname == "stone" then
         exitcode = BLOCK_IS_COBBLESTONE
 
+    elseif blockname == "bedrock" then
+        exitcode = BLOCK_IS_BEDROCK
+    
     -- There was a block picked up, but it wasn't cobble or dirt
     else
         exitcode = BLOCK_IS_UNKNOWN
