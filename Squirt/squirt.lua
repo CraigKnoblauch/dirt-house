@@ -16,7 +16,7 @@ action = sq_comms.sqRead()
 print("Received " .. action)
 
 -- Act on the action code
-outcome = sq_exe.executeAction(action)
+outcome = sq_exe.sqExecuteAction(action)
 sq_comms.sqWrite(action, outcome)
 
 -- Close the connection

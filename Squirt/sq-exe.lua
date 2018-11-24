@@ -4,6 +4,10 @@ local sq_act = require("sq-act")
 -- Table of functions that this module will return
 local exe = {}
 
+-- This is BAD design, but it's too late to make this OO
+-- This value tracks what episode Squirt is on. It's used to adjust relative positions
+SQ_EXE_EPISODE_COUNT = 0
+
 
 -- This is how the action codes are assigned. Complimentary table in Crush/EAC ]]
 local FORWARD             = "001"
@@ -23,11 +27,17 @@ local PLACE_COBBLE_BLOCK  = "010"
 
 local NEXT_EPISODE        = "011"
 
+--[[ Function local to this module. Used to check if the action requested of Squirt will operate
+    out of bounds. ]]
+local function isActionOutOfBounds(action_code)
+
 --[[ Decodes the action code given to direct Squirt.
     Returns what the function would have returned (It's at this point that I realized how bad it was to not define a standard return early on.)
     Returns "invalid action code" if the action code is unknown 
 ]]
-function exe.executeAction(action_code)
+function exe.sqExecuteAction(action_code)
+
+    -- TODO, do NOT allow Squirt to perform actions on the boundaries
     
     -- Use action codes defined above to call correct action
     if action_code == FORWARD then
