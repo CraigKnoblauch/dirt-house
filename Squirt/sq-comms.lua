@@ -50,9 +50,12 @@ end
 --[[ Construct and write a message to the connection. Message is a combination of
     parameters, seperated by commas. Returns whether or not the message was written
     and an error message if it was not ]]
-function comms.sqWrite(x, y, z, action, outcome)
+function comms.sqWrite(action, outcome)
     local written = false
     local err = "ERROR: NO CONNECTION"
+
+    -- Position after the action is complete
+    local x, y, z = sq_nav.sqGetPos()
 
     -- Construct the message
     local msg = ""

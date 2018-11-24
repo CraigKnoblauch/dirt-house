@@ -7,8 +7,7 @@
 class EAC:
 
     def __init__(self):
-        self.actions = {'noop': 0,
-                        'forward': b'001',
+        self.actions = {'forward': b'001',
                         'back': 2,
                         'up': b'003',
                         'down': 4,
@@ -16,8 +15,9 @@ class EAC:
                         'turn right': 6,
                         'turn around': 7,
                         'pick up block': 8,
-                        'place block': 9,
-                        'next episode': 10 }
+                        'place dirt block': 9,
+                        'place cobblestone block': 10
+                        'next episode': 11 }
 
         self.HOST = "127.0.0.1"
         self.PORT = 65432
