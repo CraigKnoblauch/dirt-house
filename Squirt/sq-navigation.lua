@@ -78,11 +78,11 @@ function nav.sqGetEpisodicY(episode)
 end
 
 --[[ Return Squirt's Z position based on the episode count ]]
-function nav.sqGetEpisodicX(episode)
+function nav.sqGetEpisodicZ(episode)
     local epZ = nil
 
     -- 18 because each starting point is 18 blocks away
-    epZ = nav.sqGetX() - SQ_INIT_Z - (18 * episode)
+    epZ = nav.sqGetZ() - SQ_INIT_Z - (18 * episode)
 
     return epZ
 end
