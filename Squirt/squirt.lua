@@ -19,9 +19,28 @@ print("Received " .. read)
 -- 1 go forward
 if read == "001" then
     sq_swim.sqForward()
+    -- Ack
+    sq_comms.sqWrite(sq_nav.sqGetX(),
+                     sq_nav.sqGetY(),
+                     sq_nav.sqGetZ(),
+                     "001", "true")
 else
     print("UNKNOWN ACTION CODE")
 end
+
+-- Only works for this demo. Wait for read to not equal 001
+while read ~= "003" do
+    read = sq_comms.sqRead()
+end
+
+sq_swim.sqUp()
+-- Ack
+sq_comms.sqWrite(sq_nav.sqGetX(),
+                 sq_nav.sqGetY(),
+                 sq_nav.sqGetZ(),
+                 "003", "true")
+
+
 
 -- Close the connection
 sq_comms.sqClose()

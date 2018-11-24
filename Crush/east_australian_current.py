@@ -10,7 +10,7 @@ class EAC:
         self.actions = {'noop': 0,
                         'forward': b'001',
                         'back': 2,
-                        'up': 3,
+                        'up': b'003',
                         'down': 4,
                         'turn left': 5,
                         'turn right': 6,
