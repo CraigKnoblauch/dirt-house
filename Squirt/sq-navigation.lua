@@ -43,6 +43,46 @@ function nav.sqGetPos()
     return thisX, thisY, thisZ
 end
 
+--[[ Allows squirt to set the absolute init points without knowledge of them ]]
+function nav.sqSetAbsInitPos()
+    SQ_INIT_X, SQ_INIT_Y, SQ_INIT_Z = nav.sqGetPos()
+end
 
+-- TODO on all, handle weird cases with return codes
+--[[ Return Squirt's X position based on the episode count ]]
+function nav.sqGetEpisodicX(episode)
+    local epX = nil
+
+    -- 18 because each starting point is 18 blocks away
+    epX = nav.sqGetX() - SQ_INIT_X - (18 * episode)
+
+    return epX
+end
+
+--[[ Return Squirt's Y position based on the episode count.
+    NOTE: While currently Squirt's y pos is not dependent on episode
+    count, it's good practice to have this function used as if it does.
+    Just in case the setup changes in the future 
+]]
+function nav.sqGetEpisodicY(episode)
+    local epY = nil
+
+    epY = nav.sqGetY() - SQ_INIT_Y
+
+    return epY
+end
+
+--[[ Return Squirt's Z position based on the episode count.
+    NOTE: While currently Squirt's z pos is not dependent on episode
+    count, it's good practice to have this function used as if it does.
+    Just in case the setup changes in the future 
+]]
+function nav.sqGetEpisodicZ(episode)
+    local epZ = nil
+
+    epZ = nav.sqGetZ() - SQ_INIT_Z
+
+    return epZ
+end
 
 return nav
