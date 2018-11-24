@@ -6,22 +6,22 @@ local exe = {}
 
 
 -- This is how the action codes are assigned. Complimentary table in Crush/EAC ]]
-FORWARD             = "001"
-BACK                = "002"
-UP                  = "003"
-DOWN                = "004"
-TURN_LEFT           = "005"
-TURN_RIGHT          = "006"
-TURN_AROUND         = "007"
-PICK_UP_BLOCK       = "008"
+local FORWARD             = "001"
+local BACK                = "002"
+local UP                  = "003"
+local DOWN                = "004"
+local TURN_LEFT           = "005"
+local TURN_RIGHT          = "006"
+local TURN_AROUND         = "007"
+local PICK_UP_BLOCK       = "008"
 
 --[[ Since the comms are so finnicky, and the messages to Squirt must be of fixed
     length, there are two options for place block. This way we don't have to have
     separate block codes to worry about ]]
-PLACE_DIRT_BLOCK    = "009"
-PLACE_COBBLE_BLOCK  = "010"
+local PLACE_DIRT_BLOCK    = "009"
+local PLACE_COBBLE_BLOCK  = "010"
 
-NEXT_EPISODE        = "011"
+local NEXT_EPISODE        = "011"
 
 --[[ Decodes the action code given to direct Squirt.
     Returns what the function would have returned (It's at this point that I realized how bad it was to not define a standard return early on.)

@@ -77,6 +77,8 @@ end
 --[[ Serves as a wrapper for a robot's down function. Without this function, squirt would 
     report his position as the block he came from, rather than the block he's going to. ]]
 function swim.sqDown()
+    local outcome = 0
+
     -- Get the coordinates before the move
     local initX, initY, initZ
     initX, initY, initZ = sq_nav.sqGetPos()
@@ -92,26 +94,61 @@ function swim.sqDown()
 
     end
 
-    -- Return the down's usual return
-    return ret
+    -- Convert down's result into a number. 1 if true, -1 if false
+    if ret then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
+    
 end
 
---[[ Turn left. Unaware if additional functionality will be needed at this time ]]
+--[[ Turn left. Unaware if additional functionality will be needed at this time 
+    Returns 1 if successful turn, -1 if unsuccessful, 0 if the time_t's rolled around
+]]
 function swim.sqTurnLeft()
-    -- Turn left
-    squirt.turnLeft()
+    local outcome = 0
+    -- Turn left and record the result
+    if squirt.turnLeft() then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
+
 end
 
---[[ Turn right. Unaware if additional functionality will be needed at this time ]]
+--[[ Turn right. Unaware if additional functionality will be needed at this time 
+    Returns 1 if successful turn, -1 if unsuccessful, 0 if the time_t's rolled around
+]]
 function swim.sqTurnRight()
-    -- Turn right
-    squirt.turnRight()
+    local outcome = 0
+    -- Turn right and record the result
+    if squirt.turnRight() then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
 end
 
---[[ Turn around. Unaware if additional functionality will be needed ]]
+--[[ Turn around. Unaware if additional functionality will be needed at this time 
+    Returns 1 if successful turn, -1 if unsuccessful, 0 if the time_t's rolled around
+]]
 function swim.sqTurnAround()
-    -- Turn around
-    squirt.turnAround()
+    local outcome = 0
+    -- Turn around and record the result
+    if squirt.turnAround() then
+        outcome = 1
+    else
+        outcome = -1
+    end
+
+    return outcome
 end
 
 --[[ Values of component.navigation.getFacing given here: https://github.com/MightyPirates/OpenComputers/issues/2984

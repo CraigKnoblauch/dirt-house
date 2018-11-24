@@ -8,23 +8,19 @@ class EAC:
 
     def __init__(self):
         self.actions = {'forward': b'001',
-                        'back': 2,
+                        'back': b'002',
                         'up': b'003',
-                        'down': 4,
-                        'turn left': 5,
-                        'turn right': 6,
-                        'turn around': 7,
-                        'pick up block': 8,
-                        'place dirt block': 9,
-                        'place cobblestone block': 10
-                        'next episode': 11 }
+                        'down': b'004',
+                        'turn left': b'005',
+                        'turn right': b'006',
+                        'turn around': b'007',
+                        'pick up block': b'008',
+                        'place dirt block': b'009',
+                        'place cobblestone block': b'010',
+                        'next episode': b'011' }
 
         self.HOST = "127.0.0.1"
         self.PORT = 65432
-
-    ## Return the action code for noop
-    def getNoopAC(self):
-        return self.actions['noop']
 
     ## Return the action code for forward
     def getForwardAC(self):
@@ -58,9 +54,13 @@ class EAC:
     def getPickUpBlockAC(self):
         return self.actions['pick up block']
         
-    ## Return the action code for place block
-    def getPlaceBlockAC(self):
-        return self.actions['place block']
+    ## Return the action code for place dirt block
+    def getPlaceDirtBlockAC(self):
+        return self.actions['place dirt block']
+
+    ## Return the action code for place cobblestone block
+    def getPlaceCobblestoneBlockAC(self):
+        return self.actions['place cobblestone block']
 
     ## Return the action code for next episode
     def getNextEpisodeAC(self):
