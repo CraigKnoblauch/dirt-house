@@ -29,18 +29,20 @@ local back = {}
 local pick_up = {}
 local place = {}
 
--- Expectations
+-- Expectations 
+-- false: Not out of bounds
+-- true: out of bounds
 local DOWN_NUM = 3
 local down_expectations = {}
-down_expectations[1] = false -- Base level
-down_expectations[2] = true  -- 4 Blocks up
-down_expectations[3] = true  -- 8 blocks up
+down_expectations[1] = false -- At ceiling
+down_expectations[2] = false  
+down_expectations[3] = true  
 
 local UP_NUM = 3
 local up_expectations = {}
-up_expectations[1] = true
-up_expectations[2] = true
-up_expectations[3] = false
+up_expectations[1] = false
+up_expectations[2] = false
+up_expectations[3] = true
 
 local FORWARD_NUM = 32
 local forward_expectations = {}

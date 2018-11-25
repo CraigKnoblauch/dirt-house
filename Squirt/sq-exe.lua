@@ -63,6 +63,7 @@ function exe.isActionOutOfBounds(action_code)
         isOutOfBounds = false
     else
         isOutOfBounds = true
+    end
 
     return isOutOfBounds
 end
