@@ -371,9 +371,10 @@ function swim.sqGoToEpisode(episode)
     local relative_destZ = sq_nav.sqGetEpisodicZ(episode)
 
     -- Calculate the world destination coordinates
-    local world_destX = squirtX + relative_destX
-    local world_destY = squirtY + relative_destY
-    local world_destZ = squirtZ + relative_destZ
+    -- minus compensates for world orientation
+    local world_destX = squirtX - relative_destX
+    local world_destY = squirtY - relative_destY
+    local world_destZ = squirtZ - relative_destZ
 
     -- Send Squirt to the episode position
     swim.sqGoToPos(world_destX, world_destY, world_destZ)
