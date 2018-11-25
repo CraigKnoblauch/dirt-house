@@ -1,4 +1,5 @@
 local debug = require("component").debug
+local ocnav = require("component").navigation
 
 -- Table of functions to return
 local nav = {}
@@ -97,5 +98,84 @@ function nav.sqGetEpisodicPos(episode)
 
     return epX, epY, epZ
 end
+
+-- Local function below is taken from swim. I would've used that function, but I don't want this module to be aware of swim
+--[[ Values of component.navigation.getFacing given here: https://github.com/MightyPirates/OpenComputers/issues/2984
+    Also confirmed in game
+    - North == 2
+    - East == 5
+    - South == 3
+    - West == 4 
+
+    This functions returns a string direction rather than the number. Returns nil if the number is unknown
+]]
+local function sqGetFacing()
+    -- Get the number of the direction Squirt is facing
+    facing_num = ocnav.getFacing()
+    facing_str = "nil"
+
+    -- Determine the direction Squirt is facing
+    if facing_num == 2 then
+        facing_str = "north"
+    elseif facing_num == 5 then
+        facing_str = "east"
+    elseif facing_num == 3 then
+        facing_str = "south"
+    elseif facing_num == 4 then
+        facing_str = "west"
+    end
+
+    return facing_str
+end
+
+--[[ Returns the next episodic position based on the current facing direction,
+    and the action selected ]]
+function nav.sqGetNextEpisodicPos(episode, action)
+    local facing = sqGetFacing()
+    local nextX, nextY, nextZ = nav.sqGetEpisodicPos(episode)
+
+    if action == "forward" or action == "pick up block" or action == "place block" or action == "place dirt block" or action == "place cobblestone block" then
+        if facing == "north" then
+            -- Intent to move/interact with -Z
+            nextZ = nextZ - 1
+        elseif facing == "east" then
+            -- Intent to move/interact with +X
+            nextX = nextX + 1
+        elseif facing == "south" then
+            -- Intent to move/interact with +Z
+            nextZ = nextZ + 1
+        elseif facing == "west" then
+            -- Intent to move/interact with -X
+            nextX = nextX - 1
+        end -- end forward
+    
+    elseif action == "back" then
+        if facing == "north" then
+            -- Intent to move +Z
+            nextZ = nextZ + 1
+        elseif facing == "east" then
+            -- Intent to move -X
+            nextX = nextX - 1
+        elseif facing == "south" then
+            -- Intent to move -Z
+            nextZ = nextZ - 1
+        elseif facing == "west" then
+            -- Intent to move +X
+            nextX = nextX + 1
+        end -- end back
+
+    elseif action == "up" then
+        -- Intent to move +Y
+        nextY = nextY + 1
+
+    elseif action == "down" then
+        -- Intent to move -Y
+        nextY = nextY - 1
+    end -- end all
+
+    return nextX, nextY, nextZ
+end
+        
+
 
 return nav
