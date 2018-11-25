@@ -114,6 +114,10 @@ function exe.sqExecuteAction(action_code, episode)
 
     elseif action_code == PLACE_COBBLE_BLOCK then
         return sq_act.sqPlaceBlock("front", "cobblestone")
+
+    elseif action_code == NEXT_EPISODE then
+        return sq_swim.sqGoToEpisode(episode + 1)
+        
     else
         return "invalid action code"
     end
