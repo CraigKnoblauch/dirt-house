@@ -366,29 +366,29 @@ function swim.sqGoToEpisode(episode)
     squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
 
     -- Get the relative episodic destination coordinates
-    local relative_destX = sq_nav.getEpisodicX(episode)
-    local relative_destY = sq_nav.getEpisodicY(episode)
-    local relative_destZ = sq_nav.getEpisodicZ(episode)
+    local relative_destX = sq_nav.sqGetEpisodicX(episode)
+    local relative_destY = sq_nav.sqGetEpisodicY(episode)
+    local relative_destZ = sq_nav.sqGetEpisodicZ(episode)
 
     -- Calculate the world destination coordinates
     local world_destX = squirtX + relative_destX
     local world_destY = squirtY + relative_destY
     local world_destZ = squirtZ + relative_destZ
 
-    -- Send Squirt to the waypoint position
+    -- Send Squirt to the episode position
     swim.sqGoToPos(world_destX, world_destY, world_destZ)
 
     -- Face Squirt east
-    local facing = sq_swim.sqGetFacing()
+    local facing = swim.sqGetFacing()
 
     if facing == "north" then
-        sq_swim.sqTurnRight()
+        swim.sqTurnRight()
     elseif facing == "south" then
-        sq_swim.sqTurnLeft()
+        swim.sqTurnLeft()
     elseif facing == "west" then
-        sq_swim.sqTurnAround()
+        swim.sqTurnAround()
     end
-    
+
 end
 
 return swim
