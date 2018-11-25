@@ -50,7 +50,7 @@ end
 --[[ Construct and write a message to the connection. Message is a combination of
     parameters, seperated by commas. Returns whether or not the message was written
     and an error message if it was not ]]
-function comms.sqWrite(action, outcome, episode)
+function comms.sqWrite(action, outcome, episode, step)
     local written = false
     local err = "ERROR: NO CONNECTION"
 
@@ -59,9 +59,12 @@ function comms.sqWrite(action, outcome, episode)
 
     -- Construct the message
     local msg = ""
+    msg = msg .. tostring(episode) .. ","
+    msg = msg .. tostring(step) .. ","
     msg = msg .. tostring(x) .. ","
     msg = msg .. tostring(y) .. ","
     msg = msg .. tostring(z) .. ","
+    msg = msg .. tostring(sq_swim.sqGetFacing()) .. ","
     msg = msg .. tostring(action) .. ","
     msg = msg .. tostring(outcome)
 

@@ -30,7 +30,7 @@ for episode = 0, NUM_EPISODES - 1, 1 do
 
         -- Act on the action code
         outcome = sq_exe.sqExecuteAction(action, episode)
-        sq_comms.sqWrite(action, outcome, episode)
+        sq_comms.sqWrite(action, outcome, episode, step)
     end
 
     sq_exe.sqExecuteAction("011", episode)
