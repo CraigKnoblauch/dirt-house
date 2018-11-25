@@ -128,28 +128,28 @@ local function sqGetFacing()
     return facing_str
 end
 
---[[ Returns the next episdic position based on the current facing direction,
-    and the direction selected ]]
-function nav.sqGetNextEpisodicPos(episode, travel)
+--[[ Returns the next episodic position based on the current facing direction,
+    and the action selected ]]
+function nav.sqGetNextEpisodicPos(episode, action)
     local facing = sqGetFacing()
     local nextX, nextY, nextZ = nav.sqGetEpisodicPos(episode)
 
-    if travel == "forward" then
+    if action == "forward" or action == "pick up block" or action == "place block" or action == "place dirt block" or action == "place cobblestone block" then
         if facing == "north" then
-            -- Intent to move -Z
+            -- Intent to move/interact with -Z
             nextZ = nextZ - 1
         elseif facing == "east" then
-            -- Intent to move +X
+            -- Intent to move/interact with +X
             nextX = nextX + 1
         elseif facing == "south" then
-            -- Intent to move +Z
+            -- Intent to move/interact with +Z
             nextZ = nextZ + 1
         elseif facing == "west" then
-            -- Intent to move -X
+            -- Intent to move/interact with -X
             nextX = nextX - 1
         end -- end forward
     
-    elseif travel == "back" then
+    elseif action == "back" then
         if facing == "north" then
             -- Intent to move +Z
             nextZ = nextZ + 1
@@ -164,11 +164,11 @@ function nav.sqGetNextEpisodicPos(episode, travel)
             nextX = nextX + 1
         end -- end back
 
-    elseif travel == "up" then
+    elseif action == "up" then
         -- Intent to move +Y
         nextY = nextY + 1
 
-    elseif travel == "down" then
+    elseif action == "down" then
         -- Intent to move -Y
         nextY = nextY - 1
     end -- end all

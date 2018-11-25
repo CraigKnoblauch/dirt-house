@@ -1,5 +1,6 @@
 local sq_swim = require("sq-swim")
 local sq_act = require("sq-act")
+local sq_nav = require("sq-navigation")
 
 -- Table of functions that this module will return
 local exe = {}
@@ -30,11 +31,42 @@ local NEXT_EPISODE        = "011"
 --[[ Function local to this module. Used to check if the action requested of Squirt will operate
     out of bounds. ]]
 function exe.isActionOutOfBounds(action_code) 
+    local nextX, nextY, nextZ
+    local isOutOfBounds = false
 
-    --[[ Forward is out of bounds if the next position would be:
+    -- Get the anticipated block that this action will affect
+    if action_code == FORWARD then
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "forward")
+
+    elseif action_code == BACK then
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "back")
+
+    elseif action_code == UP then
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "up")
+
+    elseif action_code == DOWN then
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "down")
+
+    elseif action_code == PICK_UP_BLOCK then
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "pick up block")
+
+    elseif action_code == PLACE_COBBLE_BLOCK or action_code == PLACE_DIRT_BLOCK then
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "place block")
+        
+    end
+
+    --[[ Next position is out of bounds if:
         X < 0, Z < 0, Y < 0
         X > 15, Z > 15, Y > 8
     ]]
+    if nextX < 0 or nextZ < 0 or nextY < 0 or nextX > 15 or nextZ > 15 or nextY > 8 then
+        isOutOfBounds = true
+    else
+        isOutOfBounds = false
+    end
+
+    return isOutOfBounds
+end
     
 
 --[[ Decodes the action code given to direct Squirt.
