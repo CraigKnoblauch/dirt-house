@@ -29,7 +29,13 @@ local NEXT_EPISODE        = "011"
 
 --[[ Function local to this module. Used to check if the action requested of Squirt will operate
     out of bounds. ]]
-local function isActionOutOfBounds(action_code)
+function exe.isActionOutOfBounds(action_code) 
+
+    --[[ Forward is out of bounds if the next position would be:
+        X < 0, Z < 0, Y < 0
+        X > 15, Z > 15, Y > 8
+    ]]
+    
 
 --[[ Decodes the action code given to direct Squirt.
     Returns what the function would have returned (It's at this point that I realized how bad it was to not define a standard return early on.)
