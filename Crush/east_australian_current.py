@@ -16,8 +16,8 @@ class EAC:
                         'turn around': b'007',
                         'pick up block': b'008',
                         'place dirt block': b'009',
-                        'place cobblestone block': b'010',
-                        'next episode': b'011' }
+                        'place cobblestone block': b'010'}
+                        #'next episode': b'011' }
 
         self.HOST = "127.0.0.1"
         self.PORT = 65432
@@ -62,9 +62,9 @@ class EAC:
     def getPlaceCobblestoneBlockAC(self):
         return self.actions['place cobblestone block']
 
-    ## Return the action code for next episode
-    def getNextEpisodeAC(self):
-        return self.actions['next episode']
+    # ## Return the action code for next episode
+    # def getNextEpisodeAC(self):
+    #     return self.actions['next episode']
 
     ## Takes state information from Squirt, and returns a reward to Crush
     def getReward(action, outcome):

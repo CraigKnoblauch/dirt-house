@@ -3,6 +3,9 @@ from east_australian_current import EAC
 
 eac = EAC()
 
+NUM_EPISODES = 3
+NUM_STEPS = 400
+
 # Open a socket for Squirt to connect to
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind( (eac.HOST, eac.PORT) )
