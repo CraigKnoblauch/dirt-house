@@ -1,4 +1,4 @@
-
+import random
 
 ## East Australian Current
 # @class This class is responsible for send action requests to Squirt and for 
@@ -65,6 +65,33 @@ class EAC:
     # ## Return the action code for next episode
     # def getNextEpisodeAC(self):
     #     return self.actions['next episode']
+
+    ## Return a random action code
+    def getRandomAC(self):
+        i = random.randint(0, 9)
+
+        if i == 0:
+            return self.getForwardAC()
+        elif i == 1:
+            return self.getBackAC()
+        elif i == 2:
+            return self.getUpAC()
+        elif i == 3:
+            return self.getDownAC()
+        elif i == 4: 
+            return self.getTurnLeftAC()
+        elif i == 5:
+            return self.getTurnRightAC()
+        elif i == 6:
+            return self.getTurnAroundAC()
+        elif i == 7:
+            return self.getPickUpBlockAC()
+        elif i == 8:
+            return self.getPlaceDirtBlockAC()
+        elif i == 9:
+            return self.getPlaceCobblestoneBlockAC()
+        else:
+            return self.getForwardAC()
 
     ## Takes state information from Squirt, and returns a reward to Crush
     def getReward(action, outcome):

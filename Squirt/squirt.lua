@@ -33,7 +33,7 @@ for episode = 0, NUM_EPISODES - 1, 1 do
         sq_comms.sqWrite(action, outcome, episode)
     end
 
-    sq_exe.sqExecuteAction("011", episode + 1)
+    sq_exe.sqExecuteAction("011", episode)
 end
 
 -- Close the connection
