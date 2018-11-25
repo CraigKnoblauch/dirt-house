@@ -5,11 +5,6 @@ local sq_nav = require("sq-navigation")
 -- Table of functions that this module will return
 local exe = {}
 
--- This is BAD design, but it's too late to make this OO
--- This value tracks what episode Squirt is on. It's used to adjust relative positions
-SQ_EXE_EPISODE_COUNT = 0
-
-
 -- This is how the action codes are assigned. Complimentary table in Crush/EAC ]]
 local FORWARD             = "001"
 local BACK                = "002"
@@ -30,7 +25,7 @@ local NEXT_EPISODE        = "011"
 
 --[[ Function local to this module. Used to check if the action requested of Squirt will operate
     out of bounds. ]]
-local function isActionOutOfBounds(action_code) 
+local function isActionOutOfBounds(action_code, episode) 
     local nextX, nextY, nextZ
     
     -- Set to false for action codes that are not concerned with boundaries
@@ -39,22 +34,22 @@ local function isActionOutOfBounds(action_code)
 
     -- Get the anticipated block that this action will affect
     if action_code == FORWARD then
-        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "forward")
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(episode, "forward")
 
     elseif action_code == BACK then
-        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "back")
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(episode, "back")
 
     elseif action_code == UP then
-        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "up")
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(episode, "up")
 
     elseif action_code == DOWN then
-        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "down")
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(episode, "down")
 
     elseif action_code == PICK_UP_BLOCK then
-        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "pick up block")
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(episode, "pick up block")
 
     elseif action_code == PLACE_COBBLE_BLOCK or action_code == PLACE_DIRT_BLOCK then
-        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "place block")
+        nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(episode, "place block")
         
     else -- action code is not one which is bound by the boundaries
         skipBoundsCheck = true
@@ -80,11 +75,11 @@ end
     Returns what the function would have returned (It's at this point that I realized how bad it was to not define a standard return early on.)
     Returns "invalid action code" if the action code is unknown 
 ]]
-function exe.sqExecuteAction(action_code)
+function exe.sqExecuteAction(action_code, episode)
 
     -- Do NOT allow Squirt to perform actions on the boundaries
     -- Nothing uses -10 as a retun code. Use that to mean out of bounds
-    if isActionOutOfBounds(action_code) then
+    if isActionOutOfBounds(action_code, episode) then
         return -10
     
     -- Use action codes defined above to call correct action
