@@ -352,7 +352,7 @@ function traverse(outcomes, action)
 
     -- Go up, turn left, go forward, turn right, go back, go down
     r.up()
-    r.turnleft()
+    r.turnLeft()
     r.forward()
     r.turnRight()
     r.back()
