@@ -236,7 +236,7 @@ function traverse(outcomes, action)
 
     -- Go up 1, forward 15, down 1
     r.up()
-    for 1, 15, 1 do r.forward() end
+    for i=1, 15, 1 do r.forward() end
     r.down()
 
     -- Test 5 through 8
@@ -252,7 +252,7 @@ function traverse(outcomes, action)
     -- Turn right, go up 1, forward 15, down 1, turn left
     r.turnRight()
     r.up()
-    for 1, 15, 1 do r.forward() end
+    for i=1, 15, 1 do r.forward() end
     r.down()
     r.turnLeft()
 
@@ -269,7 +269,7 @@ function traverse(outcomes, action)
     -- Turn around, go up 1, forward 15, down 1, turn around
     r.turnAround()
     r.up()
-    for 1, 15, 1 do r.forward() end
+    for i=1, 15, 1 do r.forward() end
     r.down()
     r.turnAround()
 
@@ -303,7 +303,7 @@ function traverse(outcomes, action)
 
     -- Go up 1, go forward 13, go down 1
     r.up()
-    for 1, 13, 1 do r.forward() end
+    for i=1, 13, 1 do r.forward() end
     r.down()
 
     -- Test 21 through 24
@@ -319,7 +319,7 @@ function traverse(outcomes, action)
     -- Go up 1, turn left, go forward 13, turn right, go down
     r.up()
     r.turnLeft()
-    for 1, 13, 1 do r.forward() end
+    for i=1, 13, 1 do r.forward() end
     r.turnRight()
     r.down()
 
@@ -336,7 +336,7 @@ function traverse(outcomes, action)
     -- Go up 1, turn around, go forward 13, turn around, go down
     r.up()
     r.turnAround()
-    for 1, 13, 1 do r.forward() end
+    for i=1, 13, 1 do r.forward() end
     r.turnAround()
     r.down()
 
