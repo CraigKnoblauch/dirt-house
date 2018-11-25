@@ -35,6 +35,7 @@ local function isActionOutOfBounds(action_code)
     
     -- Set to false for action codes that are not concerned with boundaries
     local isOutOfBounds = false 
+    local skipBoundsCheck = false
 
     -- Get the anticipated block that this action will affect
     if action_code == FORWARD then
@@ -55,16 +56,20 @@ local function isActionOutOfBounds(action_code)
     elseif action_code == PLACE_COBBLE_BLOCK or action_code == PLACE_DIRT_BLOCK then
         nextX, nextY, nextZ = sq_nav.sqGetNextEpisodicPos(SQ_EXE_EPISODE_COUNT, "place block")
         
+    else -- action code is not one which is bound by the boundaries
+        skipBoundsCheck = true
     end
 
-    --[[ Next position is out of bounds if:
-        X < 0, Z < 0, Y < 0
-        X > 15, Z > 15, Y > 8
-    ]]
-    if nextX >= 0 and nextZ >= 0 and nextY >= 0 and nextX <= 15 and nextZ <= 15 and nextY <= 8 then
-        isOutOfBounds = false
-    else
-        isOutOfBounds = true
+    if not skipBoundsCheck then
+        --[[ Next position is out of bounds if:
+            X < 0, Z < 0, Y < 0
+            X > 15, Z > 15, Y > 8
+        ]]
+        if nextX >= 0 and nextZ >= 0 and nextY >= 0 and nextX <= 15 and nextZ <= 15 and nextY <= 8 then
+            isOutOfBounds = false
+        else
+            isOutOfBounds = true
+        end
     end
 
     return isOutOfBounds
