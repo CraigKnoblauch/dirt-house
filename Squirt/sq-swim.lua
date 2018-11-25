@@ -377,6 +377,18 @@ function swim.sqGoToEpisode(episode)
 
     -- Send Squirt to the waypoint position
     swim.sqGoToPos(world_destX, world_destY, world_destZ)
+
+    -- Face Squirt east
+    local facing = sq_swim.sqGetFacing()
+
+    if facing == "north" then
+        sq_swim.sqTurnRight()
+    elseif facing == "south" then
+        sq_swim.sqTurnLeft()
+    elseif facing == "west" then
+        sq_swim.sqTurnAround()
+    end
+    
 end
 
 return swim
