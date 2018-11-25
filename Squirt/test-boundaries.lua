@@ -188,8 +188,8 @@ up[1] = e.isActionOutOfBounds(action)
 -- Go up 4 blocks
 for i=1, 4, 1 do r.up() end
 up[2] = e.isActionOutOfBounds(action)
--- Go up 4 blocks
-for i=1, 4, 1 do r.up() end
+-- Go up 3 blocks
+for i=1, 3, 1 do r.up() end
 up[3] = e.isActionOutOfBounds(action)
 
 -- Check UP results
@@ -207,8 +207,8 @@ down[1] = e.isActionOutOfBounds(action)
 -- Go down 4 blocks
 for i=1, 4, 1 do r.down() end
 down[2] = e.isActionOutOfBounds(action)
--- Go down 4 blocks
-for i=1, 4, 1 do r.down() end
+-- Go down 3 blocks
+for i=1, 3, 1 do r.down() end
 down[3] = e.isActionOutOfBounds(action)
 
 -- Check DOWN results

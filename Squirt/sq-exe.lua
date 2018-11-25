@@ -59,11 +59,10 @@ function exe.isActionOutOfBounds(action_code)
         X < 0, Z < 0, Y < 0
         X > 15, Z > 15, Y > 8
     ]]
-    if nextX < 0 or nextZ < 0 or nextY < 0 or nextX > 15 or nextZ > 15 or nextY > 8 then
-        isOutOfBounds = true
-    else
+    if nextX >= 0 and nextZ >= 0 and nextY >= 0 and nextX <= 15 and nextZ <= 15 and nextY <= 8 then
         isOutOfBounds = false
-    end
+    else
+        isOutOfBounds = true
 
     return isOutOfBounds
 end
