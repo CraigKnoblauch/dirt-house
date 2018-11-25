@@ -32,7 +32,9 @@ local NEXT_EPISODE        = "011"
     out of bounds. ]]
 local function isActionOutOfBounds(action_code) 
     local nextX, nextY, nextZ
-    local isOutOfBounds = false
+    
+    -- Set to false for action codes that are not concerned with boundaries
+    local isOutOfBounds = false 
 
     -- Get the anticipated block that this action will affect
     if action_code == FORWARD then
