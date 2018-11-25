@@ -130,9 +130,9 @@ end
 
 --[[ Returns the next episdic position based on the current facing direction,
     and the direction selected ]]
-function nav.sqGetNextEpisodicPos(travel)
+function nav.sqGetNextEpisodicPos(episode, travel)
     local facing = sqGetFacing()
-    local nextX, nextY, nextZ = nav.sqGetEpisodicPos()
+    local nextX, nextY, nextZ = nav.sqGetEpisodicPos(episode)
 
     if travel == "forward" then
         if facing == "north" then
@@ -144,7 +144,7 @@ function nav.sqGetNextEpisodicPos(travel)
         elseif facing == "south" then
             -- Intent to move +Z
             nextZ = nextZ + 1
-        elseif facing == "south" then
+        elseif facing == "west" then
             -- Intent to move -X
             nextX = nextX - 1
         end -- end forward
