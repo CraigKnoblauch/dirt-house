@@ -186,10 +186,10 @@ pick_up_expectations[32] = true
 action = UP
 up[1] = e.isActionOutOfBounds(action)
 -- Go up 4 blocks
-for i=1, 1, 4 do r.up() end
+for i=1, 4, 1 do r.up() end
 up[2] = e.isActionOutOfBounds(action)
 -- Go up 4 blocks
-for i=1, 1, 4 do r.up() end
+for i=1, 4, 1 do r.up() end
 up[3] = e.isActionOutOfBounds(action)
 
 -- Check UP results
@@ -205,10 +205,10 @@ end
 action = DOWN
 down[1] = e.isActionOutOfBounds(action)
 -- Go down 4 blocks
-for i=1, 1, 4 do r.down() end
+for i=1, 4, 1 do r.down() end
 down[2] = e.isActionOutOfBounds(action)
 -- Go down 4 blocks
-for i=1, 1, 4 do r.down() end
+for i=1, 4, 1 do r.down() end
 down[3] = e.isActionOutOfBounds(action)
 
 -- Check DOWN results
