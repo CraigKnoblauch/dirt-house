@@ -30,7 +30,7 @@ local NEXT_EPISODE        = "011"
 
 --[[ Function local to this module. Used to check if the action requested of Squirt will operate
     out of bounds. ]]
-function exe.isActionOutOfBounds(action_code) 
+local function isActionOutOfBounds(action_code) 
     local nextX, nextY, nextZ
     local isOutOfBounds = false
 
@@ -75,10 +75,13 @@ end
 ]]
 function exe.sqExecuteAction(action_code)
 
-    -- TODO, do NOT allow Squirt to perform actions on the boundaries
+    -- Do NOT allow Squirt to perform actions on the boundaries
+    -- Nothing uses -10 as a retun code. Use that to mean out of bounds
+    if isActionOutOfBounds(action_code) then
+        return -10
     
     -- Use action codes defined above to call correct action
-    if action_code == FORWARD then
+    elseif action_code == FORWARD then
         return sq_swim.sqForward()
 
     elseif action_code == BACK then
