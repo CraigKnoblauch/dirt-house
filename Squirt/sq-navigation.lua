@@ -49,7 +49,7 @@ function nav.sqSetAbsInitPos()
 end
 
 -- TODO on all, handle weird cases with return codes
--- NOTE Back of envs must be facing West
+-- NOTE Back of envs must be facing East
 
 --[[ Return Squirt's X position based on the episode count.
     NOTE: While currently Squirt's x pos is not dependent on episode
@@ -85,6 +85,17 @@ function nav.sqGetEpisodicZ(episode)
     epZ = nav.sqGetZ() - SQ_INIT_Z - (18 * episode)
 
     return epZ
+end
+
+--[[ Return Squirt's episodic position based on the episode count ]]
+function nav.sqGetEpisodicPos(episode)
+    local epX, epY, epZ
+
+    epX = nav.sqGetEpisodicX(episode)
+    epY = nav.sqGetEpisodicY(episode)
+    epZ = nav.sqGetEpisodicZ(episode)
+
+    return epX, epY, epZ
 end
 
 return nav

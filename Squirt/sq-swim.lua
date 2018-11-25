@@ -354,5 +354,30 @@ function swim.sqGoToWaypoint(label)
     swim.sqGoToPos(world_destX, world_destY, world_destZ)
 end
 
+--[[ Moves Squirt to the beginning of the episode count given.
+    Faces him east (forward) after taking him there. ]]
+function swim.sqGoToEpisode(episode)
+    --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
+        this is to convert these coordinates into world coordinates. Then we can use the 
+        previously defined sqGoToPos function ]]
+
+    -- Get the current coordinates
+    local squirtX, squirtY, squirtZ
+    squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
+
+    -- Get the relative episodic destination coordinates
+    local relative_destX = sq_nav.getEpisodicX(episode)
+    local relative_destY = sq_nav.getEpisodicY(episode)
+    local relative_destZ = sq_nav.getEpisodicZ(episode)
+
+    -- Calculate the world destination coordinates
+    local world_destX = squirtX + relative_destX
+    local world_destY = squirtY + relative_destY
+    local world_destZ = squirtZ + relative_destZ
+
+    -- Send Squirt to the waypoint position
+    swim.sqGoToPos(world_destX, world_destY, world_destZ)
+end
+
 return swim
     
