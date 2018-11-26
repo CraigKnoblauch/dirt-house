@@ -2,11 +2,28 @@
 
 local squirt = require("robot")
 local debug = require("component").debug
-local nav = require("component").navigation
 local sq_nav = require("sq-navigation")
+
+FACING = "north"
 
 -- Table of functions to return 
 local swim = {}
+
+--[[ Returns the global FACING string. Note the documentation below is from using the navigation upgrade. Issue 14
+    recommends a switch to the chunkloader upgrade.
+    
+    Values of component.navigation.getFacing given here: https://github.com/MightyPirates/OpenComputers/issues/2984
+    Also confirmed in game
+    - North == 2
+    - East == 5
+    - South == 3
+    - West == 4 
+
+    This functions returns a string direction rather than the number. Returns nil if the number is unknown
+  ]]
+function swim.sqGetFacing()
+    return FACING   
+end
 
 --[[ Serves as a wrapper for a robot's forward function. Without this function, squirt would 
     report his position as the block he came from, rather than the block he's going to. 
@@ -161,6 +178,22 @@ function swim.sqTurnLeft()
         outcome = -1
     end
 
+    -- Update the global FACING
+    -- NOTE 'facing' is the old direction
+    if outcome == 1 then
+        local facing = swim.sqGetFacing()
+        if facing == "north" then
+            FACING = "west"
+        elseif facing == "east" then
+            FACING = "north"
+        elseif facing == "south" then
+            FACING = "east"
+        elseif facing == "west" then
+            FACING = "south"
+        end
+    end
+
+
     return outcome
 
 end
@@ -175,6 +208,21 @@ function swim.sqTurnRight()
         outcome = 1
     else
         outcome = -1
+    end
+
+    -- Update the global FACING
+    -- NOTE 'facing' is the old direction
+    local facing = swim.sqGetFacing()
+    if outcome == 1 then
+        if facing == "north" then
+            FACING = "east"
+        elseif facing == "east" then
+            FACING = "south"
+        elseif facing == "south" then 
+            FACING = "west"
+        elseif facing == "west" then
+            FACING = "north"
+        end
     end
 
     return outcome
@@ -192,35 +240,22 @@ function swim.sqTurnAround()
         outcome = -1
     end
 
-    return outcome
-end
-
---[[ Values of component.navigation.getFacing given here: https://github.com/MightyPirates/OpenComputers/issues/2984
-    Also confirmed in game
-    - North == 2
-    - East == 5
-    - South == 3
-    - West == 4 
-
-    This functions returns a string direction rather than the number. Returns nil if the number is unknown
-  ]]
-function swim.sqGetFacing()
-    -- Get the number of the direction Squirt is facing
-    facing_num = nav.getFacing()
-    facing_str = "nil"
-
-    -- Determine the direction Squirt is facing
-    if facing_num == 2 then
-        facing_str = "north"
-    elseif facing_num == 5 then
-        facing_str = "east"
-    elseif facing_num == 3 then
-        facing_str = "south"
-    elseif facing_num == 4 then
-        facing_str = "west"
+    -- Update the global FACING
+    -- NOTE 'facing' is the old direction
+    if outcome == 1 then
+        local facing = swim.sqGetFacing()
+        if facing == "north" then
+            FACING = "south"
+        elseif facing == "east" then
+            FACING = "west"
+        elseif facing == "south" then
+            FACING = "north"
+        elseif facing == "west" then
+            FACING = "east"
+        end
     end
 
-    return facing_str
+    return outcome
 end
 
 --[[ Takes Squirt to the postion specified in arguments 
@@ -306,53 +341,54 @@ function swim.sqGoToPos(destX, destY, destZ)
     end
 end
 
---[[ Command squirt to navigate to the waypoint whose label is specified 
-    as argument ]]
-function swim.sqGoToWaypoint(label)
-    -- Get all waypoints in a 1000 block area
-    -- NOTE TODO The 1000 blocks is completely arbitrary. What's a good distance.
-    local range = 1000
-    local waypoints_tbl = nav.findWaypoints(range)
+-- NOTE: Cannot have this functionality without the navigation component
+-- --[[ Command squirt to navigate to the waypoint whose label is specified 
+--     as argument ]]
+-- function swim.sqGoToWaypoint(label)
+--     -- Get all waypoints in a 1000 block area
+--     -- NOTE TODO The 1000 blocks is completely arbitrary. What's a good distance.
+--     local range = 1000
+--     local waypoints_tbl = nav.findWaypoints(range)
 
-    --[[ All we care about are the labels and their positions. So, the following
-        code organizes the labels and their position tables into a set]]
-    waypoints_set = {}
+--     --[[ All we care about are the labels and their positions. So, the following
+--         code organizes the labels and their position tables into a set]]
+--     waypoints_set = {}
     
-    -- TODO QUESTION Is this code too slow for OpenComputers?
-    -- TODO Change this to break when the label is found
-    -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
-    for i = 1, waypoints_tbl.n - 1, 1 do
-        waypoint_label = waypoints_tbl[i].label
-        waypoint_position = waypoints_tbl[i].position
+--     -- TODO QUESTION Is this code too slow for OpenComputers?
+--     -- TODO Change this to break when the label is found
+--     -- For each table in waypoints_tbl, use the label as a key, and the postion table as a value
+--     for i = 1, waypoints_tbl.n - 1, 1 do
+--         waypoint_label = waypoints_tbl[i].label
+--         waypoint_position = waypoints_tbl[i].position
 
-        waypoints_set[ waypoint_label ] = waypoint_position
-    end
+--         waypoints_set[ waypoint_label ] = waypoint_position
+--     end
 
-    -- TODO handle the case where the label is unknown
-    -- Get the destination position relative to Squirt
-    local relative_dest = waypoints_set[label]
+--     -- TODO handle the case where the label is unknown
+--     -- Get the destination position relative to Squirt
+--     local relative_dest = waypoints_set[label]
 
-    --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
-        this is to convert these coordinates into world coordinates. Then we can use the 
-        previously defined sqGoToPos function ]]
+--     --[[ The destination coordinates are relative to Squirt. The easiest way to resolve
+--         this is to convert these coordinates into world coordinates. Then we can use the 
+--         previously defined sqGoToPos function ]]
 
-    -- Get the current coordinates
-    local squirtX, squirtY, squirtZ
-    squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
+--     -- Get the current coordinates
+--     local squirtX, squirtY, squirtZ
+--     squirtX, squirtY, squirtZ = sq_nav.sqGetPos()
 
-    -- Get the relative destination coordinates
-    local relative_destX = relative_dest[1]
-    local relative_destY = relative_dest[2]
-    local relative_destZ = relative_dest[3]
+--     -- Get the relative destination coordinates
+--     local relative_destX = relative_dest[1]
+--     local relative_destY = relative_dest[2]
+--     local relative_destZ = relative_dest[3]
 
-    -- Calculate the world destination coordinates
-    local world_destX = squirtX + relative_destX
-    local world_destY = squirtY + relative_destY
-    local world_destZ = squirtZ + relative_destZ
+--     -- Calculate the world destination coordinates
+--     local world_destX = squirtX + relative_destX
+--     local world_destY = squirtY + relative_destY
+--     local world_destZ = squirtZ + relative_destZ
 
-    -- Send Squirt to the waypoint position
-    swim.sqGoToPos(world_destX, world_destY, world_destZ)
-end
+--     -- Send Squirt to the waypoint position
+--     swim.sqGoToPos(world_destX, world_destY, world_destZ)
+-- end
 
 --[[ Moves Squirt to the beginning of the episode count given.
     Faces him east (forward) after taking him there. ]]
