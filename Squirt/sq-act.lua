@@ -2,7 +2,6 @@
 
 local squirt = require("robot")
 local debug = require("component").debug
-local nav = require("component").navigation
 local sq_nav = require("sq-navigation")
 local sq_swim = require("sq-swim")
 
