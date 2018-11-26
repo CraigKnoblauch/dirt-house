@@ -183,7 +183,7 @@ function swim.sqTurnRight()
 
     -- Update the global FACING
     if outcome == 1 then
-        sq_nav.sqUpdateFacing("left")
+        sq_nav.sqUpdateFacing("right")
     end
 
     return outcome
