@@ -93,6 +93,75 @@ class EAC:
         else:
             return self.getForwardAC()
 
+    ## 
+    # Parses Squirt's return message
+    # @param msg The message Squirt writes back to Crush after each action
+    # @return episode, step, x, y, z, facing, action, outcome in that order. 
+    #
+    # episode --> The episode number Squirt executed the action on
+    # step    --> The step count Squirt exectured the action on
+    # x, y, z --> Squirt's coordinate when he executed the action
+    # facing  --> The cardinal direction Squirt was facing when he executed the action
+    # action  --> The action code Squirt used to execute the action
+    # outcome --> The outcome code of that action Squirt executed
+    def parseSquirtMsg(self, msg):
+
+        # TODO What about the case where msg == b''
+        
+        components = str(msg).split(",")
+        
+        episode = (components[0])[2:] # Get rid of b'
+        step = components[1]
+        x = components[2]
+        y = components[3]
+        z = components[4]
+        facing = components[5]
+        action = components[6]
+        outcome = (components[7])[:-1] # Get rid of '
+
+        return episode, step, x, y, z, facing, action, outcome
+
+    ##
+    # Takes action and state information from squirt to determine where the environment is being
+    # changed. Only really useful when a block is picked up or placed.
+    # @param msg The message Squirt wrote back after completing the action
+    # @return x, y, z The position affected by Squirt's action
+    #
+    # TODO In need of refactor. Ideally this should be called when one of the actions is known
+    def getAffectedPos(self, msg):
+
+        # Parse Squirt's message 
+        _, _, sqX, sqY, sqZ, facing, action, outcome = self.parseSquirtMsg(msg)
+
+        # It's highly possible the action is of no concern. In that case, the following if block
+        # will not be explored. The default return will therefore be the position Squirt acted in
+        x, y, z = sqX, sqZ, sqY
+
+        # The actions that matter are placing blocks, and picking up blocks
+        if action == self.getPickUpBlockAC() or action == self.getPlaceCobblestoneBlockAC() or action == self.getPlaceDirtBlockAC():
+
+            # React to the direction Squirt was facing.
+            # 
+            # |--------------------------|
+            # |  Facing  | Affected Axis |
+            # |--------------------------|
+            # | "north"  |       -Z      |
+            # | "east"   |       +X      |
+            # | "south"  |       +Z      |
+            # | "west"   |       -X      |
+            # |--------------------------|
+
+            if facing == "north":
+                z -= 1
+            elif faceing == "east":
+                x += 1
+            elif facing == "south":
+                z += 1
+            elif facing == "west":
+                x -= 1
+                
+        return x, y, z
+
     ## Takes state information from Squirt, and returns a reward to Crush
     def getReward(action, outcome):
         pass

@@ -30,4 +30,15 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             print(data)
 
+            # # -- Additons
+            # episode, step, x, y, z, facing, action, outcome = eac.parseSquirtMsg(data)
+            # print("Episode: " + str(episode))
+            # print("Step: " + str(step))
+            # print(str(x) + " " + str(y) + " " + str(z))
+            # print("Facing: " + str(facing))
+            # print("Action: " + str(action))
+            # print("Outcome: " + str(outcome))
+
+            
+
     conn.close()
