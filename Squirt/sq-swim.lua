@@ -4,26 +4,8 @@ local squirt = require("robot")
 local debug = require("component").debug
 local sq_nav = require("sq-navigation")
 
-FACING = "east"
-
 -- Table of functions to return 
 local swim = {}
-
---[[ Returns the global FACING string. Note the documentation below is from using the navigation upgrade. Issue 14
-    recommends a switch to the chunkloader upgrade.
-    
-    Values of component.navigation.getFacing given here: https://github.com/MightyPirates/OpenComputers/issues/2984
-    Also confirmed in game
-    - North == 2
-    - East == 5
-    - South == 3
-    - West == 4 
-
-    This functions returns a string direction rather than the number. Returns nil if the number is unknown
-  ]]
-function swim.sqGetFacing()
-    return FACING   
-end
 
 --[[ Serves as a wrapper for a robot's forward function. Without this function, squirt would 
     report his position as the block he came from, rather than the block he's going to. 
@@ -178,21 +160,10 @@ function swim.sqTurnLeft()
         outcome = -1
     end
 
-    -- Update the global FACING
-    -- NOTE 'facing' is the old direction
+    -- Update the GLOBAL Facing
     if outcome == 1 then
-        local facing = swim.sqGetFacing()
-        if facing == "north" then
-            FACING = "west"
-        elseif facing == "east" then
-            FACING = "north"
-        elseif facing == "south" then
-            FACING = "east"
-        elseif facing == "west" then
-            FACING = "south"
-        end
+        sq_nav.sqUpdateFacing("left")
     end
-
 
     return outcome
 
@@ -211,18 +182,8 @@ function swim.sqTurnRight()
     end
 
     -- Update the global FACING
-    -- NOTE 'facing' is the old direction
-    local facing = swim.sqGetFacing()
     if outcome == 1 then
-        if facing == "north" then
-            FACING = "east"
-        elseif facing == "east" then
-            FACING = "south"
-        elseif facing == "south" then 
-            FACING = "west"
-        elseif facing == "west" then
-            FACING = "north"
-        end
+        sq_nav.sqUpdateFacing("left")
     end
 
     return outcome
@@ -241,18 +202,8 @@ function swim.sqTurnAround()
     end
 
     -- Update the global FACING
-    -- NOTE 'facing' is the old direction
     if outcome == 1 then
-        local facing = swim.sqGetFacing()
-        if facing == "north" then
-            FACING = "south"
-        elseif facing == "east" then
-            FACING = "west"
-        elseif facing == "south" then
-            FACING = "north"
-        elseif facing == "west" then
-            FACING = "east"
-        end
+        sq_nav.sqUpdateFacing("around")        
     end
 
     return outcome
@@ -280,7 +231,7 @@ function swim.sqGoToPos(destX, destY, destZ)
     initX, initY, initZ = sq_nav.sqGetPos()
 
     -- Get Squirt's orientation
-    local facing = swim.sqGetFacing()
+    local facing = sq_nav.sqGetFacing()
 
     -- Calculate the difference between Squirt's current location and the destination
     local diffX, diffY, diffZ
@@ -294,14 +245,14 @@ function swim.sqGoToPos(destX, destY, destZ)
     if diffX < 0 then
         while facing ~= "east" do
             swim.sqTurnRight()
-            facing = swim.sqGetFacing()
+            facing = sq_nav.sqGetFacing()
         end
 
     -- If diffX > 0, face west
     elseif diffX > 0 then
         while facing ~= "west" do
             swim.sqTurnRight()
-            facing = swim.sqGetFacing()
+            facing = sq_nav.sqGetFacing()
         end
 
     -- In the event diffX == 0, do nothing
@@ -317,14 +268,14 @@ function swim.sqGoToPos(destX, destY, destZ)
     if diffZ < 0 then
         while facing ~= "south" do
             swim.sqTurnRight()
-            facing = swim.sqGetFacing()
+            facing = sq_nav.sqGetFacing()
         end
 
     -- If diffZ > 0, face north
     elseif diffZ > 0 then
         while facing ~= "north" do
             swim.sqTurnRight()
-            facing = swim.sqGetFacing()
+            facing = sq_nav.sqGetFacing()
         end
 
     -- In the event diffZ == 0, do nothing
@@ -416,7 +367,7 @@ function swim.sqGoToEpisode(episode)
     swim.sqGoToPos(world_destX, world_destY, world_destZ)
 
     -- Face Squirt east
-    local facing = swim.sqGetFacing()
+    local facing = sq_nav.sqGetFacing()
 
     if facing == "north" then
         swim.sqTurnRight()

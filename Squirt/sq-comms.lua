@@ -63,7 +63,7 @@ function comms.sqWrite(action, outcome, episode, step)
     msg = msg .. tostring(x) .. ","
     msg = msg .. tostring(y) .. ","
     msg = msg .. tostring(z) .. ","
-    msg = msg .. tostring(sq_swim.sqGetFacing()) .. ","
+    msg = msg .. tostring(sq_nav.sqGetFacing()) .. ","
     msg = msg .. tostring(action) .. ","
     msg = msg .. tostring(outcome)
 
