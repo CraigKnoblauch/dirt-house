@@ -4,7 +4,7 @@ local squirt = require("robot")
 local debug = require("component").debug
 local sq_nav = require("sq-navigation")
 
-FACING = "north"
+FACING = "east"
 
 -- Table of functions to return 
 local swim = {}
