@@ -2,7 +2,6 @@
 
 local squirt = require("robot")
 local debug = require("component").debug
-local nav = require("component").navigation
 local sq_nav = require("sq-navigation")
 local sq_swim = require("sq-swim")
 
@@ -63,7 +62,7 @@ local function getFrontPos()
     local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
 
     -- Determine which direction Squirt is facing
-    local facing = sq_swim.sqGetFacing()
+    local facing = sq_nav.sqGetFacing()
 
     --[[ Based on the direction Squirt is facing, we can determine which
         axis must be incremented our decremented to give the block in front 
@@ -121,7 +120,7 @@ local function getBackPos()
     local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
 
     -- Determine which direction Squirt is facing
-    local facing = sq_swim.sqGetFacing()
+    local facing = sq_nav.sqGetFacing()
 
     --[[ Based on the direction Squirt is facing, we can determine which
         axis must be incremented our decremented to give the block behind
@@ -179,7 +178,7 @@ local function getRightPos()
     local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
 
     -- Determine which direction Squirt is facing
-    local facing = sq_swim.sqGetFacing()
+    local facing = sq_nav.sqGetFacing()
 
     --[[ Based on the direction Squirt is facing, we can determine which
         axis must be incremented our decremented to give the block to the right
@@ -237,7 +236,7 @@ local function getLeftPos()
     local blockX, blockY, blockZ = squirtX, squirtY, squirtZ
 
     -- Determine which direction Squirt is facing
-    local facing = sq_swim.sqGetFacing()
+    local facing = sq_nav.sqGetFacing()
 
     --[[ Based on the direction Squirt is facing, we can determine which
         axis must be incremented our decremented to give the block to the left
