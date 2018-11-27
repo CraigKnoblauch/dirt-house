@@ -135,7 +135,7 @@ class EAC:
 
         # It's highly possible the action is of no concern. In that case, the following if block
         # will not be explored. The default return will therefore be the position Squirt acted in
-        x, y, z = sqX, sqZ, sqY
+        x, y, z = int(sqX), int(sqY), int(sqZ)
 
         # The actions that matter are placing blocks, and picking up blocks
         if action == self.getPickUpBlockAC() or action == self.getPlaceCobblestoneBlockAC() or action == self.getPlaceDirtBlockAC():
