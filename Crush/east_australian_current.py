@@ -22,6 +22,17 @@ class EAC:
         self.HOST = "127.0.0.1"
         self.PORT = 65432
 
+        # The coordinates of blocks that make up the house, including air
+        self.house = {'air': [ (),
+                               (),
+                               ()
+                             ],
+
+                      'dirt': [ (), 
+                                (),
+                              ]
+                     }
+
     ## Return the action code for forward
     def getForwardAC(self):
         return self.actions['forward']
@@ -161,6 +172,20 @@ class EAC:
                 x -= 1
                 
         return x, y, z
+
+    ##
+    # Determines if the affected posisition is part of the house.
+    # @param x, y, z The position affected by one of Squirt's actions. This position can be gotten from the
+    # getAffectedPos function.
+    # @return boolean True if the position is part of the house. False otherwise
+    def isPosPartOfHouse(x, y, z):
+        # Make a tuple of the arguments
+        pos = (x, y, z)
+
+    ##
+    # Determines if the position in question should have a block placed in it. Should be called only if the
+    # pos in question is part of the house.
+    def shouldPosHaveBlock(x, y, z)
 
     ## Takes state information from Squirt, and returns a reward to Crush
     def getReward(action, outcome):
