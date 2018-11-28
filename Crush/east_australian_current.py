@@ -112,14 +112,14 @@ class EAC:
         
         episode = (components[0])[2:] # Get rid of b'
         step = components[1]
-        x = components[2]
-        y = components[3]
-        z = components[4]
+        x = (components[2])[:-2] # Get's rid of .0
+        y = (components[3])[:-2] # Get's rid of .0
+        z = (components[4])[:-2] # Get's rid of .0
         facing = components[5]
         action = components[6]
         outcome = (components[7])[:-1] # Get rid of '
 
-        return episode, step, x, y, z, facing, action, outcome
+        return str(episode), str(step), str(x), str(y), str(z), str(facing), str(action), str(outcome)
 
     ##
     # Takes action and state information from squirt to determine where the environment is being
@@ -138,7 +138,7 @@ class EAC:
         x, y, z = int(sqX), int(sqY), int(sqZ)
 
         # The actions that matter are placing blocks, and picking up blocks
-        if action == self.getPickUpBlockAC() or action == self.getPlaceCobblestoneBlockAC() or action == self.getPlaceDirtBlockAC():
+        if action == "008" or "009" or "010":
 
             # React to the direction Squirt was facing.
             # 
@@ -153,7 +153,7 @@ class EAC:
 
             if facing == "north":
                 z -= 1
-            elif faceing == "east":
+            elif facing == "east":
                 x += 1
             elif facing == "south":
                 z += 1
