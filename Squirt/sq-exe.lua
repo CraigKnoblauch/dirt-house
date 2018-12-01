@@ -116,6 +116,7 @@ function exe.sqExecuteAction(action_code, episode)
         return sq_act.sqPlaceBlock("front", "cobblestone")
 
     elseif action_code == NEXT_EPISODE then
+        -- TODO: Empty inventory
         return sq_swim.sqGoToEpisode(episode + 1)
         
     else
