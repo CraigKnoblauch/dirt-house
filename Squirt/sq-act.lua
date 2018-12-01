@@ -716,9 +716,20 @@ function act.sqPlaceBlock(side, block)
 
 end
 
+--[[ Empties all items in the inventory, sets the selection to block when done 
+    Currently returns void ]]
+function act.sqEmptyInventory()
+
+    for i=1, 16, 1 do
+        squirt.select(i)
+        squirt.drop()
+    end
+
+    squirt.select(9)
+
+end
 
 
-            
 return act
     
 

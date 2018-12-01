@@ -21,18 +21,53 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     with conn:
         print("Squirt has connected")
+
+        action_code = eac.getTurnRightAC()
+        conn.sendall(action_code)
+        msg = conn.recv(1024)
+        print(msg)
        
-        # At Squirt's starting postion, place a block. Ask internally if the block is part of the house
-        action_code = eac.getPickUpBlockAC()
+        # Turn right, go to the border of the house, "place a block" meaning air, check if it's part of the house
+        for _ in range(1,10):
+            action_code = eac.getForwardAC()
+            conn.sendall(action_code)
+            msg = conn.recv(1024)
+            print(msg)
+
+        action_code = eac.getPlaceDirtBlockAC()
         conn.sendall(action_code)
         msg = conn.recv(1024)
         print(msg)
 
         x, y, z = eac.getAffectedPos(msg)
-        if eac.shouldPosHaveBlock(x, y, z):
-            print("Pos is part of house")
+
+        if eac.isPosPartOfHouse(x, y, z):
+            print("Pos {}, {}, {} is part of house".format(x, y, z))
         else:
-            print("Pos is not part of house")
+            print("Pos {}, {}, {} is not part of house".format(x, y, z))
+
+        if eac.shouldPosHaveBlock(x, y, z):
+            print("Pos {}, {}, {} should have block".format(x, y, z))
+        else:
+            print("Pos {}, {}, {} should not have block".format(x, y, z))
+
+        action_code = eac.getTurnAroundAC()
+        conn.sendall(action_code)
+        msg = conn.recv(1024)
+        print(msg)
+
+        # Move squirt back
+        # Turn right, go to the border of the house, "place a block" meaning air, check if it's part of the house
+        for _ in range(1,10):
+            action_code = eac.getForwardAC()
+            conn.sendall(action_code)
+            msg = conn.recv(1024)
+            print(msg)
+
+        action_code = eac.getTurnRightAC()
+        conn.sendall(action_code)
+        msg = conn.recv(1024)
+        print(msg)
 
         
         # # Send squirt to 1,1,1. Turn him in all four directions and place a block in each direction

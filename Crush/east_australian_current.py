@@ -367,7 +367,7 @@ class EAC:
     # @param x, y, z The position affected by one of Squirt's actions. This position can be gotten from the
     # getAffectedPos function.
     # @return boolean True if the position is part of the house. False otherwise
-    def isPosPartOfHouse(x, y, z):
+    def isPosPartOfHouse(self, x, y, z):
         # Make a tuple of the arguments
         pos = (x, y, z)
 
@@ -377,7 +377,11 @@ class EAC:
     ##
     # Determines if the position in question should have a block placed in it. Should be called only if the
     # pos in question is part of the house.
-    def shouldPosHaveBlock(x, y, z)
+    def shouldPosHaveBlock(self, x, y, z):
+        # Make a tupe of the arguments
+        pos = (x, y, z)
+
+        # See if this tuple is a dirt block portion of the house
         return pos in self.house['dirt']
 
     ## Takes state information from Squirt, and returns a reward to Crush
