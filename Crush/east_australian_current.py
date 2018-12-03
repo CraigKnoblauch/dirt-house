@@ -289,7 +289,7 @@ class EAC:
             name = "turn right"
         elif action_code == "007":
             name = "turn around"
-        elif action_code = "008":
+        elif action_code == "008":
             name = "pick up block"
         elif action_code == "009":
             name = "place dirt block"

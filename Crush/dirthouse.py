@@ -4,9 +4,9 @@ from east_australian_current import EAC
 from crush import Crush
 from agent import DQNAgent
 
-agent = DQNAgent()
 eac = EAC()
 crush = Crush()
+agent = DQNAgent(crush.state_size, crush.action_space.n, learning_rate=0.01, epsilon=0.95)
 
 NUM_EPISODES = 3
 NUM_STEPS = 400
@@ -17,16 +17,10 @@ GROUP_SIZE = 20
 
 # Set hyper parameters
 state_size = 2
-action_size = env.action_space.n
+action_size = crush.action_space.n
 batch_size = 32 # For gradient descent, vary by powers of 2
 n_episodes = 2000 # but who really cares. It's going infinitely
 out_dir = 'model_output/dirthouse'
-
-action_code = eac.getTurnRightAC()
-        conn.sendall(action_code)
-        msg = conn.recv(1024)
-        print(msg)
-
 
 # Open a socket for Squirt to connect to
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -54,7 +48,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 conn.sendall(action_code)
                 msg = conn.recv(1024)
 
-                next_state, reward, done, _ = env.step(action, msg)
+                next_state, reward, done, _ = crush.step(action, msg)
 
                 next_state = np.reshape(next_state, [1, state_size])
                 agent.remember(state, action, reward, next_state, done)

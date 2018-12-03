@@ -247,7 +247,7 @@ class Crush(gym.Env):
 
         if (self.eac).getStep(msg) == 399:
             done = True
-            
+
         reward = 0
 
         # Get the affected position
@@ -275,7 +275,7 @@ class Crush(gym.Env):
             # picked up a block, give him a massive penalty, if he was successful, but the block came from where blocks should be, a massive penalty
             # if he was successful and a block should not be there, a small reward
 
-            if action_name == "pick up block" 
+            if action_name == "pick up block":
                 # Did Squirt successfully pick up the block
                 if (self.eac).getOutcome(msg) > 0:
                     # Did he do so where a block should exist?
@@ -349,7 +349,7 @@ class Crush(gym.Env):
             record.write("{},{},{},{},{},{},{},{}\n".format(episode, step, x, y, z, facing, action, outcome))
         
 
-        output = "Step {} of Episode {} -- Facing {} at ({}, {}, {}) Squirt performed {} which resulted in {}".format( step, episode facing, x, y, z, (self.eac).getACName(action), outcome) 
+        output = "Step {} of Episode {} -- Facing {} at ({}, {}, {}) Squirt performed {} which resulted in {}".format( step, episode, facing, x, y, z, (self.eac).getACName(action), outcome) 
         print(output)
 
 
