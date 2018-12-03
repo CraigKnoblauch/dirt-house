@@ -26,7 +26,7 @@ out_dir = 'model_output/dirthouse'
 # Open a socket for Squirt to connect to
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind( (eac.HOST, eac.PORT) )
-
+    print("Awaiting connection")
     # Wait for Squirt to initiate comms
     s.listen()
 
@@ -36,6 +36,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print("Squirt has connected")
 
         # Begin training.
+        episode_count = 0
         while True:
             state = crush.reset()
             state = np.reshape(state, [1, state_size])
@@ -49,11 +50,15 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 conn.sendall(action_code)
                 msg = conn.recv(1024)
 
+                crush.render(msg)
+
                 next_state, reward, done, _ = crush.step(action, msg)
 
                 next_state = np.reshape(next_state, [1, state_size])
                 agent.remember(state, action, reward, next_state, done)
 
                 state = next_state
+            
+            crush.recordEpisodeState(episode_count)
     
         conn.close()
