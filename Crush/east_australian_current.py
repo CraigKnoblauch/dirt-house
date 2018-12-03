@@ -266,6 +266,38 @@ class EAC:
     # def getNextEpisodeAC(self):
     #     return self.actions['next episode']
 
+    # Translates an index of an action to the action code
+    def indexToAC(self, index):
+        action_codes = list( (self.actions).values() )
+        return action_codes[index]
+
+    # Determines the string name from the string action code given
+    def getACName(self, action_code):
+        name = ""
+
+        if action_code == "001":
+            name = "forward"
+        elif action_code == "002":
+            name = "back"
+        elif action_code == "003":
+            name = "up"
+        elif action_code == "004":
+            name = "down"
+        elif action_code == "005":
+            name = "turn left"
+        elif action_code == "006":
+            name = "turn right"
+        elif action_code == "007":
+            name = "turn around"
+        elif action_code = "008":
+            name = "pick up block"
+        elif action_code == "009":
+            name = "place dirt block"
+        elif action_code == "010":
+            name = "place cobblestone block"
+
+        return name
+
     ## Return a random action code
     def getRandomAC(self):
         i = random.randint(0, 9)
@@ -320,6 +352,32 @@ class EAC:
         outcome = (components[7])[:-1] # Get rid of '
 
         return str(episode), str(step), str(x), str(y), str(z), str(facing), str(action), str(outcome)
+
+    ##
+    # Returns the integer outcome from Squirt's message
+    def getOutcome(self, msg):
+        _, _, _, _, _, _, _, outcome = self.parseSquirtMsg(msg)
+        return int(outcome)
+
+    # Returns whether or not the action that was attempted failed because it was out of bounds
+    def isOutOfBounds(self, msg):
+        outofbounds = False
+
+        _, _, _, _, _, _, _, outcome = self.parseSquirtMsg(msg)
+
+        if int(outcome) == -10:
+            outofbounds = True
+        else:
+            outofbounds = False
+
+        return outofbounds
+
+    # Returns the step number
+    def getStep(self, msg):
+        _, step, _, _, _, _, _, _ = self.parseSquirtMsg(msg)
+
+        return int(step)
+
 
     ##
     # Takes action and state information from squirt to determine where the environment is being
