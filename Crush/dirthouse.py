@@ -21,7 +21,7 @@ state_size = crush.state_size
 action_size = crush.action_space.n
 batch_size = 32 # For gradient descent, vary by powers of 2
 n_episodes = 2000 # but who really cares. It's going infinitely
-out_dir = 'model_output/dirthouse'
+out_dir = 'model_output/'
 
 # Open a socket for Squirt to connect to
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -59,6 +59,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
                 state = next_state
             
+            weights_fname = out_dir + "squirt{}hdf5".format(episode_count)
+            agent.save(weights_fname)
             crush.recordEpisodeState(episode_count)
     
         conn.close()
