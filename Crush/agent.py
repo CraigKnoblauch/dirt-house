@@ -51,6 +51,7 @@ class DQNAgent:
         if np.random.rand() <= self.epsilon:
             return random.randrange(self.action_size) # Exploration mode
 
+        # Errors out with Value Error
         act_values = self.model.predict(state)
         return np.argmax(act_values[0])
 

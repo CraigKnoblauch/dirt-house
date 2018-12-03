@@ -1,5 +1,6 @@
 import socket
 import random
+import numpy as np
 from east_australian_current import EAC
 from crush import Crush
 from agent import DQNAgent
@@ -16,7 +17,7 @@ action_codes = list( (eac.actions).keys() )
 GROUP_SIZE = 20
 
 # Set hyper parameters
-state_size = 2
+state_size = crush.state_size
 action_size = crush.action_space.n
 batch_size = 32 # For gradient descent, vary by powers of 2
 n_episodes = 2000 # but who really cares. It's going infinitely
