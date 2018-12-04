@@ -62,5 +62,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             weights_fname = out_dir + "squirt{}hdf5".format(episode_count)
             agent.save(weights_fname)
             crush.recordEpisodeState(episode_count)
+            episode_count += 1
     
         conn.close()

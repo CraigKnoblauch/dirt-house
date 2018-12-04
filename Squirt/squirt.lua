@@ -9,7 +9,7 @@ local sq_nav = require("sq-navigation")
 -- Episode running stuff
 -- NOTE These must be the same between Crush and Squirt
 local NUM_STEPS = 400
-local NUM_EPISODES = 3
+local NUM_EPISODES = 4000 -- Effectively infinite for our timeline 
 
 -- Required initialization steps
 local episode = 0
