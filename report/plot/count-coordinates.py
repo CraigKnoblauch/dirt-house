@@ -89,14 +89,13 @@ MAX_COUNT = compare_to[0].count
 # Use max count to normalize the counts of the coordinates
 coord_norm = colors.Normalize(vmin=0, vmax=MAX_COUNT)
 
-# Get the spectral color map
-cmap = plt.cm.get_cmap('Spectral')
+# Get the plasma color map
+cmap = plt.cm.get_cmap('plasma')
 
+# Uncomment for 3d heat map
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-# For each set of style and range settings, plot n random points in the box
-# defined by x in [23, 32], y in [0, 100], z in [zlow, zhigh].
 for coord in compare_to:
     coord.transpose()
     xs = coord.x
@@ -107,11 +106,13 @@ for coord in compare_to:
 
     ax.scatter(xs, ys, zs, c=cmap( norm_color_val ), marker='o')
 
-ax.set_xlabel('X Label')
-ax.set_ylabel('Y Label')
-ax.set_zlabel('Z Label')
+ax.set_xlabel('North to South')
+ax.set_ylabel('West to East')
+ax.set_zlabel('Ground Level to Flight Height')
 
 plt.show()
+
+
 
 
 
