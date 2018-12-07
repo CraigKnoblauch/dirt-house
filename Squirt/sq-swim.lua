@@ -215,7 +215,7 @@ end
 function swim.sqGoToPos(destX, destY, destZ)
     -- Defines the Y flight height that Squirt should be at before moving forward.
     -- TODO Change this is if the environment changes
-    local FLIGHT_Y = 67
+    local FLIGHT_Y = 17
 
     -- Move squirt up to the flight height so he's clear of obstructions in the environment
     -- NOTE: This can only be assumed to work in a specific environment and setting

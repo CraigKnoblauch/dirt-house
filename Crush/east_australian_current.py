@@ -222,6 +222,41 @@ class EAC:
                                 (5, 3, 14) ]
                      }
 
+    # HACK The DQN agent cannot use sequences, which is what the tuples are. Instead, it uses numbers to represent the coordinate triplets
+    # This function takes a position tuple and gives the index as it appears in self.house. If the pos belongs to the air section, it will
+    # be the length of dirt. HACK assume the pos is in the correct area
+    def getPosIndex(self, pos):
+        offset = len( self.house['dirt'] )
+        index = 0 
+
+        if pos in self.house['dirt']:
+            index = (self.house['dirt']).index(pos)
+        else:
+            index = (self.house['air']).index(pos)
+            index += offset
+
+        # HACK Increment by 3 because the last block_type value of the state can never be >= 3
+        index += 3
+
+        return index
+
+    # HACK translate an index from Crush to the house coordinate
+    def indexToPos(self, index):
+        # Initially decrement index by 3
+        index -= 3
+
+        pos = (-1,-1,-1)
+
+        # If the index is less than the length of the dirt list, it belongs to the dirt list, else, subtract the length of dirt from it and it belongs to 
+        # the air list
+        if index <= ( len(self.house['dirt']) - 1):
+            pos = (self.house['dirt'])[index]
+        else:
+            index -= len(self.house['dirt'])
+            pos = (self.house['air'])[index]
+
+        return pos
+    
     ## Return the action code for forward
     def getForwardAC(self):
         return self.actions['forward']
@@ -254,7 +289,7 @@ class EAC:
     def getPickUpBlockAC(self):
         return self.actions['pick up block']
         
-    ## Return the action code for place dirt block
+    ## Return the action cozde for place dirt block
     def getPlaceDirtBlockAC(self):
         return self.actions['place dirt block']
 
@@ -265,6 +300,38 @@ class EAC:
     # ## Return the action code for next episode
     # def getNextEpisodeAC(self):
     #     return self.actions['next episode']
+
+    # Translates an index of an action to the action code
+    def indexToAC(self, index):
+        action_codes = list( (self.actions).values() )
+        return action_codes[index]
+
+    # Determines the string name from the string action code given
+    def getACName(self, action_code):
+        name = ""
+
+        if action_code == "001":
+            name = "forward"
+        elif action_code == "002":
+            name = "back"
+        elif action_code == "003":
+            name = "up"
+        elif action_code == "004":
+            name = "down"
+        elif action_code == "005":
+            name = "turn left"
+        elif action_code == "006":
+            name = "turn right"
+        elif action_code == "007":
+            name = "turn around"
+        elif action_code == "008":
+            name = "pick up block"
+        elif action_code == "009":
+            name = "place dirt block"
+        elif action_code == "010":
+            name = "place cobblestone block"
+
+        return name
 
     ## Return a random action code
     def getRandomAC(self):
@@ -320,6 +387,32 @@ class EAC:
         outcome = (components[7])[:-1] # Get rid of '
 
         return str(episode), str(step), str(x), str(y), str(z), str(facing), str(action), str(outcome)
+
+    ##
+    # Returns the integer outcome from Squirt's message
+    def getOutcome(self, msg):
+        _, _, _, _, _, _, _, outcome = self.parseSquirtMsg(msg)
+        return int(outcome)
+
+    # Returns whether or not the action that was attempted failed because it was out of bounds
+    def isOutOfBounds(self, msg):
+        outofbounds = False
+
+        _, _, _, _, _, _, _, outcome = self.parseSquirtMsg(msg)
+
+        if int(outcome) == -10:
+            outofbounds = True
+        else:
+            outofbounds = False
+
+        return outofbounds
+
+    # Returns the step number
+    def getStep(self, msg):
+        _, step, _, _, _, _, _, _ = self.parseSquirtMsg(msg)
+
+        return int(step)
+
 
     ##
     # Takes action and state information from squirt to determine where the environment is being
