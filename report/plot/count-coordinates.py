@@ -76,10 +76,6 @@ with open('action_record.csv', 'r') as csvfile:
         # Increment the count of the matching coordinate
         (compare_to[ matching_coordinate_i ]).incrementCount()
 
-        # For testing only
-        if i == 300:
-            break
-
 # Sort the compare to coordinates by count, greatest to least
 compare_to.sort(key=lambda x: x.count, reverse=True)
 
