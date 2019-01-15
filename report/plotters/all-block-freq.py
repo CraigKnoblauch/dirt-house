@@ -92,8 +92,8 @@ p = np.poly1d(z)
 pylab.plot(x,p(x))
 
 
-pylab.legend(names, loc='upper left')
-pylab.title('Frequency of Successful Actions')
+pylab.legend(names, loc='best')
+pylab.title('Frequency of Successful Block Actions')
 pylab.xlabel('Episode number')
 pylab.ylabel('Action frequency per episode')
 pylab.show()
